@@ -1,347 +1,93 @@
-# Phase 4: Versus Mode
+# PHASE-004: Versus Mode
 
 ## Overview
-
-This phase implements the Versus Mode feature that allows users to compare 2-3 countries side-by-side. It includes country selection UI, comparison chart components using Recharts, and the logic to calculate and display percentage differences between countries with visual highlighting of winners.
+This phase implements the country comparison feature called "Versus Mode" that allows users to compare 2-3 countries side-by-side. The comparison displays key metrics using bar charts created with Recharts, shows percentage differences between countries, and highlights the winner (highest/lowest) for each metric with visual indicators. This feature transforms the data exploration experience by enabling direct country-to-country analysis.
 
 ## Features
-
-- Dual/triple country selection interface
-- Comparison chart component with bar charts
-- Comparison logic and percentage calculations
-- Winner highlighting in each category
-- Dynamic add/remove of countries
-- Session persistence for selected countries
+- Comparison Selection UI
+- Multi-Country Comparison (2-3 countries)
+- Bar Charts with Recharts
+- Percentage Difference Display
+- Winner Highlighting
 
 ## Tasks
 
-### Task 4.1: Versus Page Structure
+### Comparison Selection UI
+- [ ] Task 1.1: Create Versus mode page at `/versus` route
+- [ ] Task 1.2: Build country selector dropdowns using existing search autocomplete component
+- [ ] Task 1.3: Add "Add Country" button to allow selecting 2nd and 3rd country (max 3)
+- [ ] Task 1.4: Implement "Remove" button for each selected country
+- [ ] Task 1.5: Add "Swap Countries" button to rearrange comparison order
+- [ ] Task 1.6: Pre-populate first country from URL params if coming from profile page
+- [ ] Task 1.7: Show quick-select suggestions for popular comparisons
 
-**Feature:** Dual/triple country selection
-**Description:** Create the Versus page route and basic layout
-**Deliverables:** Page structure with selection area and chart area
+### Multi-Country Comparison
+- [ ] Task 2.1: Fetch all selected countries data in parallel using Promise.all
+- [ ] Task 2.2: Create comparison data structure with unified metrics across countries
+- [ ] Task 2.3: Normalize data for consistent comparison (handle missing values, different units)
+- [ ] Task 2.4: Implement comparison categories: Population, Area, GDP, GDP per Capita, HDI, Life Expectancy
+- [ ] Task 2.5: Add comparison for additional metrics: Capital, Currency, Language, Timezone
+- [ ] Task 2.6: Handle edge cases when countries have no comparable data
 
-#### Detailed Plan
+### Bar Charts with Recharts
+- [ ] Task 3.1: Create ComparisonChart component using Recharts BarChart
+- [ ] Task 3.2: Configure horizontal bar chart layout for better label readability
+- [ ] Task 3.3: Style chart with cyberpunk color palette (different neon color per country)
+- [ ] Task 3.4: Add proper axis labels and value tooltips
+- [ ] Task 3.5: Implement responsive sizing with viewBox for different screen sizes
+- [ ] Task 3.6: Add chart animation on data load
 
-1. Create `src/app/versus/page.tsx`:
-   - Main page component
-   - Two sections: Country selector (top) and Charts (bottom)
-2. Create `src/components/versus/VersusLayout/VersusLayout.tsx`:
-   - Container with header
-   - Three slots for country selection
-   - Chart display area
-3. Create `src/components/versus/VersusLayout/VersusLayout.module.scss`:
-   - Grid layout for country slots
-   - Full-width chart area
-   - Responsive: stack on mobile, side-by-side on desktop
-4. Add page state:
-   - Empty state: "Select countries to compare"
-   - Partial state: 1-2 countries selected
-   - Full state: 3 countries selected
+### Percentage Difference Display
+- [ ] Task 4.1: Calculate percentage difference between highest and lowest values
+- [ ] Task 4.2: Display percentage difference as text below each chart
+- [ ] Task 4.3: Create diff indicator showing "+X%" or "-X%" from baseline
+- [ ] Task 4.4: Format large percentage differences with proper notation (e.g., "15,000% larger")
+- [ ] Task 4.5: Show absolute difference in numbers alongside percentage
 
----
+### Winner Highlighting
+- [ ] Task 5.1: Determine winner for each metric (highest for positive, lowest for negative metrics)
+- [ ] Task 5.2: Add trophy/crown icon next to winner value with neon glow effect
+- [ ] Task 5.3: Create "vs" badge showing head-to-head winner for 2-country comparisons
+- [ ] Task 5.4: Build "Overall Winner" summary section counting wins across all metrics
+- [ ] Task 5.5: Add tie handling with special "TIE" indicator
+- [ ] Task 5.6: Style winning values with green (#2FF801) accent, losers with muted styling
 
-### Task 4.2: Country Selector Component
+## Detailed Plan
 
-**Feature:** Dual/triple country selection
-**Description:** Create selector component for adding countries to comparison
-**Deliverables:** Working country selection interface
+### Versus Page Implementation
+1. **Route Setup**: Create `src/app/versus/page.tsx` with Suspense boundary and loading state
+2. **Selection Panel**: Build `src/components/versus/CountrySelector.tsx` using search component for autocomplete
+3. **Country Cards**: Create `src/components/versus/CountryBadge.tsx` with flag, name, and remove button
+4. **State Management**: Use Zustand store to track selected countries array, persist in sessionStorage
 
-#### Detailed Plan
+### Chart Implementation
+1. **Data Preparation**: Transform country data to array format [{ country: "USA", value: 331000000 }, { country: "CAN", value: 38000000 }]
+2. **Chart Component**: Create `src/components/versus/ComparisonChart.tsx` with BarChart, XAxis, YAxis, Tooltip, Bar
+3. **Custom Colors**: Use cyan (#00FFD1), green (#2FF801), pink (#FF7073) for up to 3 countries
+4. **Tooltip**: Create CustomTooltip showing country name, metric value formatted properly
+5. **Responsive**: Use ResponsiveContainer to fill parent width, set min-height for mobile
 
-1. Create `src/components/versus/CountrySelector/CountrySelector.tsx`:
-   - Search input with autocomplete
-   - Dropdown showing matching countries
-   - Selected country display (flag + name)
-   - Remove (X) button to clear selection
-2. Implement search functionality:
-   - Filter from cached country list
-   - Show flag + name in results
-   - Max 8 suggestions
-3. Create selector states:
-   - Empty: Show "Select country" placeholder
-   - Active: Show selected country info
-   - Hover: Highlight with cyan border
-4. Create multiple selectors:
-   - Slot 1: Country A
-   - Slot 2: Country B
-   - Slot 3: Country C (optional)
-   - Disable Slot 3 until Slot 2 filled
+### Comparison Logic Implementation
+1. **Metric Definitions**: Create `src/constants/comparisonMetrics.ts` with all comparable fields and their display names
+2. **Winner Calculation**: Implement getWinner() function comparing values, returning { winner: countryCode, diff: number }
+3. **Percentage Calc**: Formula: ((max - min) / min) * 100 for percentage difference
+4. **Text Generation**: Create getComparisonText() for natural language descriptions
 
----
+### Styling Implementation
+1. **Layout**: Use CSS Grid for side-by-side country cards at top, charts below
+2. **Chart Colors**: Each country gets unique neon color for easy visual distinction
+3. **Winner Badge**: Absolute positioned crown/trophy icon with #2FF801 glow
+4. **Animations**: Fade in charts on load, pulse animation on winner highlight
 
-### Task 4.3: Quick Selection from Recent
+## Dependencies
+- **External**: Recharts for visualization
+- **Internal**: PHASE-001 UI components, PHASE-003 country data types, existing search component
 
-**Feature:** Dual/triple country selection
-**Description:** Add quick access to recently viewed or selected countries
-**Deliverables:** Recent countries list for fast selection
-
-#### Detailed Plan
-
-1. Track recently viewed countries:
-   - Store last 10 viewed countries
-   - Persist in localStorage
-   - Show in "Recent" section of selector
-2. Create recent countries display:
-   - Horizontal scrollable list
-   - Thumbnail: Flag + Name
-   - Click to select
-3. Create "Popular" quick selection:
-   - Show top 10 most viewed countries
-   - Persist across sessions
-4. Add "Clear All" button:
-   - Reset all three slots
-   - Confirmation if countries selected
-
----
-
-### Task 4.4: Comparison Chart Component
-
-**Feature:** Comparison chart component
-**Description:** Create bar chart component for comparing metrics
-**Deliverables:** Recharts-based comparison visualization
-
-#### Detailed Plan
-
-1. Create `src/components/charts/ComparisonChart/ComparisonChart.tsx`:
-   - Recharts BarChart component
-   - Horizontal bar layout
-   - Multiple series (one per country)
-2. Create `src/components/charts/ComparisonChart/ComparisonChart.module.scss`:
-   - Cyberpunk styled chart
-   - Green neon bars (#2FF801)
-   - Grid background
-   - Animated on data load
-3. Configure chart:
-   - Y-axis: Country names
-   - X-axis: Metric value
-   - Tooltip: Show exact value
-   - Legend: Show country colors
-4. Handle responsive:
-   - Resize chart on window resize
-   - Mobile: vertical layout
-   - Desktop: horizontal bars
-
----
-
-### Task 4.5: Population Comparison Chart
-
-**Feature:** Comparison chart component
-**Description:** Create first chart comparing population of selected countries
-**Deliverables:** Population comparison bar chart
-
-#### Detailed Plan
-
-1. Implement population chart:
-   - Data: Population number from each country
-   - Format: Use formatPopulation() for display
-   - Scale: Automatically adjust to largest value
-2. Create chart header:
-   - Title: "Population Comparison"
-   - Icon: MdPeople
-   - Show total for each country
-3. Add data labels:
-   - Show value on bar end
-   - Format: "47M" or "47,000,000"
-4. Style bars:
-   - Different shade for each country
-   - Neon glow effect on hover
-
----
-
-### Task 4.6: Area Comparison Chart
-
-**Feature:** Comparison chart component
-**Description:** Create chart comparing land area
-**Deliverables:** Area comparison bar chart
-
-#### Detailed Plan
-
-1. Implement area chart:
-   - Data: Area in km² from each country
-   - Format: formatArea() with km² suffix
-2. Create chart header:
-   - Title: "Land Area Comparison"
-   - Icon: MdSquareFoot
-   - Show area for each country
-3. Add comparison context:
-   - Show multiple of comparison
-   - e.g., "Country A is 5.2x larger than Country B"
-4. Handle edge cases:
-   - Show "N/A" if area is null
-   - Handle very large areas (Russia, etc.)
-
----
-
-### Task 4.7: Border Count Comparison
-
-**Feature:** Comparison chart component
-**Description:** Create chart comparing number of land borders
-**Deliverables:** Border count comparison bar chart
-
-#### Detailed Plan
-
-1. Implement border count chart:
-   - Data: Length of borders array from each country
-   - Format: Count as number
-2. Create chart header:
-   - Title: "Land Borders"
-   - Icon: MdBorderAll
-   - Show count for each country
-3. Add extra context:
-   - List border countries on hover
-   - Show "Landlocked" for countries with 0
-4. Sort data for chart:
-   - Order by border count descending
-
----
-
-### Task 4.8: Percentage Difference Calculation
-
-**Feature:** Comparison logic and display
-**Description:** Calculate and display percentage differences between countries
-**Deliverables:** Percentage difference display
-
-#### Detailed Plan
-
-1. Create percentage calculator:
-   - Formula: ((value - compareValue) / compareValue) * 100
-   - Handle both directions (A vs B, B vs A)
-2. Display percentage differences:
-   - Show in chart tooltip
-   - Show in summary section below chart
-3. Format percentages:
-   - Positive: "+X%" in green
-   - Negative: "-X%" in red
-   - Handle zero and equal values
-4. Create comparison summary:
-   - Text summary: "Country A is X% larger than Country B"
-   - Update dynamically as selections change
-
----
-
-### Task 4.9: Winner Highlighting
-
-**Feature:** Comparison logic and display
-**Description:** Highlight the highest value in each comparison category
-**Deliverables:** Visual winner indicators
-
-#### Detailed Plan
-
-1. Create winner detection logic:
-   - Compare values for each metric
-   - Identify highest value
-   - Handle ties (no winner)
-2. Add visual indicators:
-   - Trophy/crown icon next to winner
-   - Highlight bar in chart
-   - Bold the winner in text
-3. Create winner summary card:
-   - Title: "Comparison Winners"
-   - List each metric with winning country
-   - Show value difference
-4. Style indicators:
-   - Gold/yellow accent for winner
-   - Animated sparkle effect
-   - Cyan glow on hover
-
----
-
-### Task 4.10: Add/Remove Countries Dynamically
-
-**Feature:** Dynamic add/remove countries
-**Description:** Allow users to add or remove countries during comparison
-**Deliverables:** Working dynamic country management
-
-#### Detailed Plan
-
-1. Implement add country flow:
-   - Click empty slot to open selector
-   - Type to search, select from dropdown
-   - Country added, chart updates
-2. Implement remove country flow:
-   - Click X button on selected country
-   - Slot cleared, chart updates
-   - Smooth animation on removal
-3. Handle limit:
-   - Maximum 3 countries
-   - Disable "Add" when 3 selected
-   - Show message: "Remove one to add another"
-4. Add keyboard shortcuts:
-   - Backspace to remove selected
-   - Arrow keys to navigate slots
-
----
-
-### Task 4.11: Session Persistence
-
-**Feature:** Session persistence
-**Description:** Persist selected countries during browser session
-**Deliverables:** Countries remembered on page refresh
-
-#### Detailed Plan
-
-1. Implement session storage:
-   - Save selected countries on change
-   - Load on page mount
-   - Clear on "Clear All" action
-2. Use Zustand with persist middleware:
-   - Add to comparison store
-   - Configure for session storage
-   - Add expiry (24 hours)
-3. Handle page refresh:
-   - Restore selected countries
-   - Fetch fresh data for each country
-   - Show loading while fetching
-4. Handle browser back/forward:
-   - Restore state correctly
-   - Update URL params for shareability
-
----
-
-### Task 4.12: URL-based Comparison Sharing
-
-**Feature:** Session persistence
-**Description:** Allow sharing comparison via URL parameters
-**Deliverables:** Shareable comparison links
-
-#### Detailed Plan
-
-1. Implement URL parameters:
-   - Format: ?countries=ESP,USA,BRA
-   - Parse on page load
-   - Auto-select countries from URL
-2. Create share button:
-   - Copy current URL to clipboard
-   - Show confirmation toast
-   - Include summary in shared link
-3. Handle invalid codes:
-   - Skip invalid country codes
-   - Show message for removed codes
-4. Add Open Graph meta tags:
-   - Title: "Comparing: Spain, USA, Brazil"
-   - Description: "View country comparison on Atlas Ciber-Neón"
-
----
-
-## Technical Notes
-
-- Use Recharts for chart rendering with responsive container
-- Implement proper chart loading states
-- Handle missing data gracefully (show N/A, skip chart)
-- Use React.memo for chart performance
-- Ensure accessibility for chart data (ARIA labels, screen reader descriptions)
-- Use CSS animations for smooth transitions between states
-
-## Success Criteria
-
-- [ ] Can select 2-3 countries for comparison
-- [ ] Search autocomplete works in selectors
-- [ ] Population chart displays correctly
-- [ ] Area chart displays correctly
-- [ ] Border count chart displays correctly
-- [ ] Percentage differences calculated and shown
-- [ ] Winner highlighted in each category
-- [ ] Can add/remove countries dynamically
-- [ ] Selection persists on page refresh
-- [ ] URL sharing works correctly
+## Deliverables
+- Functional Versus mode page with country selector (2-3 countries)
+- Bar charts displaying key metrics with proper formatting
+- Percentage difference calculation and display
+- Visual winner highlighting with crown icons and color coding
+- Overall winner summary showing total wins per country
+- Pre-populated selection from profile page link
+- Responsive design for mobile and desktop comparison views
