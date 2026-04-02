@@ -2,7 +2,7 @@
 
 La idea es crear una herramienta de inteligencia geográfica que permita a un usuario no solo ver datos aislados, sino comparar regiones y entender la demografía global de forma visual.
 
-Para los datos, utilizaremos [the REST Countries API](https://restcountries.com/)
+Para los datos, utilizaremos [the REST Countries API](https://restcountries.com/) V4
 
 ## Funcionalidades Principales (Features)
 
