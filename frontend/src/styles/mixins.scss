@@ -1,0 +1,44 @@
+@mixin neon-glow-cyan {
+  box-shadow: 0 0 5px rgba(0, 255, 209, 0.5),
+              inset 0 0 5px rgba(0, 255, 209, 0.1);
+}
+
+@mixin neon-glow-green {
+  box-shadow: 0 0 5px rgba(47, 248, 1, 0.5),
+              inset 0 0 5px rgba(47, 248, 1, 0.1);
+}
+
+@mixin neon-glow-red {
+  box-shadow: 0 0 5px rgba(255, 112, 115, 0.5),
+              inset 0 0 5px rgba(255, 112, 115, 0.1);
+}
+
+@mixin text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.7),
+               0 0 20px rgba(0, 255, 209, 0.5),
+               0 0 30px rgba(0, 255, 209, 0.3);
+}
+
+@mixin mobile {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 640px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+@mixin glassmorphism {
+  background: rgba(22, 24, 31, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
