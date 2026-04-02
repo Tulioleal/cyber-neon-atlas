@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Fira+Code:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 255, 209, 0.02) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+        .flicker-on-click:active {
+            opacity: 0.7;
+            filter: brightness(1.5);
+        }
+        .crt-glow {
+            text-shadow: 0 0 5px rgba(0, 255, 209, 0.5);
+        }
+        .hologram-map {
+            mask-image: radial-gradient(circle, black 60%, transparent 95%);
+        }
+        body {
+            background-color: #090A0F;
+            color: #f7f5fd;
+            overflow: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ff7a7c",
+                        "tertiary": "#ff7073",
+                        "error-container": "#9f0519",
+                        "error-dim": "#d7383b",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#2a2c34",
+                        "inverse-surface": "#faf8ff",
+                        "surface-tint": "#b9ffe8",
+                        "on-tertiary": "#49000a",
+                        "tertiary-container": "#fc003b",
+                        "on-tertiary-container": "#000000",
+                        "on-secondary-fixed-variant": "#0d6200",
+                        "on-secondary-container": "#e7ffd9",
+                        "secondary-fixed": "#2ff801",
+                        "on-primary-container": "#005d4b",
+                        "on-primary-fixed": "#004436",
+                        "on-background": "#f7f5fd",
+                        "primary-dim": "#00e9bf",
+                        "surface-dim": "#0d0e13",
+                        "outline-variant": "#47474e",
+                        "inverse-on-surface": "#54545b",
+                        "on-surface-variant": "#abaab1",
+                        "on-secondary-fixed": "#064200",
+                        "primary-container": "#15ffd1",
+                        "on-tertiary-fixed-variant": "#790017",
+                        "secondary": "#2ff801",
+                        "secondary-container": "#106e00",
+                        "on-primary": "#006653",
+                        "on-error-container": "#ffa8a3",
+                        "primary-fixed-dim": "#00e9bf",
+                        "on-error": "#490006",
+                        "inverse-primary": "#006c57",
+                        "tertiary-fixed": "#ff9191",
+                        "tertiary-dim": "#e90036",
+                        "error": "#ff716c",
+                        "surface-container": "#181920",
+                        "surface-container-low": "#121319",
+                        "surface-container-high": "#1e1f26",
+                        "secondary-dim": "#2be800",
+                        "surface-container-highest": "#24252d",
+                        "on-tertiary-fixed": "#3a0006",
+                        "on-surface": "#f7f5fd",
+                        "primary-fixed": "#00f9cc",
+                        "primary": "#b9ffe8",
+                        "on-primary-fixed-variant": "#006451",
+                        "surface-variant": "#24252d",
+                        "secondary-fixed-dim": "#2be800",
+                        "on-secondary": "#0b5800",
+                        "background": "#0d0e13",
+                        "outline": "#75757b",
+                        "surface": "#0d0e13"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Mono"],
+                        "body": ["Space Grotesk"],
+                        "label": ["Space Grotesk"],
+                        "data": ["Fira Code"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<div class="fixed inset-0 scanlines z-[100] opacity-30 pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 py-3 fixed top-0 z-50 bg-[#090A0F]/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,255,209,0.15)] border-b border-[#00FFD1]/10">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-[#00FFD1] drop-shadow-[0_0_8px_rgba(0,255,209,0.5)] font-['Space_Mono'] uppercase tracking-[0.1em]">ATLAS CIBER-NEÓN</span>
+<nav class="hidden md:flex gap-6 font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold">
+<a class="text-[#00FFD1] border-b-2 border-[#00FFD1] pb-1 flicker-on-click" href="#">HOME</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors flicker-on-click" href="#">PERFIL</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors flicker-on-click" href="#">VERSUS</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors flicker-on-click" href="#">DATABANK</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#00FFD1]/60 hover:text-[#00FFD1] transition-colors">settings</button>
+<button class="material-symbols-outlined text-[#00FFD1]/60 hover:text-[#00FFD1] transition-colors">terminal</button>
+<div class="relative">
+<button class="material-symbols-outlined text-[#00FFD1]/60 hover:text-[#00FFD1] transition-colors" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</button>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary shadow-[0_0_8px_#2ff801]"></span>
+</div>
+</div>
+</header>
+<!-- Sidebar Control Center -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-80px)] z-40 flex flex-col w-[300px] bg-[#12151C] border-r border-[#00FFD1]/20 shadow-[8px_0_24px_rgba(0,0,0,0.5)] overflow-y-auto">
+<!-- Search Console -->
+<div class="p-6 border-b border-[#00FFD1]/10 bg-[#090A0F]/50">
+<label class="font-['Space_Mono'] text-[10px] text-[#00FFD1]/60 block mb-2 uppercase tracking-widest">COMMAND_SEARCH</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-[#00FFD1]/40">
+<span class="font-['Fira_Code'] text-sm">&gt;</span>
+</div>
+<input class="w-full bg-[#0d0e13] border-none focus:ring-1 focus:ring-[#00FFD1] text-[#00FFD1] font-['Fira_Code'] text-sm py-3 pl-8 pr-4 placeholder-[#00FFD1]/20 uppercase" placeholder="LOCATE_NATION..." type="text"/>
+<div class="absolute inset-y-0 right-3 flex items-center text-[#2ff801] font-['Fira_Code'] text-xs animate-pulse">_</div>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-center px-2 py-1 bg-[#2ff801]/10 text-secondary text-[10px] font-['Fira_Code']">
+<span>MATCH_FOUND: BRA<span class="bg-secondary text-black">ZIL</span></span>
+<span class="text-[8px]">LOC_REF: 442</span>
+</div>
+<div class="flex justify-between items-center px-2 py-1 text-[#00FFD1]/40 text-[10px] font-['Fira_Code']">
+<span>MATCH_FOUND: BRU<span class="text-[#00FFD1]/80">NEI</span></span>
+</div>
+</div>
+</div>
+<!-- OP_CENTER Header -->
+<div class="p-6 flex items-center gap-4 bg-[#090A0F]">
+<div class="w-12 h-12 border border-[#00FFD1]/40 flex items-center justify-center relative">
+<img alt="OPERATOR_01" class="w-10 h-10 opacity-80" data-alt="Abstract cybernetic operator icon in neon cyan and black with geometric patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsmqtOZI6eO0O2e_OIXDuWBcCA5fqphe2JDo7FP98UGleG99vPGP-ePzG1I95V7HpvRGgSLoe0ai6fNgvrXqo8Twot6N80FnJqprhpGTEhL8bzPD8ntJ12T8dTLNMe-HuDe6kdj457GB96y_eVraVS2GwXBd2Pq9JF4WiRNEbGSfKqVZ8DjRgUcksnJVBaSaGSSz6XVqd-JTvUXpwjTHScEVLGC5cNwTc_-PaczboJBs59rIvVf2zbOsTbwpKjx_lxsLxFkVu6nPM"/>
+<div class="absolute -top-1 -right-1 w-2 h-2 bg-[#00FFD1]"></div>
+</div>
+<div>
+<h2 class="text-[#00FFD1] font-bold text-lg font-['Space_Grotesk'] tracking-tight">OP_CENTER</h2>
+<p class="text-[#00FFD1]/50 text-[10px] font-['Fira_Code']">SECTOR_7G // STATUS: ACTIVE</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-grow flex flex-col font-['Space_Grotesk'] text-xs font-medium uppercase">
+<button class="flex items-center gap-4 px-6 py-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 transition-all duration-200 group">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+<span class="tracking-widest group-hover:text-[#00FFD1]">FILTROS</span>
+</button>
+<button class="flex items-center gap-4 px-6 py-4 bg-[#00FFD1]/20 text-[#00FFD1] border-l-4 border-[#00FFD1]">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span class="tracking-widest">PARÁMETROS</span>
+</button>
+<button class="flex items-center gap-4 px-6 py-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 transition-all duration-200 group">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="tracking-widest group-hover:text-[#00FFD1]">TELEMETRÍA</span>
+</button>
+<button class="flex items-center gap-4 px-6 py-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 transition-all duration-200 group">
+<span class="material-symbols-outlined text-lg">history</span>
+<span class="tracking-widest group-hover:text-[#00FFD1]">HISTORIAL</span>
+</button>
+<!-- Region Matrix -->
+<div class="px-6 py-4 border-t border-[#00FFD1]/10">
+<span class="text-[10px] text-[#00FFD1]/40 mb-3 block font-['Space_Mono']">REGION_MATRIX</span>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-[#00FFD1]/40 bg-[#00FFD1]/10 flex items-center justify-center transition-colors">
+<div class="w-2 h-2 bg-secondary shadow-[0_0_5px_#2ff801]"></div>
+</div>
+<span class="text-[#00FFD1] group-hover:text-secondary transition-colors">APAC</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-[#00FFD1]/40 group-hover:border-[#00FFD1] transition-colors"></div>
+<span class="text-[#00FFD1]/40 group-hover:text-[#00FFD1] transition-colors">EMEA</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-secondary bg-secondary/10 flex items-center justify-center">
+<div class="w-2 h-2 bg-secondary"></div>
+</div>
+<span class="text-secondary">LATAM</span>
+</label>
+</div>
+</div>
+</nav>
+<div class="p-4 bg-[#090A0F]">
+<button class="w-full py-3 bg-[#00FFD1] text-[#006653] font-bold text-sm tracking-[0.2em] flicker-on-click uppercase">
+                EJECUTAR_SCAN
+            </button>
+</div>
+<!-- Footer Mini-Nav -->
+<div class="flex border-t border-[#00FFD1]/20 font-['Space_Grotesk'] text-[10px]">
+<button class="flex-1 py-3 flex items-center justify-center gap-2 text-[#00FFD1]/40 hover:text-[#00FFD1] hover:bg-[#00FFD1]/5">
+<span class="material-symbols-outlined text-sm">terminal</span>
+                CONSOLA
+            </button>
+<button class="flex-1 py-3 border-l border-[#00FFD1]/20 flex items-center justify-center gap-2 text-[#00FFD1]/40 hover:text-[#00FFD1] hover:bg-[#00FFD1]/5">
+<span class="material-symbols-outlined text-sm">list_alt</span>
+                LOGS
+            </button>
+</div>
+</aside>
+<!-- Main Viewport / Holo-Globe -->
+<main class="ml-[300px] mt-16 h-[calc(100vh-80px)] relative overflow-hidden flex items-center justify-center bg-[#0d0e13]">
+<!-- Grid Floor Decorative -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(#00FFD1 1px, transparent 1px), linear-gradient(90deg, #00FFD1 1px, transparent 1px); background-size: 50px 50px; transform: perspective(500px) rotateX(60deg) translateY(200px);"></div>
+<!-- The Hologram Globe Container -->
+<div class="relative w-[800px] h-[800px] flex items-center justify-center hologram-map scale-110">
+<!-- Glow Rings -->
+<div class="absolute w-[600px] h-[600px] border border-[#00FFD1]/10 rounded-full animate-pulse"></div>
+<div class="absolute w-[650px] h-[650px] border border-[#00FFD1]/5 rounded-full"></div>
+<!-- Map Visualization -->
+<div class="relative z-10 w-full h-full flex items-center justify-center">
+<!-- Using an image to represent the complex WebGL state -->
+<img class="w-full h-full object-contain mix-blend-screen opacity-90 drop-shadow-[0_0_30px_rgba(0,255,209,0.4)]" data-alt="Digital wireframe globe hologram in neon cyan against a dark space background with technical data overlays and glowing grid lines" data-location="Global" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-cl7jUAn6STpW6IhxiGAQ0nJR9xgnLZSBeS9f9zGYM91aCt0unQxfuF5vzO2tq8qzWfnM6PVyYN-UDKMk9bd4koMYevFg9FLq0-FfzZlIKDUhOeSNxTkrw7m5Mb07qIdmdnUJoyO9nhSUlN_HKGfcV0eRN4tyVGUCEimVD_RZIbhPrOQmj7hUWwQXA8GrpaZ6Q-3Djt6sW_Wk-fNtb29KQxfqw0Fi9m8oySIefSpec_pMEFHq_-6UfvMdv4bYYohyJBspGe9qu58"/>
+<!-- Tactical Overlays -->
+<div class="absolute top-1/4 right-1/4 w-32 h-32 border border-[#39FF14]/40 flex flex-col p-2 bg-[#39FF14]/5 backdrop-blur-md">
+<div class="flex justify-between items-start mb-1">
+<span class="text-secondary font-['Space_Mono'] text-[8px] font-bold">TARGET_LOC</span>
+<span class="text-secondary material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</div>
+<div class="text-[10px] font-['Fira_Code'] text-secondary/80 leading-tight">
+                        ID: LATAM_44<br/>
+                        LAT: 23.5505<br/>
+                        LON: 46.6333<br/>
+                        POP: 12.3M
+                    </div>
+<div class="mt-auto h-1 w-full bg-secondary/20">
+<div class="h-full bg-secondary w-2/3 shadow-[0_0_5px_#2ff801]"></div>
+</div>
+</div>
+<!-- Floating Data Stream Right -->
+<div class="absolute bottom-10 right-10 w-48 space-y-2 opacity-60">
+<div class="flex justify-between font-['Fira_Code'] text-[8px] text-[#00FFD1]">
+<span>SIGNAL_STRENGTH</span>
+<span>98.2%</span>
+</div>
+<div class="w-full h-[2px] bg-[#00FFD1]/20">
+<div class="h-full bg-[#00FFD1] w-4/5"></div>
+</div>
+<div class="text-[8px] font-['Fira_Code'] text-[#00FFD1]/40 leading-[1.2]">
+                        UDP://STREAM.DATA_PACKET.0042<br/>
+                        DECRYPTING_HASH_SEQUENCE_77X<br/>
+                        HANDSHAKE_ESTABLISHED_LOCAL_NODE
+                    </div>
+</div>
+</div>
+</div>
+<!-- HUD Corner Details -->
+<div class="absolute top-8 right-8 text-right font-['Fira_Code']">
+<div class="text-[10px] text-[#00FFD1]/60 tracking-widest mb-1">SYSTEM_STATUS: NOMINAL</div>
+<div class="text-2xl font-bold text-[#00FFD1] crt-glow">14:23:08 UTC</div>
+<div class="text-[10px] text-secondary mt-1">UPTIME: 99.998%</div>
+</div>
+<!-- Asymmetric Detail Module -->
+<div class="absolute bottom-12 left-12 w-64 bg-[#12151C]/80 border-l-4 border-secondary p-4 backdrop-blur-md">
+<h4 class="font-['Space_Mono'] text-[10px] font-bold text-secondary mb-2 tracking-[0.2em]">CURRENT_FOCUS: BRAZIL</h4>
+<p class="font-['Space_Grotesk'] text-xs text-[#f7f5fd]/70 leading-relaxed">
+                Critical signal discrepancy detected in Sector 4-B. Recommending deep-layer packet inspection on local satellite clusters.
+            </p>
+<div class="mt-4 flex gap-2">
+<div class="h-1 flex-grow bg-[#00FFD1]/10"><div class="h-full bg-[#00FFD1] w-1/3"></div></div>
+<div class="h-1 flex-grow bg-[#00FFD1]/10"><div class="h-full bg-[#00FFD1] w-1/2"></div></div>
+<div class="h-1 flex-grow bg-[#00FFD1]/10"><div class="h-full bg-[#00FFD1] w-4/5"></div></div>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="fixed bottom-0 w-full z-50 flex justify-between items-center px-4 py-1 border-t border-[#00FFD1]/20 bg-[#090A0F] font-['Fira_Code'] text-[10px] tracking-tighter">
+<div class="text-[#00FFD1]/60 flex gap-4">
+<span class="hover:text-[#00FFD1] transition-colors cursor-help">LAT: 35.6895 LON: 139.6917</span>
+<span class="text-[#00FFD1]/20">|</span>
+<span class="hover:text-[#00FFD1] transition-colors cursor-help uppercase">UPTIME: 99.998%</span>
+<span class="text-[#00FFD1]/20">|</span>
+<span class="hover:text-[#00FFD1] transition-colors cursor-help uppercase">REGION: GLOBAL_SEC_01</span>
+</div>
+<div class="flex gap-4">
+<a class="text-[#00FFD1]/60 hover:text-[#00FFD1] transition-colors" href="#">SYSTEM_STATUS</a>
+<a class="text-[#00FFD1]/60 hover:text-[#00FFD1] transition-colors" href="#">ENCRYPTION_LAYER</a>
+<span class="text-[#2ff801]">V_2.0.48</span>
+</div>
+</footer>
+<!-- Fixed Floating Action Element (Optional if aligned with purpose) -->
+<button class="fixed bottom-10 right-10 z-[60] w-14 h-14 bg-[#00FFD1] shadow-[0_0_24px_rgba(0,255,209,0.5)] flex items-center justify-center flicker-on-click">
+<span class="material-symbols-outlined text-[#006653] scale-125" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

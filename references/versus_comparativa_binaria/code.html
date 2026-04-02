@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#ff7a7c",
+                        "tertiary": "#ff7073",
+                        "error-container": "#9f0519",
+                        "error-dim": "#d7383b",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#2a2c34",
+                        "inverse-surface": "#faf8ff",
+                        "surface-tint": "#b9ffe8",
+                        "on-tertiary": "#49000a",
+                        "tertiary-container": "#fc003b",
+                        "on-tertiary-container": "#000000",
+                        "on-secondary-fixed-variant": "#0d6200",
+                        "on-secondary-container": "#e7ffd9",
+                        "secondary-fixed": "#2ff801",
+                        "on-primary-container": "#005d4b",
+                        "on-primary-fixed": "#004436",
+                        "on-background": "#f7f5fd",
+                        "primary-dim": "#00e9bf",
+                        "surface-dim": "#0d0e13",
+                        "outline-variant": "#47474e",
+                        "inverse-on-surface": "#54545b",
+                        "on-surface-variant": "#abaab1",
+                        "on-secondary-fixed": "#064200",
+                        "primary-container": "#15ffd1",
+                        "on-tertiary-fixed-variant": "#790017",
+                        "secondary": "#2ff801",
+                        "secondary-container": "#106e00",
+                        "on-primary": "#006653",
+                        "on-error-container": "#ffa8a3",
+                        "primary-fixed-dim": "#00e9bf",
+                        "on-error": "#490006",
+                        "inverse-primary": "#006c57",
+                        "tertiary-fixed": "#ff9191",
+                        "tertiary-dim": "#e90036",
+                        "error": "#ff716c",
+                        "surface-container": "#181920",
+                        "surface-container-low": "#121319",
+                        "surface-container-high": "#1e1f26",
+                        "secondary-dim": "#2be800",
+                        "surface-container-highest": "#24252d",
+                        "on-tertiary-fixed": "#3a0006",
+                        "on-surface": "#f7f5fd",
+                        "primary-fixed": "#00f9cc",
+                        "primary": "#b9ffe8",
+                        "on-primary-fixed-variant": "#006451",
+                        "surface-variant": "#24252d",
+                        "secondary-fixed-dim": "#2be800",
+                        "on-secondary": "#0b5800",
+                        "background": "#0d0e13",
+                        "outline": "#75757b",
+                        "surface": "#0d0e13"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Mono"],
+                        "body": ["Space Grotesk"],
+                        "label": ["Fira Code"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flicker-on-click:active {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+        .scanlines {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        .radar-grid {
+            background-image: 
+                radial-gradient(circle at center, transparent 30%, #333C4D 30.5%, transparent 31%),
+                radial-gradient(circle at center, transparent 50%, #333C4D 50.5%, transparent 51%),
+                radial-gradient(circle at center, transparent 70%, #333C4D 70.5%, transparent 71%),
+                linear-gradient(0deg, transparent 49.5%, #333C4D 50%, transparent 50.5%),
+                linear-gradient(90deg, transparent 49.5%, #333C4D 50%, transparent 50.5%),
+                linear-gradient(45deg, transparent 49.5%, #333C4D 50%, transparent 50.5%),
+                linear-gradient(-45deg, transparent 49.5%, #333C4D 50%, transparent 50.5%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary overflow-hidden h-screen">
+<div class="fixed inset-0 scanlines z-[100] opacity-30 pointer-events-none"></div>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 py-3 fixed top-0 z-50 bg-[#090A0F]/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,255,209,0.15)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-[#00FFD1] drop-shadow-[0_0_8px_rgba(0,255,209,0.5)] font-['Space_Mono'] uppercase tracking-[0.1em]">ATLAS CIBER-NEÓN</span>
+<nav class="hidden md:flex gap-6 font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold">
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors" href="#">HOME</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors" href="#">PERFIL</a>
+<a class="text-[#00FFD1] border-b-2 border-[#00FFD1] pb-1" href="#">VERSUS</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors" href="#">DATABANK</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 text-[#00FFD1]">
+<button class="material-symbols-outlined flicker-on-click p-2 hover:bg-[#00FFD1]/10">settings</button>
+<button class="material-symbols-outlined flicker-on-click p-2 hover:bg-[#00FFD1]/10">terminal</button>
+<button class="material-symbols-outlined flicker-on-click p-2 hover:bg-[#00FFD1]/10">notifications</button>
+</div>
+</header>
+<!-- SideNavBar (Hidden on small screens, expands on hover) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-80px)] z-40 flex flex-col bg-[#12151C] text-[#00FFD1] w-20 hover:w-64 transition-all duration-300 shadow-[8px_0_24px_rgba(0,0,0,0.5)] font-['Space_Grotesk'] text-xs font-medium uppercase group">
+<div class="p-6 flex items-center gap-4 border-b border-[#00FFD1]/10">
+<div class="w-10 h-10 bg-[#00FFD1]/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap overflow-hidden">
+<p class="text-lg font-bold">OP_CENTER</p>
+<p class="text-[#00FFD1]/60">SECTOR_7G</p>
+</div>
+</div>
+<nav class="flex-1 py-4 flex flex-col gap-1 overflow-hidden">
+<button class="flex items-center gap-4 p-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] hover:shadow-[inset_0_0_10px_rgba(0,255,209,0.2)] transition-all">
+<span class="material-symbols-outlined">filter_alt</span>
+<span class="opacity-0 group-hover:opacity-100 whitespace-nowrap">FILTROS</span>
+</button>
+<button class="flex items-center gap-4 p-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] hover:shadow-[inset_0_0_10px_rgba(0,255,209,0.2)] transition-all">
+<span class="material-symbols-outlined">tune</span>
+<span class="opacity-0 group-hover:opacity-100 whitespace-nowrap">PARÁMETROS</span>
+</button>
+<button class="flex items-center gap-4 p-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] hover:shadow-[inset_0_0_10px_rgba(0,255,209,0.2)] transition-all">
+<span class="material-symbols-outlined">analytics</span>
+<span class="opacity-0 group-hover:opacity-100 whitespace-nowrap">TELEMETRÍA</span>
+</button>
+<button class="flex items-center gap-4 p-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] hover:shadow-[inset_0_0_10px_rgba(0,255,209,0.2)] transition-all">
+<span class="material-symbols-outlined">history</span>
+<span class="opacity-0 group-hover:opacity-100 whitespace-nowrap">HISTORIAL</span>
+</button>
+<button class="flex items-center gap-4 p-4 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] hover:shadow-[inset_0_0_10px_rgba(0,255,209,0.2)] transition-all">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="opacity-0 group-hover:opacity-100 whitespace-nowrap">NOTAS</span>
+</button>
+</nav>
+<div class="p-4 mt-auto border-t border-[#00FFD1]/10 flex flex-col gap-2">
+<button class="bg-[#00FFD1] text-[#090A0F] font-bold py-3 px-4 flex items-center justify-center gap-2 flicker-on-click">
+<span class="material-symbols-outlined text-sm">search</span>
+<span class="opacity-0 group-hover:opacity-100">EJECUTAR_SCAN</span>
+</button>
+<div class="flex justify-between px-2 py-2">
+<span class="material-symbols-outlined text-[#00FFD1]/40">terminal</span>
+<span class="material-symbols-outlined text-[#00FFD1]/40">list_alt</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-20 pt-16 h-screen flex flex-col relative bg-surface-dim">
+<!-- Dual Selectors Header -->
+<section class="h-20 w-full flex items-center justify-between px-8 bg-surface-container-low border-b border-[#00FFD1]/10 relative z-30">
+<div class="flex-1 max-w-md">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary-dim text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-0 focus:ring-1 focus:ring-primary pl-10 pr-4 py-2 font-label text-primary-fixed-dim uppercase tracking-wider" type="text" value="JAPAN"/>
+</div>
+</div>
+<div class="px-10 flex flex-col items-center">
+<span class="font-headline font-bold text-2xl tracking-[0.2em] text-[#00FFD1]/30">VERSUS</span>
+<div class="w-px h-8 bg-[#00FFD1]/20"></div>
+</div>
+<div class="flex-1 max-w-md text-right">
+<div class="relative group">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-0 focus:ring-1 focus:ring-secondary pl-4 pr-10 py-2 font-label text-secondary text-right uppercase tracking-wider" type="text" value="SOUTH KOREA"/>
+</div>
+</div>
+</section>
+<!-- Versus Content: 50/50 Split -->
+<div class="flex-1 flex overflow-hidden">
+<!-- LEFT ENTITY: JAPAN -->
+<section class="flex-1 relative flex flex-col p-12 overflow-y-auto bg-surface-container-low/50">
+<div class="absolute top-0 right-0 p-4 font-label text-[10px] text-primary/30">ID: JP_OPERATIONAL_DATA_SEC_01</div>
+<div class="flex flex-col gap-8">
+<div class="border-l-4 border-primary pl-6 py-2">
+<h2 class="text-4xl font-headline font-bold text-primary tracking-tighter">NIHON-KOKU</h2>
+<p class="font-label text-primary-dim/60 mt-1">COORD: 36.2048° N, 138.2529° E</p>
+</div>
+<div class="space-y-6 max-w-xs">
+<div class="group">
+<label class="font-label text-[10px] text-primary/40 block mb-1">CAPITAL_UNIT</label>
+<p class="font-headline text-lg text-primary-fixed-dim">TOKYO</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-primary/40 block mb-1">CURRENCY_ID</label>
+<p class="font-headline text-lg text-primary-fixed-dim">JPY / YEN</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-primary/40 block mb-1">DRIVE_SIDE</label>
+<p class="font-headline text-lg text-primary-fixed-dim">LEFT_ALIGNED</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-primary/40 block mb-1">GOV_SYSTEM</label>
+<p class="font-headline text-lg text-primary-fixed-dim">CONSTIT_MONARCHY</p>
+</div>
+</div>
+<div class="mt-12 bg-primary/5 p-6 border border-primary/20 backdrop-blur-sm">
+<p class="font-label text-[10px] text-primary mb-4">// OPERATIONAL_OVERVIEW</p>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+                            Archipelagic state in East Asia. High-density urban centers mixed with mountainous terrain. Strategic military ally. Key technological hub for robotic and aerospace sectors.
+                        </p>
+</div>
+</div>
+</section>
+<!-- CENTER AXIS: Radar & Intersection -->
+<div class="w-[450px] shrink-0 bg-surface-dim border-x border-[#00FFD1]/10 flex flex-col items-center relative overflow-hidden">
+<!-- Radar Matrix Container -->
+<div class="h-[450px] w-full flex items-center justify-center relative bg-surface-container-lowest/20">
+<div class="absolute inset-0 radar-grid opacity-20"></div>
+<svg class="w-full h-full p-12 drop-shadow-[0_0_12px_rgba(0,255,209,0.2)]" viewbox="0 0 100 100">
+<!-- Labels -->
+<text class="font-label text-[4px]" fill="#00FFD1" style="font-size: 4px;" text-anchor="middle" x="50" y="8">AREA</text>
+<text class="font-label text-[4px]" fill="#00FFD1" style="font-size: 4px;" text-anchor="start" x="92" y="52">GDP</text>
+<text class="font-label text-[4px]" fill="#00FFD1" style="font-size: 4px;" text-anchor="middle" x="50" y="96">POP</text>
+<text class="font-label text-[4px]" fill="#00FFD1" style="font-size: 4px;" text-anchor="end" x="8" y="52">HDI</text>
+<!-- Data Polygons -->
+<!-- Entity 1: Cyan -->
+<polygon fill="rgba(0, 255, 209, 0.2)" points="50,20 85,50 50,85 15,50" stroke="#00FFD1" stroke-width="1"></polygon>
+<!-- Entity 2: Green -->
+<polygon fill="rgba(47, 248, 1, 0.2)" points="50,35 65,50 50,60 25,50" stroke="#2ff801" stroke-width="1"></polygon>
+<!-- Glow points for high values -->
+<circle class="animate-pulse" cx="50" cy="20" fill="#39FF14" r="1.5"></circle>
+<circle class="animate-pulse" cx="85" cy="50" fill="#39FF14" r="1.5"></circle>
+</svg>
+<!-- Legend Overlay -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between px-6 font-label text-[10px]">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary"></div>
+<span class="text-primary">JP_SIG</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary"></div>
+<span class="text-secondary">KR_SIG</span>
+</div>
+</div>
+</div>
+<!-- Intersection Analysis -->
+<div class="flex-1 w-full bg-surface-container border-t border-[#00FFD1]/10 p-8">
+<h3 class="font-headline text-xs font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+                        INTERSECTION_PROTOCOLS
+                    </h3>
+<div class="space-y-4 font-label">
+<div class="group border-b border-[#00FFD1]/5 pb-3">
+<p class="text-[10px] text-[#00FFD1]/40 mb-1">SHARED BORDERS</p>
+<p class="text-xs text-error-dim">NONE_DETECTED</p>
+</div>
+<div class="group border-b border-[#00FFD1]/5 pb-3">
+<p class="text-[10px] text-[#00FFD1]/40 mb-1">SHARED BLOCS</p>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="bg-primary/10 text-primary px-2 py-1 text-[10px] border border-primary/20">UN</span>
+<span class="bg-primary/10 text-primary px-2 py-1 text-[10px] border border-primary/20">WTO</span>
+<span class="bg-primary/10 text-primary px-2 py-1 text-[10px] border border-primary/20">OECD</span>
+<span class="bg-primary/10 text-primary px-2 py-1 text-[10px] border border-primary/20">G20</span>
+</div>
+</div>
+<div class="group border-b border-[#00FFD1]/5 pb-3">
+<p class="text-[10px] text-[#00FFD1]/40 mb-1">SECURITY_LEVEL</p>
+<p class="text-xs text-secondary-fixed">HIGH_SYNERGY</p>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full py-4 border border-secondary text-secondary font-headline text-xs tracking-widest hover:bg-secondary/10 transition-colors flicker-on-click">
+                            EXPORT_CROSS_ANALYSIS.DAT
+                        </button>
+</div>
+</div>
+</div>
+<!-- RIGHT ENTITY: SOUTH KOREA -->
+<section class="flex-1 relative flex flex-col p-12 overflow-y-auto text-right bg-surface-container-low/50">
+<div class="absolute top-0 left-0 p-4 font-label text-[10px] text-secondary/30">ID: KR_OPERATIONAL_DATA_SEC_07</div>
+<div class="flex flex-col gap-8 items-end">
+<div class="border-r-4 border-secondary pr-6 py-2">
+<h2 class="text-4xl font-headline font-bold text-secondary tracking-tighter">DAEHAN MIN-GUK</h2>
+<p class="font-label text-secondary-dim/60 mt-1">COORD: 35.9078° N, 127.7669° E</p>
+</div>
+<div class="space-y-6 max-w-xs">
+<div class="group">
+<label class="font-label text-[10px] text-secondary/40 block mb-1">CAPITAL_UNIT</label>
+<p class="font-headline text-lg text-secondary-dim">SEOUL</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-secondary/40 block mb-1">CURRENCY_ID</label>
+<p class="font-headline text-lg text-secondary-dim">KRW / WON</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-secondary/40 block mb-1">DRIVE_SIDE</label>
+<p class="font-headline text-lg text-secondary-dim">RIGHT_ALIGNED</p>
+</div>
+<div class="group">
+<label class="font-label text-[10px] text-secondary/40 block mb-1">GOV_SYSTEM</label>
+<p class="font-headline text-lg text-secondary-dim">UNITARY_REPUBLIC</p>
+</div>
+</div>
+<div class="mt-12 bg-secondary/5 p-6 border border-secondary/20 backdrop-blur-sm text-left">
+<p class="font-label text-[10px] text-secondary mb-4 text-right">// OPERATIONAL_OVERVIEW</p>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed text-right">
+                            Peninsular state in East Asia. Rapid industrialization. World-leading semiconductor and telecommunications infrastructure. High operational readiness due to regional proximity factors.
+                        </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-50 flex justify-between items-center px-4 py-1 border-t border-[#00FFD1]/20 bg-[#090A0F] text-[#00FFD1] font-['Fira_Code'] text-[10px] tracking-tighter">
+<div class="flex gap-4">
+<span class="opacity-70">LAT: 35.6895 LON: 139.6917</span>
+<span class="opacity-70">UPTIME: 99.998%</span>
+<span class="opacity-70">REGION: GLOBAL_SEC_01</span>
+</div>
+<div class="flex gap-6">
+<a class="hover:text-[#00FFD1] text-[#00FFD1]/60" href="#">SYSTEM_STATUS</a>
+<a class="hover:text-[#00FFD1] text-[#00FFD1]/60" href="#">ENCRYPTION_LAYER</a>
+<a class="hover:text-[#00FFD1] text-[#00FFD1]/60" href="#">V_2.0.48</a>
+</div>
+</footer>
+</main>
+</body></html>

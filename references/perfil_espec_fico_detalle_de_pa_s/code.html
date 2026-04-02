@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Fira+Code:wght@300;400;500&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#ff7a7c",
+                        "tertiary": "#ff7073",
+                        "error-container": "#9f0519",
+                        "error-dim": "#d7383b",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#2a2c34",
+                        "inverse-surface": "#faf8ff",
+                        "surface-tint": "#b9ffe8",
+                        "on-tertiary": "#49000a",
+                        "tertiary-container": "#fc003b",
+                        "on-tertiary-container": "#000000",
+                        "on-secondary-fixed-variant": "#0d6200",
+                        "on-secondary-container": "#e7ffd9",
+                        "secondary-fixed": "#2ff801",
+                        "on-primary-container": "#005d4b",
+                        "on-primary-fixed": "#004436",
+                        "on-background": "#f7f5fd",
+                        "primary-dim": "#00e9bf",
+                        "surface-dim": "#0d0e13",
+                        "outline-variant": "#47474e",
+                        "inverse-on-surface": "#54545b",
+                        "on-surface-variant": "#abaab1",
+                        "on-secondary-fixed": "#064200",
+                        "primary-container": "#15ffd1",
+                        "on-tertiary-fixed-variant": "#790017",
+                        "secondary": "#2ff801",
+                        "secondary-container": "#106e00",
+                        "on-primary": "#006653",
+                        "on-error-container": "#ffa8a3",
+                        "primary-fixed-dim": "#00e9bf",
+                        "on-error": "#490006",
+                        "inverse-primary": "#006c57",
+                        "tertiary-fixed": "#ff9191",
+                        "tertiary-dim": "#e90036",
+                        "error": "#ff716c",
+                        "surface-container": "#181920",
+                        "surface-container-low": "#121319",
+                        "surface-container-high": "#1e1f26",
+                        "secondary-dim": "#2be800",
+                        "surface-container-highest": "#24252d",
+                        "on-tertiary-fixed": "#3a0006",
+                        "on-surface": "#f7f5fd",
+                        "primary-fixed": "#00f9cc",
+                        "primary": "#b9ffe8",
+                        "on-primary-fixed-variant": "#006451",
+                        "surface-variant": "#24252d",
+                        "secondary-fixed-dim": "#2be800",
+                        "on-secondary": "#0b5800",
+                        "background": "#0d0e13",
+                        "outline": "#75757b",
+                        "surface": "#0d0e13"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk"],
+                        body: ["Space Grotesk"],
+                        label: ["Space Grotesk"],
+                        mono: ["Space Mono"],
+                        data: ["Fira Code"],
+                        display: ["Rajdhani"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scanline-overlay {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+        .pixel-flag {
+            image-rendering: pixelated;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 209, 0.3);
+            border-color: #00FFD1;
+        }
+    </style>
+</head>
+<body class="bg-[#0d0e13] text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<!-- SCANLINE GLOBAL OVERLAY -->
+<div class="fixed inset-0 z-[100] scanline-overlay opacity-30 pointer-events-none"></div>
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center w-full px-6 py-3 fixed top-0 z-50 bg-[#090A0F]/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,255,209,0.15)]">
+<div class="text-xl font-black text-[#00FFD1] drop-shadow-[0_0_8px_rgba(0,255,209,0.5)] font-['Space_Mono'] uppercase tracking-[0.1em]">
+            ATLAS CIBER-NEÓN
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold" href="#">HOME</a>
+<a class="text-[#00FFD1] border-b-2 border-[#00FFD1] pb-1 font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold" href="#">PERFIL</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold" href="#">VERSUS</a>
+<a class="text-[#00FFD1]/50 hover:text-[#00FFD1] transition-colors font-['Space_Mono'] uppercase tracking-[0.1em] text-sm font-bold" href="#">DATABANK</a>
+</div>
+<div class="flex items-center gap-4 text-[#00FFD1]">
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#00FFD1]/10 p-1">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#00FFD1]/10 p-1">terminal</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#00FFD1]/10 p-1">settings</span>
+</div>
+</nav>
+<!-- SideNavBar (Collapsed/Expanded on hover) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-80px)] z-40 flex flex-col bg-[#12151C] text-[#00FFD1] shadow-[8px_0_24px_rgba(0,0,0,0.5)] docked left-0 w-20 hover:w-64 transition-all duration-300 group">
+<div class="p-4 border-b border-[#00FFD1]/10 flex items-center gap-4 overflow-hidden">
+<div class="w-10 h-10 bg-surface-container-highest flex-shrink-0 flex items-center justify-center border border-[#00FFD1]/30">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<div class="text-sm font-bold text-[#00FFD1]">OP_CENTER</div>
+<div class="text-[10px] text-[#00FFD1]/60">SECTOR_7G</div>
+</div>
+</div>
+<div class="flex-1 py-4 overflow-hidden">
+<div class="flex flex-col gap-2">
+<div class="flex items-center px-6 py-3 bg-[#00FFD1]/20 text-[#00FFD1] border-l-4 border-[#00FFD1] cursor-pointer">
+<span class="material-symbols-outlined mr-4">filter_alt</span>
+<span class="opacity-0 group-hover:opacity-100 font-['Space_Grotesk'] text-xs font-medium uppercase tracking-wider">FILTROS</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] cursor-pointer transition-all">
+<span class="material-symbols-outlined mr-4">tune</span>
+<span class="opacity-0 group-hover:opacity-100 font-['Space_Grotesk'] text-xs font-medium uppercase tracking-wider">PARÁMETROS</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] cursor-pointer transition-all">
+<span class="material-symbols-outlined mr-4">analytics</span>
+<span class="opacity-0 group-hover:opacity-100 font-['Space_Grotesk'] text-xs font-medium uppercase tracking-wider">TELEMETRÍA</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] cursor-pointer transition-all">
+<span class="material-symbols-outlined mr-4">history</span>
+<span class="opacity-0 group-hover:opacity-100 font-['Space_Grotesk'] text-xs font-medium uppercase tracking-wider">HISTORIAL</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#00FFD1]/40 hover:bg-[#00FFD1]/5 hover:text-[#00FFD1] cursor-pointer transition-all">
+<span class="material-symbols-outlined mr-4">edit_note</span>
+<span class="opacity-0 group-hover:opacity-100 font-['Space_Grotesk'] text-xs font-medium uppercase tracking-wider">NOTAS</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-[#090A0F]">
+<button class="w-full bg-[#00FFD1] text-on-primary-container font-bold py-2 text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                EJECUTAR_SCAN
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 mt-16 p-8 min-h-screen pb-12">
+<!-- Header Identity Block -->
+<header class="grid grid-cols-12 gap-6 mb-10 items-center">
+<div class="col-span-12 md:col-span-8 flex items-center gap-8">
+<div class="relative w-32 h-32 bg-surface-container border border-[#333C4D] flex items-center justify-center p-2 glow-hover transition-all">
+<img alt="Japan Flag" class="pixel-flag w-full h-auto" data-alt="Pixelated Japanese flag with high contrast red sun on white background displayed on a retro CRT monitor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4JKySxDRsVT6i6DVsszv0d0CDbFEeFFGav5Zz0hxPGc8m-vRBWVcKrX4-B_xeX1cd7tw8JLYzI-I0vsydph-tZxE_CtDL2QzTNtZYLGk4k1GxtmbG7g4j192GIY_UEhgPNsxNv-akKiea17BtAbUQpkC_jDoxZfrzL7bwsFL92JZ3yOTgSNXNpkogbUTvSZaI_NqvC6_r7VXf106645nUABvMoZ5Jg6bpcqToj9EmvZHsISS5o_AAQvROcZC5do1VXrTwROSXlDA"/>
+<div class="absolute top-0 right-0 p-1 bg-[#00FFD1] text-black text-[8px] font-bold">STABLE</div>
+</div>
+<div>
+<div class="flex items-baseline gap-4">
+<h1 class="font-mono font-bold text-6xl text-on-surface tracking-tighter">[JPN]</h1>
+<span class="font-headline text-2xl font-light text-[#00FFD1]/70 uppercase tracking-[0.2em]">Japan / 日本</span>
+</div>
+<div class="mt-2 flex gap-4 font-data text-xs text-[#00FFD1]/60">
+<span>LAT: 35.6762° N</span>
+<span>LON: 139.6503° E</span>
+<span class="text-secondary">SIGNAL_STRENGTH: 98%</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 flex flex-col items-end gap-4">
+<button class="bg-transparent border border-[#00FFD1] text-[#00FFD1] px-6 py-3 font-mono font-bold text-sm tracking-widest hover:bg-[#00FFD1] hover:text-black transition-all shadow-[0_0_15px_rgba(0,255,209,0.2)] active:scale-95">
+                    [+] INITIATE VERSUS PROTOCOL
+                </button>
+<div class="text-[10px] font-data text-[#00FFD1]/40 uppercase">Last updated: 2024.10.27_04:12:01_UTC</div>
+</div>
+</header>
+<!-- 12-Column Grid Main Dashboard -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Dev/Economy Block (Left 4 cols) -->
+<section class="col-span-12 lg:col-span-4 bg-[#12151C] border border-[#333C4D] p-6 flex flex-col gap-6 glow-hover transition-all">
+<div class="flex justify-between items-center border-b border-[#333C4D] pb-2">
+<h2 class="font-mono text-xs font-bold text-[#00FFD1] tracking-widest uppercase">ECON_TELEMETRY</h2>
+<span class="material-symbols-outlined text-xs text-[#00FFD1]/40">monitoring</span>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-1">GDP_TOTAL (USD)</p>
+<p class="font-display text-4xl text-[#E2E8F0] tracking-tighter">4.21T</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-1">GINI_INDEX</p>
+<p class="font-display text-2xl text-[#E2E8F0]">32.9</p>
+</div>
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-1">HDI_RATING</p>
+<p class="font-display text-2xl text-[#E2E8F0]">0.925</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 border border-[#333C4D]/50">
+<p class="font-mono text-[10px] text-[#00FFD1] mb-2">RAW_DATA_STREAM:</p>
+<div class="font-data text-[10px] text-[#00FFD1]/70 space-y-1">
+<div class="flex justify-between"><span>INFLATION:</span> <span class="text-secondary">+2.3%</span></div>
+<div class="flex justify-between"><span>UNEMPLOYMENT:</span> <span>2.6%</span></div>
+<div class="flex justify-between"><span>PUB_DEBT/GDP:</span> <span class="text-tertiary">263%</span></div>
+<div class="flex justify-between"><span>CURRENCY:</span> <span>JPY (¥)</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Socio-Cultural Block (Center 4 cols) -->
+<section class="col-span-12 lg:col-span-4 bg-[#12151C] border border-[#333C4D] p-6 flex flex-col gap-6 glow-hover transition-all">
+<div class="flex justify-between items-center border-b border-[#333C4D] pb-2">
+<h2 class="font-mono text-xs font-bold text-[#00FFD1] tracking-widest uppercase">DEMO_MORPHOLOGY</h2>
+<span class="material-symbols-outlined text-xs text-[#00FFD1]/40">groups</span>
+</div>
+<div class="flex flex-col gap-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<p class="font-mono text-[10px] text-[#00FFD1]/60">POP_DENSITY</p>
+<p class="font-display text-2xl text-[#E2E8F0]">125.1M</p>
+</div>
+<div class="h-2 w-full bg-surface-container-lowest border border-[#333C4D] overflow-hidden">
+<div class="h-full bg-[#00FFD1] shadow-[0_0_10px_#00FFD1]" style="width: 85%;"></div>
+</div>
+</div>
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-3">LANGUAGE_NODES</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 border border-[#00FFD1] text-[#00FFD1] text-[10px] font-bold uppercase tracking-wider bg-[#00FFD1]/5">Japanese (Main)</span>
+<span class="px-3 py-1 border border-[#333C4D] text-[#E2E8F0]/60 text-[10px] font-bold uppercase tracking-wider hover:border-[#00FFD1] hover:text-[#00FFD1] transition-colors cursor-default">English</span>
+<span class="px-3 py-1 border border-[#333C4D] text-[#E2E8F0]/60 text-[10px] font-bold uppercase tracking-wider hover:border-[#00FFD1] hover:text-[#00FFD1] transition-colors cursor-default">Ainu</span>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-4">
+<div class="p-3 bg-surface-container-lowest border border-[#333C4D]">
+<p class="font-mono text-[8px] text-[#00FFD1]/60">MEDIAN_AGE</p>
+<p class="font-display text-xl text-tertiary">48.4</p>
+</div>
+<div class="p-3 bg-surface-container-lowest border border-[#333C4D]">
+<p class="font-mono text-[8px] text-[#00FFD1]/60">URBANIZATION</p>
+<p class="font-display text-xl text-secondary">91.8%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Geo-Politics Block (Right 4 cols) -->
+<section class="col-span-12 lg:col-span-4 bg-[#12151C] border border-[#333C4D] p-6 flex flex-col gap-6 glow-hover transition-all">
+<div class="flex justify-between items-center border-b border-[#333C4D] pb-2">
+<h2 class="font-mono text-xs font-bold text-[#00FFD1] tracking-widest uppercase">GEOPOL_VECTOR</h2>
+<span class="material-symbols-outlined text-xs text-[#00FFD1]/40">public</span>
+</div>
+<div class="h-48 w-full bg-surface-container-lowest border border-[#333C4D] relative overflow-hidden">
+<!-- Placeholder for Map Visualization -->
+<div class="absolute inset-0 opacity-40 bg-[radial-gradient(#00FFD1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<img alt="Japan Map Overlay" class="w-full h-full object-cover mix-blend-screen opacity-50 grayscale contrast-125" data-alt="Stylized digital blue and neon green vector map of the Japanese archipelago with data points and glowing coastlines" data-location="Japan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg7XFeiAHXU4WIdkTNtpH4TvKRSX4rSA3pYJqedX81yI0ijDGtpVLUrbgG-Blhxr6sH4HvgBY8Mcg9Sr-lWuTmxTWm6WnfYGWYdQa6c5zVaBIhuTOPeaUUpgPXZk_6JBIXbNpuz8j8aDQAlGyLmacVIbrTjjKXPqp9PIbHKa27l5b7wNHBXpOgBCP4lv3l9cYKgrSFSHoMR9WeZy4YqZ0E1o-P1QuNVeCZ0F2looqGdBol6ZHDm5F9jbbUosGt3wQfli8Oj2vs9UE"/>
+<div class="absolute bottom-2 left-2 font-data text-[8px] text-[#00FFD1] bg-black/80 px-2 py-1">COORD_LOCK: TOKYO_CENTRAL</div>
+</div>
+<div class="space-y-4">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-1">GOVERNMENT_TYPE</p>
+<p class="font-display text-xl text-[#E2E8F0] uppercase">Unitary Parliamentary Constitutional Monarchy</p>
+</div>
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/60 mb-1">CAPITAL_CITY</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00FFD1] text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<p class="font-display text-2xl text-[#E2E8F0]">TOKYO</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-tertiary">security</span>
+<div class="text-[10px] font-mono text-tertiary/80 italic">DEFENSE_LEVEL: DEFCON_4 (NON-NUCLEAR_POSTURE)</div>
+</div>
+</div>
+</section>
+<!-- Bottom Data Cluster (Bento Style) -->
+<section class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low border border-[#333C4D] p-4 flex items-center justify-between">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/40">TIME_ZONE</p>
+<p class="font-display text-lg text-[#E2E8F0]">JST (UTC+9)</p>
+</div>
+<span class="material-symbols-outlined text-[#00FFD1]/20 text-4xl">schedule</span>
+</div>
+<div class="bg-surface-container-low border border-[#333C4D] p-4 flex items-center justify-between">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/40">INTERNET_TLD</p>
+<p class="font-display text-lg text-[#E2E8F0]">.jp</p>
+</div>
+<span class="material-symbols-outlined text-[#00FFD1]/20 text-4xl">language</span>
+</div>
+<div class="bg-surface-container-low border border-[#333C4D] p-4 flex items-center justify-between">
+<div>
+<p class="font-mono text-[10px] text-[#00FFD1]/40">DIALING_CODE</p>
+<p class="font-display text-lg text-[#E2E8F0]">+81</p>
+</div>
+<span class="material-symbols-outlined text-[#00FFD1]/20 text-4xl">call</span>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-50 bg-[#090A0F] border-t border-[#00FFD1]/20 flex justify-between items-center px-4 py-1 text-[10px] font-['Fira_Code'] tracking-tighter text-[#00FFD1]">
+<div class="flex gap-6">
+<span class="text-[#00FFD1]/60">LAT: 35.6895 LON: 139.6917</span>
+<span class="text-[#00FFD1]/60">UPTIME: 99.998%</span>
+<span class="text-[#00FFD1]/60">REGION: GLOBAL_SEC_01</span>
+</div>
+<div class="flex gap-4">
+<a class="hover:text-[#00FFD1] text-[#00FFD1]/60 transition-colors" href="#">SYSTEM_STATUS</a>
+<a class="hover:text-[#00FFD1] text-[#00FFD1]/60 transition-colors" href="#">ENCRYPTION_LAYER</a>
+<span class="text-[#2ff801] font-bold">V_2.0.48</span>
+</div>
+</footer>
+</body></html>
