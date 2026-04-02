@@ -56,7 +56,7 @@ This phase implements the comprehensive country profile page that displays all d
 
 ### Country Profile Page Implementation
 1. **Dynamic Route**: Create `src/app/country/[code]/page.tsx` using Next.js App Router dynamic segments
-2. **Data Fetching**: Use Axios to call REST Countries API v4 endpoint /alpha/{code} with full=true parameter
+2. **Data Fetching**: Use Fetch API to call REST Countries API v4 endpoint /alpha/{code}
 3. **Data Transformation**: Transform API response to internal Country type with proper TypeScript interfaces
 4. **Error Handling**: Implement try/catch with custom error for 404 Not Found, display user-friendly message
 5. **Component Structure**: Create modular section components for each data category (BasicInfo, Demographics, etc.)

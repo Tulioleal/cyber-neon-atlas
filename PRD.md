@@ -445,14 +445,14 @@ Key icons used:
 
 | Layer | Technology | Version |
 |-------|------------|---------|
-| Framework | Next.js | Latest (14.x+) |
+| Framework | Next.js | 16.x (latest) |
 | Language | TypeScript | 5.x |
 | Styling | SCSS / SASS | 1.77.x |
 | Map | Leaflet + react-leaflet | 4.x / 4.x |
 | Charts | Recharts | 2.x |
 | Icons | react-icons (Material Symbols) | 4.x |
 | State | Zustand | 4.x |
-| HTTP | Axios | 1.x |
+| HTTP | Native Fetch API | Built-in (Next.js) |
 | Lint | ESLint | 8.x |
 | Format | Prettier | 3.x |
 | Git Hooks | husky + lint-staged | 9.x / 15.x |
