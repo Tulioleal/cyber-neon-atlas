@@ -1,0 +1,182 @@
+@use '@/styles/variables' as *;
+
+.filter {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  background: $surface-container-high;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: $surface-bright;
+  }
+
+  &.active {
+    background: $surface-container-highest;
+    box-shadow: $neon-bloom;
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  color: $on-surface;
+  letter-spacing: 0.1em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 $spacing-xs;
+  background: $primary;
+  color: $on-primary;
+  font-size: $type-scale-caption;
+  font-family: $font-data;
+}
+
+.icon {
+  color: $on-surface-variant;
+  transition: transform $transition-normal;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $surface-container-high;
+  border: $ghost-border;
+  z-index: 100;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  padding: $spacing-sm;
+  border-bottom: $ghost-border;
+}
+
+.searchInput {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: $surface-container-low;
+  border: none;
+  color: $on-surface;
+  font-family: $font-data;
+  font-size: $type-scale-body;
+
+  &::placeholder {
+    color: $on-surface-variant;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 -2px 0 $secondary;
+  }
+}
+
+.options {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $surface-bright;
+  }
+
+  &.selected {
+    background: rgba($primary, 0.1);
+  }
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: $surface-container-low;
+  border: 1px solid $outline-variant;
+  color: transparent;
+  font-size: 12px;
+
+  .selected & {
+    background: $primary;
+    border-color: $primary;
+    color: $on-primary;
+  }
+}
+
+.symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: $primary;
+  color: $on-primary;
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  font-weight: 600;
+}
+
+.optionText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.optionName {
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  color: $on-surface;
+}
+
+.optionCode {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+}
+
+.optionCount {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  padding: 2px 6px;
+  background: $surface-container-low;
+}

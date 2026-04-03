@@ -1,0 +1,200 @@
+@use '@/styles/variables' as *;
+
+.filter {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  background: $surface-container-high;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: $surface-bright;
+  }
+
+  &.active {
+    background: $surface-container-highest;
+    box-shadow: $neon-bloom;
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  color: $on-surface;
+  letter-spacing: 0.1em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 $spacing-xs;
+  background: $primary;
+  color: $on-primary;
+  font-size: $type-scale-caption;
+  font-family: $font-data;
+}
+
+.icon {
+  color: $on-surface-variant;
+  transition: transform $transition-normal;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $surface-container-high;
+  border: $ghost-border;
+  z-index: 100;
+  padding: $spacing-sm 0;
+}
+
+.allButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  color: $on-surface;
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  cursor: pointer;
+  text-align: left;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $surface-bright;
+  }
+
+  &.selected {
+    color: $primary;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: $outline-variant;
+  margin: $spacing-xs 0;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: $surface-container-low;
+  border: 1px solid $outline-variant;
+  color: transparent;
+  font-size: 12px;
+
+  .selected & {
+    background: $primary;
+    border-color: $primary;
+    color: $on-primary;
+  }
+}
+
+.regions {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 $spacing-sm;
+}
+
+.regionButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  color: $on-surface;
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  cursor: pointer;
+  text-align: left;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $surface-bright;
+  }
+
+  &.selected {
+    color: $primary;
+  }
+}
+
+.subregionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  color: $on-surface-variant;
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  cursor: pointer;
+  text-align: left;
+
+  &.selected {
+    color: $primary;
+  }
+
+  .open {
+    transform: rotate(180deg);
+  }
+}
+
+.subregionList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $spacing-xs $spacing-md $spacing-sm;
+}
+
+.subregionItem {
+  padding: $spacing-xs $spacing-md;
+  background: transparent;
+  border: none;
+  color: $on-surface-variant;
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  cursor: pointer;
+  text-align: left;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $on-surface;
+    background: $surface-bright;
+  }
+
+  &.selected {
+    color: $primary;
+  }
+}

@@ -1,0 +1,45 @@
+@use '@/styles/variables' as *;
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  background: $surface-container-low;
+  border-top: $ghost-border;
+}
+
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: $surface-container-high;
+  color: $primary;
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: transparent;
+  border: 1px solid $tertiary;
+  color: $tertiary;
+  font-family: $font-body;
+  font-size: $type-scale-caption;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($tertiary, 0.1);
+  }
+}

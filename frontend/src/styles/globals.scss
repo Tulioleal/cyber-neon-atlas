@@ -69,6 +69,25 @@ $breakpoint-tablet: 1024px;
 $transition-fast: 0.05s ease;
 $transition-normal: 0.2s ease;
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $primary;
+  color: $on-primary;
+  padding: $spacing-sm $spacing-md;
+  z-index: 9999;
+  transition: top 0.2s;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  &:focus {
+    top: 0;
+  }
+}
+
 *,
 *::before,
 *::after {

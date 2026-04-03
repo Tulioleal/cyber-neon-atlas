@@ -1,0 +1,71 @@
+@use '@/styles/variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: $surface-container-high;
+  border: none;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: $surface-container-highest;
+    box-shadow: $neon-bloom;
+    transform: translateY(-2px);
+  }
+}
+
+.flag {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: $surface-container-low;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.info {
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.name {
+  font-family: $font-body;
+  font-size: $type-scale-h3;
+  font-weight: 600;
+  color: $on-surface;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.region {
+  font-family: $font-headline;
+  font-size: $type-scale-caption;
+  color: $primary;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.capital {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+}
+
+.population {
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $on-surface;
+}

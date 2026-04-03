@@ -57,7 +57,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
           onMenuToggle={handleSidebarToggle} 
           showMenuButton={isMobile}
         />
-        <main className={styles.main}>
+        <main id="main-content" className={styles.main}>
           {children}
         </main>
         <Footer />
