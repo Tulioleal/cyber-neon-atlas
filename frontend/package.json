@@ -10,7 +10,9 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": ["eslint --fix"],
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
     "*.{ts,tsx,js,jsx,scss,json}": "prettier --write"
   },
   "dependencies": {
@@ -18,6 +20,7 @@
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-icons": "^5.6.0",
     "sass": "^1.99.0",
     "zustand": "^5.0.12"
   },

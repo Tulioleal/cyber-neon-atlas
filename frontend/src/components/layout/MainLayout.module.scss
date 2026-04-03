@@ -1,0 +1,42 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  min-height: 100vh;
+  background: $background;
+}
+
+.content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main {
+  flex: 1;
+  margin-top: 64px;
+  margin-bottom: 48px;
+  padding: $spacing-lg;
+  overflow-y: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 95;
+}
+
+@media (max-width: $breakpoint-mobile - 1) {
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .main {
+    padding: $spacing-md;
+  }
+}

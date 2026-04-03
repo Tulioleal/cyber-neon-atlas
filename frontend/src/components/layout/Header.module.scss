@@ -1,0 +1,142 @@
+@use '../../styles/variables' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 280px;
+  right: 0;
+  height: 64px;
+  background: $surface-container-low;
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-lg;
+  gap: $spacing-lg;
+  z-index: 90;
+  transition: left 0.3s ease;
+
+  @media (max-width: $breakpoint-mobile - 1) {
+    left: 0;
+  }
+}
+
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: $on-surface-variant;
+  cursor: pointer;
+  padding: $spacing-xs;
+  font-size: 20px;
+
+  @media (max-width: $breakpoint-mobile - 1) {
+    display: flex;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-family: $font-headline;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.titlePrefix {
+  color: $secondary;
+  margin-right: $spacing-xs;
+}
+
+.titleText {
+  color: $primary;
+  text-shadow: $crt-glow;
+}
+
+.titleCursor {
+  color: $primary;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.searchArea {
+  flex: 1;
+  max-width: 400px;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: $spacing-sm;
+  color: $on-surface-variant;
+  font-size: 14px;
+}
+
+.searchInput {
+  width: 100%;
+  background: $surface-container-high;
+  border: none;
+  border-bottom: 1px solid $outline-variant;
+  padding: $spacing-sm $spacing-sm $spacing-sm $spacing-xl;
+  font-family: $font-data;
+  font-size: $type-scale-label;
+  color: $on-surface;
+  transition: border-color $transition-fast;
+
+  &::placeholder {
+    color: $on-surface-variant;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $secondary;
+    box-shadow: 0 2px 0 $secondary;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  color: $on-surface-variant;
+  cursor: pointer;
+  padding: $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+@media (max-width: $breakpoint-mobile - 1) {
+  .header {
+    left: 0;
+    padding: 0 $spacing-md;
+  }
+
+  .searchArea {
+    display: none;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+}

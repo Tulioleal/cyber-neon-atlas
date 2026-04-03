@@ -1,0 +1,58 @@
+@use '../../styles/variables' as *;
+
+.textFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.label {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.textField {
+  background: $surface-container-high;
+  border: none;
+  border-bottom: 1px solid $outline-variant;
+  padding: $spacing-sm;
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $on-surface;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $on-surface-variant;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $secondary;
+    box-shadow: 0 2px 0 $secondary;
+  }
+
+  &:focus-visible {
+    outline: $ghost-border;
+    outline-offset: 2px;
+  }
+}
+
+.error {
+  border-bottom-color: $error;
+
+  &:focus {
+    border-bottom-color: $error;
+    box-shadow: 0 2px 0 $error;
+  }
+}
+
+.errorText {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $error;
+}

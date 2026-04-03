@@ -1,0 +1,61 @@
+@use '../../styles/variables' as *;
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  color: $on-surface-variant;
+  transition: all $transition-fast;
+  position: relative;
+  text-decoration: none;
+
+  &:hover {
+    background: $surface-container-high;
+    color: $on-surface;
+  }
+
+  &:focus-visible {
+    outline: $ghost-border;
+    outline-offset: 2px;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.label {
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: $primary;
+  box-shadow: $neon-bloom;
+}
+
+.active {
+  color: $primary;
+  background: $surface-container-high;
+
+  .icon {
+    color: $primary;
+  }
+
+  &:hover {
+    color: $primary-fixed;
+  }
+}

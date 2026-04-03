@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@use 'variables' as *;
+@use 'typography';
+@use 'scanlines';
 
 // Colors - Cyberpunk Neon Palette
 $primary: #00FFD1;

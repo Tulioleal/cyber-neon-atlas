@@ -1,0 +1,66 @@
+@use '../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.title {
+  font-family: $font-headline;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: $primary;
+  text-shadow: $crt-glow;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.prefix {
+  color: $secondary;
+}
+
+.description {
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  color: $on-surface-variant;
+  max-width: 600px;
+}
+
+.statusGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.statusItem {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-md;
+  background: $surface-container-high;
+  border-left: 3px solid $primary;
+}
+
+.statusLabel {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.statusValue {
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $secondary;
+  text-shadow: 0 0 8px rgba($secondary, 0.5);
+}

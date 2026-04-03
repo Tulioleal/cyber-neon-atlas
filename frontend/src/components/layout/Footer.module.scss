@@ -1,0 +1,76 @@
+@use '../../styles/variables' as *;
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 280px;
+  right: 0;
+  height: 48px;
+  background: $surface-container-low;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-lg;
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  z-index: 90;
+  transition: left 0.3s ease;
+  border-top: 1px solid $outline-variant;
+
+  @media (max-width: $breakpoint-mobile - 1) {
+    left: 0;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.copyright {
+  letter-spacing: 0.05em;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.coords {
+  color: $primary-dim;
+}
+
+.separator {
+  color: $outline-variant;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  color: $secondary;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background: $secondary;
+  box-shadow: 0 0 8px $secondary;
+}
+
+@media (max-width: $breakpoint-mobile - 1) {
+  .footer {
+    left: 0;
+    padding: 0 $spacing-md;
+  }
+
+  .coords {
+    display: none;
+  }
+
+  .separator {
+    display: none;
+  }
+}
