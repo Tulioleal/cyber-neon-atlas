@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  padding: 20px;
+  background: rgba(18, 19, 25, 0.8);
+  border: 1px solid rgba(0, 255, 209, 0.1);
+}
+
+.title {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #00FFD1;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 255, 209, 0.15);
+}
+
+.legend {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+}
+
+.legendLabel {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #f7f5fd;
+  text-transform: uppercase;
+}
+
+.tooltip {
+  background: #1e1f26;
+  border: 1px solid #47474e;
+  padding: 12px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+}
+
+.tooltipLabel {
+  color: #f7f5fd;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}

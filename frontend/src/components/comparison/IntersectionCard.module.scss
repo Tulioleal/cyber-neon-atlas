@@ -1,0 +1,99 @@
+.container {
+  width: 100%;
+  padding: 20px;
+  background: #121319;
+  border-top: 1px solid rgba(0, 255, 209, 0.1);
+}
+
+.title {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #00FFD1;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 255, 209, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 255, 209, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #00FFD1;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.shared {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: rgba(47, 248, 1, 0.1);
+  border: 1px solid rgba(47, 248, 1, 0.2);
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #2ff801;
+  text-transform: uppercase;
+}
+
+.noData {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #ff7073;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.uniqueRow {
+  display: flex;
+  gap: 24px;
+}
+
+.uniqueColumn {
+  flex: 1;
+}
+
+.uniqueLabel {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.uniqueTag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: rgba(171, 170, 177, 0.1);
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  color: #abaab1;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
