@@ -41,7 +41,7 @@ export default function GeopoliticsCard({
     queryFn: async () => {
       if (!borders || borders.length === 0) return [];
       const codes = borders.join(',');
-      const response = await fetch(`https://restcountries.com/v4.1/alpha?codes=${codes}&fields=name,cca3`);
+      const response = await fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`);
       return response.json();
     },
     enabled: !!borders && borders.length > 0,

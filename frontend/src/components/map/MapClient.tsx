@@ -108,7 +108,7 @@ export default function MapClient() {
       if (matchedCountry) {
         setSelectedCountry(matchedCountry);
         setSelectedCountryName(countryName);
-        router.push(`/profile/${matchedCountry.cca3}`);
+        router.push(`/country/${matchedCountry.cca3}`);
       }
     },
     [countries, setSelectedCountry, router]
@@ -132,7 +132,7 @@ export default function MapClient() {
         setSelectedCountryName(country.name.common);
       }
     },
-    [countries, geoJsonData, setSelectedCountry]
+    [countries, setSelectedCountry]
   );
 
   if (loading) {
@@ -150,12 +150,10 @@ export default function MapClient() {
       </div>
       <div className={styles.mapContainer}>
         <MapWrapper>
-          {geoJsonData && (
-            <CountryLayer
-              geoJsonData={geoJsonData}
-              onCountryClick={handleCountryClick}
-            />
-          )}
+          <CountryLayer
+            geoJsonData={geoJsonData}
+            onCountryClick={handleCountryClick}
+          />
         </MapWrapper>
       </div>
       {selectedCountryName && (

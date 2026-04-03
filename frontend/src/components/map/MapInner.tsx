@@ -37,7 +37,10 @@ export default function MapInner({ children }: { children?: React.ReactNode }) {
         zoom={MAP_CONFIG.zoom}
         minZoom={MAP_CONFIG.minZoom}
         maxZoom={MAP_CONFIG.maxZoom}
+        maxBoundsViscosity={1}
+        maxBounds={L.latLngBounds([-90, -180], [90, 180])}
         zoomControl={false}
+        zoomSnap={0.25}
         scrollWheelZoom={true}
         style={{ width: '100%', height: '100%', zIndex: 1 }}
       >
