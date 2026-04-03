@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { fetchAllCountries } from '@/services/api';
 import { useSearchStore } from '@/stores/useSearchStore';
 import styles from './SearchBar.module.scss';
@@ -25,6 +26,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onCountrySelect }: SearchBarProps) {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -89,7 +91,7 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
     setInputValue(country.name.common);
     setIsOpen(false);
     setHighlightedIndex(-1);
-    onCountrySelect?.(country.cca3);
+    router.push(`/country/${country.cca3}`);
   };
 
   const highlightMatch = (text: string, query: string) => {

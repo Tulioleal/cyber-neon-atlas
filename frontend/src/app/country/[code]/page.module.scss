@@ -1,0 +1,98 @@
+@use '../../../styles/variables' as *;
+
+.page {
+  padding: $spacing-lg;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+  padding: $spacing-xl;
+  background: $surface-container-high;
+  margin-bottom: $spacing-xl;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 209, 0.05));
+  }
+}
+
+.flag {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 255, 209, 0.3);
+  box-shadow: $neon-bloom;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  font-family: $font-headline;
+  font-size: $type-scale-h1;
+  color: $on-surface;
+  margin-bottom: $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.officialName {
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  color: $on-surface-variant;
+  margin-bottom: $spacing-md;
+}
+
+.meta {
+  display: flex;
+  gap: $spacing-xl;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.metaLabel {
+  font-family: $font-body;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metaValue {
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $primary;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $primary;
+  margin-bottom: $spacing-lg;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

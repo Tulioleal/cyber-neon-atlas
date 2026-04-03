@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.icon {
+  color: $primary;
+  font-size: $type-scale-h3;
+  margin-bottom: $spacing-xs;
+}
+
+.label {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.value {
+  font-family: $font-data;
+  font-size: $type-scale-h2;
+  color: $on-surface;
+  text-shadow: $crt-glow;
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $type-scale-caption;
+  font-family: $font-data;
+  
+  &.up {
+    color: $secondary;
+  }
+  
+  &.down {
+    color: $tertiary;
+  }
+}

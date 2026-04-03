@@ -1,0 +1,82 @@
+@use '../../styles/variables' as *;
+
+.card {
+  background-color: $surface-container-high;
+  padding: $spacing-lg;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow $transition-normal;
+
+  &:hover {
+    box-shadow: $neon-bloom;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 24px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 255, 209, 0.05) 50%);
+  }
+}
+
+.small {
+  grid-column: span 1;
+}
+
+.medium {
+  grid-column: span 1;
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-column: span 1;
+  }
+}
+
+.large {
+  grid-column: span 1;
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-column: span 2;
+  }
+}
+
+.wide {
+  grid-column: span 1;
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-column: span 2;
+  }
+}
+
+.tall {
+  grid-row: span 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-md;
+}
+
+.title {
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary;
+}
+
+.coordinate {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  opacity: 0.6;
+}
+
+.content {
+  color: $on-surface;
+}

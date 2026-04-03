@@ -1,0 +1,88 @@
+@use '../../styles/variables' as *;
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  background: $surface-container-high;
+}
+
+.flag {
+  width: 120px;
+  height: 80px;
+  background: $surface-container-low;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.name {
+  height: 24px;
+  width: 200px;
+  background: $surface-container-low;
+  animation: pulse 1.5s infinite;
+}
+
+.code {
+  height: 16px;
+  width: 60px;
+  background: $surface-container-low;
+  animation: pulse 1.5s infinite;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+}
+
+.card {
+  background: $surface-container-high;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.cardTitle {
+  height: 16px;
+  width: 100px;
+  background: $surface-container-low;
+  animation: pulse 1.5s infinite;
+}
+
+.cardLine {
+  height: 14px;
+  width: 100%;
+  background: $surface-container-low;
+  animation: pulse 1.5s infinite;
+
+  &:nth-child(2) {
+    width: 80%;
+  }
+
+  &:nth-child(3) {
+    width: 60%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

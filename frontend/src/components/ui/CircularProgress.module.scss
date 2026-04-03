@@ -1,0 +1,32 @@
+@use '../../styles/variables' as *;
+
+.circularProgress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg);
+}
+
+.background {
+  fill: none;
+  stroke: $surface-container-low;
+}
+
+.progress {
+  fill: none;
+  stroke: $primary;
+  stroke-linecap: square;
+  transition: stroke-dashoffset 0.5s ease-out;
+  filter: drop-shadow(0 0 4px $primary);
+}
+
+.label {
+  position: absolute;
+  font-family: $font-data;
+  font-size: $type-scale-label;
+  color: $on-surface;
+}

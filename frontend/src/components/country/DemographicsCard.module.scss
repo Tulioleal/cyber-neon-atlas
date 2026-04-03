@@ -1,0 +1,87 @@
+@use '../../styles/variables' as *;
+
+.demographicsCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.statLabel {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+}
+
+.statValue {
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $on-surface;
+}
+
+.languagesSection {
+  margin-top: $spacing-sm;
+}
+
+.languagesTitle {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $spacing-sm;
+}
+
+.languageBar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.languageItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.languageName {
+  font-family: $font-body;
+  font-size: $type-scale-caption;
+  color: $on-surface;
+  min-width: 80px;
+}
+
+.languageProgress {
+  flex: 1;
+  height: 6px;
+  background: $surface-container-low;
+  position: relative;
+}
+
+.languageFill {
+  height: 100%;
+  background: $primary;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: 0 0 4px $primary;
+}
+
+.languagePercent {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  min-width: 40px;
+  text-align: right;
+}

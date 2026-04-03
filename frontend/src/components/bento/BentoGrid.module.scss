@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}

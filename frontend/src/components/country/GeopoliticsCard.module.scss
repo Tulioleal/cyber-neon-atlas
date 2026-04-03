@@ -1,0 +1,109 @@
+@use '../../styles/variables' as *;
+
+.geopoliticsCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.statLabel {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+}
+
+.statValue {
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  color: $on-surface;
+}
+
+.capitalSection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.capitalName {
+  font-family: $font-body;
+  font-size: $type-scale-body;
+  color: $on-surface;
+}
+
+.capitalCoords {
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $primary;
+  opacity: 0.8;
+}
+
+.regionBadges {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: $spacing-xs $spacing-sm;
+  font-family: $font-headline;
+  font-size: $type-scale-caption;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid $primary;
+  color: $primary;
+  background: transparent;
+}
+
+.neighborsSection {
+  margin-top: $spacing-sm;
+}
+
+.neighborsTitle {
+  font-family: $font-body;
+  font-size: $type-scale-label;
+  color: $on-surface-variant;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $spacing-sm;
+}
+
+.neighborsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.neighborLink {
+  padding: $spacing-xs $spacing-sm;
+  font-family: $font-body;
+  font-size: $type-scale-caption;
+  color: $secondary;
+  background: rgba(47, 248, 1, 0.1);
+  border: 1px solid rgba(47, 248, 1, 0.3);
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba(47, 248, 1, 0.2);
+    box-shadow: 0 0 8px rgba(47, 248, 1, 0.3);
+  }
+}
+
+.noNeighbors {
+  font-family: $font-body;
+  font-size: $type-scale-caption;
+  color: $on-surface-variant;
+  font-style: italic;
+}
