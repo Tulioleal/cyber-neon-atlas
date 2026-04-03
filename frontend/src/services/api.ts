@@ -1,10 +1,10 @@
 import { Country } from '@/types/country';
 
-const BASE_URL = 'https://restcountries.com/v4.1';
+const BASE_URL = 'https://restcountries.com/v3.1';
 
 export const fetchAllCountries = async (): Promise<Country[]> => {
   const response = await fetch(
-    `${BASE_URL}/all?fields=name,cca3,cca2,flags,population,area,continents,region,subregion,capital,capitalInfo,tld,currencies,languages,borders,timezones,maps,car,idd,postalCode,gini,coatOfArms,startOfWeek,demonyms,unMember,status`
+    `${BASE_URL}/all?fields=name,capital,currencies,alpha,cca3`
   );
 
   if (!response.ok) {
