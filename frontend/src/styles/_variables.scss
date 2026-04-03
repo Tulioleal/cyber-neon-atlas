@@ -1,0 +1,45 @@
+// Colors - Cyberpunk Neon Palette
+$primary: #00FFD1;
+$primary-dim: #00e9bf;
+$primary-fixed: #00f9cc;
+$secondary: #2ff801;
+$secondary-dim: #2be800;
+$background: #0d0e13;
+$surface: #0d0e13;
+$surface-container-lowest: #090A0F;
+$surface-container-low: #121319;
+$surface-container-high: #1e1f26;
+$surface-container-highest: #24252d;
+$surface-bright: #2a2c34;
+$tertiary: #ff7073;
+$error: #ff716c;
+$on-primary: #006653;
+$on-surface: #f7f5fd;
+$on-surface-variant: #abaab1;
+$outline-variant: #47474e;
+
+// Spacing System (4px base unit)
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+// Neon Bloom
+$neon-bloom: 0 0 15px rgba(0, 255, 209, 0.3);
+$neon-bloom-strong: 0 0 24px rgba(0, 255, 209, 0.4);
+
+// Ghost Border
+$ghost-border: 1px solid rgba(0, 255, 209, 0.2);
+
+// CRT Glow Text
+$crt-glow: 0 0 5px rgba(0, 255, 209, 0.5);
+
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// Transitions
+$transition-fast: 0.05s ease;
+$transition-normal: 0.2s ease;
