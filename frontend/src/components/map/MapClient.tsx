@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState, useCallback } from 'react';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet';
@@ -11,13 +12,11 @@ import { useCountryStore } from '@/stores/useCountryStore';
 import { useRouter } from 'next/navigation';
 import SearchBar from '../search/SearchBar';
 import styles from './WorldMap.module.scss';
+import geoJsonOrigin from '@/utils/geo.json';
 
-const GEOJSON_URL = 'https://raw.githubusercontent.com/djaiss/mapsicle/master/all.geo.json';
+const geoJsonData = geoJsonOrigin as unknown as GeoJSON.FeatureCollection;
 
-const MapWrapper = dynamic(
-  () => import('./MapInner'),
-  { ssr: false }
-);
+const MapWrapper = dynamic(() => import('./MapInner'), { ssr: false });
 
 interface CountryLayerProps {
   geoJsonData: GeoJSON.FeatureCollection;
@@ -83,65 +82,58 @@ function CountryLayer({ geoJsonData, onCountryClick }: CountryLayerProps) {
 }
 
 function useCountries() {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchAllCountries()
-      .then((data) => {
-        setCountries(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
-
-  return { countries, loading };
+  return useQuery<Country[]>({
+    queryKey: ['countries'],
+    queryFn: fetchAllCountries,
+  });
 }
 
 export default function MapClient() {
   const router = useRouter();
-  const [geoJsonData, setGeoJsonData] = useState<GeoJSON.FeatureCollection | null>(null);
-  const [selectedCountryName, setSelectedCountryName] = useState<string | null>(null);
-  const { countries, loading } = useCountries();
+  const [selectedCountryName, setSelectedCountryName] = useState<string | null>(
+    null
+  );
+  const { data: countries, isLoading: loading } = useCountries();
   const { setSelectedCountry } = useCountryStore();
 
-  useEffect(() => {
-    fetch(GEOJSON_URL)
-      .then((res) => res.json())
-      .then((data) => setGeoJsonData(data))
-      .catch((err) => console.error('Failed to load GeoJSON:', err));
-  }, []);
+  const handleCountryClick = useCallback(
+    async (feature: GeoJSON.Feature) => {
+      const countryName = feature.properties?.name;
+      if (!countryName || !countries?.length) return;
 
-  const handleCountryClick = useCallback(async (feature: GeoJSON.Feature) => {
-    const countryName = feature.properties?.name;
-    if (!countryName || !countries.length) return;
+      const matchedCountry = (countries || []).find(
+        c => c.name.common.toLowerCase() === countryName.toLowerCase()
+      );
 
-    const matchedCountry = countries.find(
-      (c) => c.name.common.toLowerCase() === countryName.toLowerCase()
-    );
+      if (matchedCountry) {
+        setSelectedCountry(matchedCountry);
+        setSelectedCountryName(countryName);
+        router.push(`/profile/${matchedCountry.cca3}`);
+      }
+    },
+    [countries, setSelectedCountry, router]
+  );
 
-    if (matchedCountry) {
-      setSelectedCountry(matchedCountry);
-      setSelectedCountryName(countryName);
-      router.push(`/profile/${matchedCountry.cca3}`);
-    }
-  }, [countries, setSelectedCountry, router]);
+  const handleSearchSelect = useCallback(
+    async (countryCode: string) => {
+      if (!countries?.length || !geoJsonData) return;
 
-  const handleSearchSelect = useCallback(async (countryCode: string) => {
-    if (!countries.length || !geoJsonData) return;
+      const country = (countries || []).find(c => c.cca3 === countryCode);
+      if (!country) return;
 
-    const country = countries.find((c) => c.cca3 === countryCode);
-    if (!country) return;
+      const feature = geoJsonData.features.find(
+        f =>
+          f.properties?.name?.toLowerCase() ===
+          country.name.common.toLowerCase()
+      );
 
-    const feature = geoJsonData.features.find(
-      (f) => f.properties?.name?.toLowerCase() === country.name.common.toLowerCase()
-    );
-
-    if (feature) {
-      setSelectedCountry(country);
-      setSelectedCountryName(country.name.common);
-    }
-  }, [countries, geoJsonData, setSelectedCountry]);
+      if (feature) {
+        setSelectedCountry(country);
+        setSelectedCountryName(country.name.common);
+      }
+    },
+    [countries, geoJsonData, setSelectedCountry]
+  );
 
   if (loading) {
     return (
@@ -159,8 +151,8 @@ export default function MapClient() {
       <div className={styles.mapContainer}>
         <MapWrapper>
           {geoJsonData && (
-            <CountryLayer 
-              geoJsonData={geoJsonData} 
+            <CountryLayer
+              geoJsonData={geoJsonData}
               onCountryClick={handleCountryClick}
             />
           )}
