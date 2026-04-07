@@ -4,7 +4,7 @@ const BASE_URL = 'https://restcountries.com/v3.1';
 
 export const fetchAllCountries = async (): Promise<Country[]> => {
   const response = await fetch(
-    `${BASE_URL}/all?fields=name,capital,borders,alpha,cca3,population,flags,area,region,capitalinfo`
+    `${BASE_URL}/all?fields=name,borders,cca3,population,flags,area,region,capitalinfo,languages,currencies`
   );
 
   if (!response.ok) {
@@ -41,7 +41,6 @@ export const fetchCountryByCode = async (code: string): Promise<Country> => {
   }
 
   const data = await response.json();
-  console.log('Fetched country data:', data);
   return Array.isArray(data) ? data[0] : data;
 };
 

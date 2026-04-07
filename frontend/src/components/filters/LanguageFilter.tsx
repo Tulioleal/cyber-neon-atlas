@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { FiChevronDown, FiX, FiCheck } from 'react-icons/fi';
 import { useAllCountries } from '@/hooks/useCountries';
 import { useFilterStore } from '@/stores/useFilterStore';
@@ -18,6 +18,13 @@ export default function LanguageFilter() {
   const { languages, toggleLanguage, hasActiveFilters } = useFilterStore();
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const optionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (optionsRef.current) {
+      optionsRef.current.scrollTop = 0;
+    }
+  }, [search]);
 
   const languageOptions = useMemo(() => {
     if (!countries) return [];
@@ -97,7 +104,7 @@ export default function LanguageFilter() {
             />
           </div>
 
-          <div className={styles.options}>
+          <div className={styles.options} ref={optionsRef}>
             {filteredOptions.map(option => (
               <label
                 key={option.code}
