@@ -18,8 +18,10 @@ export default function CircularProgress({
   label,
   animated = true,
 }: CircularProgressProps) {
-  const [offset, setOffset] = useState(animated ? 0 : (1 - value / max) * 2 * Math.PI * 20);
-  
+  const [offset, setOffset] = useState(
+    animated ? 0 : (1 - value / max) * 2 * Math.PI * 20
+  );
+
   const radius = 20;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = (1 - value / max) * circumference;
@@ -36,7 +38,10 @@ export default function CircularProgress({
   }, [value, max, animated, dashOffset]);
 
   return (
-    <div className={styles.circularProgress} style={{ width: size, height: size }}>
+    <div
+      className={styles.circularProgress}
+      style={{ width: size, height: size }}
+    >
       <svg className={styles.svg} width={size} height={size}>
         <circle
           className={styles.background}

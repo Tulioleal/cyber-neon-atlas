@@ -4,11 +4,30 @@ const BASE_URL = 'https://restcountries.com/v3.1';
 
 export const fetchAllCountries = async (): Promise<Country[]> => {
   const response = await fetch(
-    `${BASE_URL}/all?fields=name,capital,currencies,alpha,cca3`
+    `${BASE_URL}/all?fields=name,capital,borders,alpha,cca3,population,flags,area,region,capitalinfo`
   );
 
   if (!response.ok) {
     throw new Error(`Failed to fetch countries: ${response.statusText}`);
+  }
+
+  return response.json();
+};
+
+export interface CountrySearchItem {
+  name: { common: string };
+  cca3: string;
+}
+
+export const fetchCountrySearchList = async (): Promise<
+  CountrySearchItem[]
+> => {
+  const response = await fetch(`${BASE_URL}/all?fields=name,cca3`);
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch country search list: ${response.statusText}`
+    );
   }
 
   return response.json();
@@ -22,6 +41,7 @@ export const fetchCountryByCode = async (code: string): Promise<Country> => {
   }
 
   const data = await response.json();
+  console.log('Fetched country data:', data);
   return Array.isArray(data) ? data[0] : data;
 };
 
@@ -31,7 +51,9 @@ export const fetchCountriesByRegion = async (
   const response = await fetch(`${BASE_URL}/region/${region}`);
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch countries by region: ${response.statusText}`);
+    throw new Error(
+      `Failed to fetch countries by region: ${response.statusText}`
+    );
   }
 
   return response.json();

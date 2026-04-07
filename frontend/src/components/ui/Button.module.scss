@@ -38,7 +38,9 @@
 
   &:hover:not(:disabled) {
     background: $primary-fixed;
-    box-shadow: $neon-bloom, inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      $neon-bloom,
+      inset 0 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -94,7 +96,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hiddenText {

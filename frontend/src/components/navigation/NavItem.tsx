@@ -9,10 +9,16 @@ interface NavItemProps {
   collapsed?: boolean;
 }
 
-export default function NavItem({ icon, label, href, active = false, collapsed = false }: NavItemProps) {
+export default function NavItem({
+  icon,
+  label,
+  href,
+  active = false,
+  collapsed = false,
+}: NavItemProps) {
   return (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       className={`${styles.navItem} ${active ? styles.active : ''}`}
       aria-current={active ? 'page' : undefined}
     >

@@ -7,22 +7,23 @@ import { notFound } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCountryByCode, fetchAllCountries } from '@/services/api';
 import { Country } from '@/types/country';
-import { BentoGrid } from '@/components/bento';
-import { BentoCard } from '@/components/bento';
+import { BentoGrid, BentoCard } from '@/components/bento';
 import EconomyCard from '@/components/country/EconomyCard';
 import DemographicsCard from '@/components/country/DemographicsCard';
 import GeopoliticsCard from '@/components/country/GeopoliticsCard';
 import CountrySkeleton from '@/components/country/CountrySkeleton';
 import styles from './page.module.scss';
+import Image from 'next/image';
 
 export default function CountryPage() {
   const params = useParams();
   const code = params?.code as string;
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return true;
+    }
+    return false;
+  });
 
   const { data: countries } = useQuery({
     queryKey: ['countries', 'all'],
@@ -30,7 +31,11 @@ export default function CountryPage() {
     staleTime: 3600000,
   });
 
-  const { data: country, isLoading, error } = useQuery<Country, Error>({
+  const {
+    data: country,
+    isLoading,
+    error,
+  } = useQuery<Country, Error>({
     queryKey: ['country', code],
     queryFn: () => fetchCountryByCode(code),
     enabled: !!code,
@@ -72,10 +77,12 @@ export default function CountryPage() {
       </Link>
 
       <div className={styles.header}>
-        <img 
-          src={country.flags.svg} 
+        <Image
+          src={country.flags.svg}
           alt={country.flags.alt || country.name.common}
           className={styles.flag}
+          width={64}
+          height={48}
         />
         <div className={styles.info}>
           <h1 className={styles.name}>{country.name.common}</h1>
@@ -96,7 +103,9 @@ export default function CountryPage() {
             {country.continents && (
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Continent</span>
-                <span className={styles.metaValue}>{country.continents[0]}</span>
+                <span className={styles.metaValue}>
+                  {country.continents[0]}
+                </span>
               </div>
             )}
           </div>
@@ -105,7 +114,7 @@ export default function CountryPage() {
 
       <BentoGrid>
         <BentoCard title="Economy Telemetry" coordinate="ECO-001">
-          <EconomyCard 
+          <EconomyCard
             population={country.population}
             area={country.area}
             gini={country.gini}
@@ -114,7 +123,7 @@ export default function CountryPage() {
         </BentoCard>
 
         <BentoCard title="Demographics" coordinate="DEM-001">
-          <DemographicsCard 
+          <DemographicsCard
             population={country.population}
             area={country.area}
             languages={country.languages}
@@ -122,7 +131,7 @@ export default function CountryPage() {
         </BentoCard>
 
         <BentoCard title="Geopolitics" coordinate="GEO-001">
-          <GeopoliticsCard 
+          <GeopoliticsCard
             capital={country.capital}
             capitalInfo={country.capitalInfo}
             region={country.region}
@@ -133,39 +142,77 @@ export default function CountryPage() {
         </BentoCard>
 
         <BentoCard title="Identifiers" coordinate="ID-001">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}
+          >
             {country.cca2 && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#abaab1', fontSize: '12px' }}>CCA2</span>
-                <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd' }}>{country.cca2}</span>
+                <span
+                  style={{
+                    fontFamily: 'Fira Code, monospace',
+                    color: '#f7f5fd',
+                  }}
+                >
+                  {country.cca2}
+                </span>
               </div>
             )}
             {country.tld && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#abaab1', fontSize: '12px' }}>TLD</span>
-                <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd' }}>{country.tld[0]}</span>
+                <span
+                  style={{
+                    fontFamily: 'Fira Code, monospace',
+                    color: '#f7f5fd',
+                  }}
+                >
+                  {country.tld[0]}
+                </span>
               </div>
             )}
             {country.idd && country.idd.root && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: '#abaab1', fontSize: '12px' }}>IDD</span>
-                <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd' }}>
-                  {country.idd.root}{country.idd.suffixes?.[0] || ''}
+                <span
+                  style={{
+                    fontFamily: 'Fira Code, monospace',
+                    color: '#f7f5fd',
+                  }}
+                >
+                  {country.idd.root}
+                  {country.idd.suffixes?.[0] || ''}
                 </span>
               </div>
             )}
             {country.car?.side && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>Driving Side</span>
-                <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd', textTransform: 'capitalize' }}>
+                <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                  Driving Side
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'Fira Code, monospace',
+                    color: '#f7f5fd',
+                    textTransform: 'capitalize',
+                  }}
+                >
                   {country.car.side}
                 </span>
               </div>
             )}
             {country.startOfWeek && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>Start of Week</span>
-                <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd', textTransform: 'capitalize' }}>
+                <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                  Start of Week
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'Fira Code, monospace',
+                    color: '#f7f5fd',
+                    textTransform: 'capitalize',
+                  }}
+                >
                   {country.startOfWeek}
                 </span>
               </div>
@@ -176,8 +223,8 @@ export default function CountryPage() {
         {country.timezones && country.timezones.length > 0 && (
           <BentoCard title="Timezones" coordinate="TZ-001">
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {country.timezones.slice(0, 6).map((tz) => (
-                <span 
+              {country.timezones.slice(0, 6).map(tz => (
+                <span
                   key={tz}
                   style={{
                     padding: '4px 8px',
@@ -197,12 +244,23 @@ export default function CountryPage() {
 
         {country.demonyms && (
           <BentoCard title="Demonyms" coordinate="DMN-001">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+            >
               {country.demonyms.eng && (
                 <>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#abaab1', fontSize: '12px' }}>English (M/F)</span>
-                    <span style={{ fontFamily: 'Fira Code, monospace', color: '#f7f5fd' }}>
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                      English (M/F)
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: 'Fira Code, monospace',
+                        color: '#f7f5fd',
+                      }}
+                    >
                       {country.demonyms.eng.m} / {country.demonyms.eng.f}
                     </span>
                   </div>

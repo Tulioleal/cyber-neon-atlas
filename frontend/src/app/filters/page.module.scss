@@ -86,7 +86,12 @@
 
 .skeleton {
   height: 120px;
-  background: linear-gradient(90deg, $surface-container-high 25%, $surface-bright 50%, $surface-container-high 75%);
+  background: linear-gradient(
+    90deg,
+    $surface-container-high 25%,
+    $surface-bright 50%,
+    $surface-container-high 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -125,7 +130,12 @@
 
 .skeletonFilter {
   height: 48px;
-  background: linear-gradient(90deg, $surface-container-high 25%, $surface-bright 50%, $surface-container-high 75%);
+  background: linear-gradient(
+    90deg,
+    $surface-container-high 25%,
+    $surface-bright 50%,
+    $surface-container-high 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

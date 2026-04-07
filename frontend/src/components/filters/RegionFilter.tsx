@@ -45,15 +45,20 @@ const SUBREGIONS: Record<string, string[]> = {
 
 export default function RegionFilter() {
   const { data: countries } = useAllCountries();
-  const { regions, subregion, setRegions, setSubregion, hasActiveFilters } = useFilterStore();
+  const { regions, subregion, setRegions, setSubregion, hasActiveFilters } =
+    useFilterStore();
   const [isOpen, setIsOpen] = useState(false);
   const [subregionOpen, setSubregionOpen] = useState(false);
 
   const availableSubregions = useMemo(() => {
     if (regions.length === 0) return [];
     const subs = new Set<string>();
-    countries?.forEach((country) => {
-      if (country.region && regions.includes(country.region) && country.subregion) {
+    countries?.forEach(country => {
+      if (
+        country.region &&
+        regions.includes(country.region) &&
+        country.subregion
+      ) {
         subs.add(country.subregion);
       }
     });
@@ -62,7 +67,7 @@ export default function RegionFilter() {
 
   const handleRegionToggle = (region: string) => {
     if (regions.includes(region)) {
-      const newRegions = regions.filter((r) => r !== region);
+      const newRegions = regions.filter(r => r !== region);
       setRegions(newRegions);
       if (newRegions.length === 0) {
         setSubregion(null);
@@ -89,9 +94,13 @@ export default function RegionFilter() {
       >
         <span className={styles.label}>
           REGIÓN
-          {regions.length > 0 && <span className={styles.badge}>{regions.length}</span>}
+          {regions.length > 0 && (
+            <span className={styles.badge}>{regions.length}</span>
+          )}
         </span>
-        <FiChevronDown className={`${styles.icon} ${isOpen ? styles.open : ''}`} />
+        <FiChevronDown
+          className={`${styles.icon} ${isOpen ? styles.open : ''}`}
+        />
       </button>
 
       {isOpen && (
@@ -109,7 +118,7 @@ export default function RegionFilter() {
           <div className={styles.divider} />
 
           <div className={styles.regions}>
-            {REGIONS.map((region) => (
+            {REGIONS.map(region => (
               <button
                 key={region}
                 className={`${styles.regionButton} ${
@@ -144,7 +153,7 @@ export default function RegionFilter() {
                   >
                     Todas las subregiones
                   </button>
-                  {availableSubregions.map((sub) => (
+                  {availableSubregions.map(sub => (
                     <button
                       key={sub}
                       className={`${styles.subregionItem} ${subregion === sub ? styles.selected : ''}`}

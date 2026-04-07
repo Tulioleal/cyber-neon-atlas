@@ -63,7 +63,7 @@
 .countryId {
   font-family: 'Fira Code', monospace;
   font-size: 10px;
-  color: #00FFD1;
+  color: #00ffd1;
   opacity: 0.3;
   margin-bottom: 24px;
 }
@@ -86,7 +86,7 @@
   font-family: 'Space Mono', monospace;
   font-size: 24px;
   font-weight: 700;
-  color: #00FFD1;
+  color: #00ffd1;
   letter-spacing: 0.02em;
   line-height: 1.2;
 }
@@ -126,7 +126,7 @@
 .statLabel {
   font-family: 'Fira Code', monospace;
   font-size: 10px;
-  color: #00FFD1;
+  color: #00ffd1;
   opacity: 0.4;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -152,6 +152,8 @@
   background: #0d0e13;
   border-left: 1px solid rgba(0, 255, 209, 0.1);
   border-right: 1px solid rgba(0, 255, 209, 0.1);
+  height: calc(100vh - 81px);
+  overflow-y: auto;
 }
 
 .charts {
@@ -187,6 +189,14 @@
   letter-spacing: 0.1em;
 }
 
+.selectSecond {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: #abaab1;
+  letter-spacing: 0.1em;
+  padding: 40px;
+}
+
 .loading {
   flex: 1;
   display: flex;
@@ -197,13 +207,19 @@
 .loader {
   font-family: 'Fira Code', monospace;
   font-size: 12px;
-  color: #00FFD1;
+  color: #00ffd1;
   animation: blink 1s infinite;
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.3;
+  }
 }
 
 @media (max-width: 768px) {

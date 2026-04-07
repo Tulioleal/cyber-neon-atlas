@@ -25,7 +25,7 @@ export default function StatCard({
 
   const formatValue = (val: number | string): string => {
     if (typeof val === 'string') return val;
-    
+
     switch (format) {
       case 'compact':
         return new Intl.NumberFormat('en-US', {
@@ -51,7 +51,7 @@ export default function StatCard({
       const steps = 30;
       const stepValue = value / steps;
       let current = 0;
-      
+
       const timer = setInterval(() => {
         current += stepValue;
         if (current >= value) {

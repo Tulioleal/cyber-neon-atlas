@@ -30,7 +30,7 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  
+
   const debouncedValue = useDebounce(inputValue, 300);
   const { results, setResults, clearSearch } = useSearchStore();
 
@@ -43,8 +43,10 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
   useEffect(() => {
     if (debouncedValue.length >= 2 && countries) {
       const filtered = countries
-        .filter((country) =>
-          country.name.common.toLowerCase().includes(debouncedValue.toLowerCase())
+        .filter(country =>
+          country.name.common
+            .toLowerCase()
+            .includes(debouncedValue.toLowerCase())
         )
         .slice(0, 8);
       setResults(filtered);
@@ -62,13 +64,13 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
       switch (e.key) {
         case 'ArrowDown':
           e.preventDefault();
-          setHighlightedIndex((prev) =>
+          setHighlightedIndex(prev =>
             prev < results.length - 1 ? prev + 1 : 0
           );
           break;
         case 'ArrowUp':
           e.preventDefault();
-          setHighlightedIndex((prev) =>
+          setHighlightedIndex(prev =>
             prev > 0 ? prev - 1 : results.length - 1
           );
           break;
@@ -115,7 +117,7 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
         <input
           type="text"
           value={inputValue}
-          onChange={(e) => {
+          onChange={e => {
             setInputValue(e.target.value);
             setHighlightedIndex(-1);
           }}

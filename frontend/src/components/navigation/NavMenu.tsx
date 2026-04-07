@@ -10,9 +10,7 @@ export default function NavMenu({ title, children }: NavMenuProps) {
   return (
     <div className={styles.navMenu}>
       {title && <span className={styles.title}>{title}</span>}
-      <div className={styles.items}>
-        {children}
-      </div>
+      <div className={styles.items}>{children}</div>
     </div>
   );
 }

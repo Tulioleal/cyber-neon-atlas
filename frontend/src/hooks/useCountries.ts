@@ -3,6 +3,8 @@ import {
   fetchAllCountries,
   fetchCountryByCode,
   fetchCountriesByRegion,
+  fetchCountrySearchList,
+  type CountrySearchItem,
 } from '@/services/api';
 import { Country } from '@/types/country';
 
@@ -28,6 +30,14 @@ export const useCountriesByRegion = (region: string | null) => {
     queryKey: ['countries', 'region', region],
     queryFn: () => fetchCountriesByRegion(region!),
     enabled: !!region,
+    staleTime: 3600000,
+  });
+};
+
+export const useCountrySearchList = () => {
+  return useQuery<CountrySearchItem[], Error>({
+    queryKey: ['countries', 'search'],
+    queryFn: fetchCountrySearchList,
     staleTime: 3600000,
   });
 };

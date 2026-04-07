@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import {
   RadarChart as RechartsRadarChart,
   PolarGrid,
@@ -11,22 +12,176 @@ import {
   Tooltip,
 } from 'recharts';
 import styles from './RadarChart.module.scss';
+import { Country } from '@/types/country';
 
 interface RadarChartProps {
-  data: Array<{
-    metric: string;
-    country1: number;
-    country2: number;
-  }>;
+  country1: Country | null;
+  country2: Country | null;
   country1Name: string;
   country2Name: string;
 }
 
 export default function RadarChart({
-  data,
+  country1,
+  country2,
   country1Name,
   country2Name,
 }: RadarChartProps) {
+  const data = useMemo(() => {
+    const normalizeBorders = (c: Country | null) =>
+      c ? Math.min(((c.borders?.length || 0) / 15) * 100, 100) : 0;
+    const normalizeGini = (c: Country | null) => {
+      if (!c?.gini) return 0;
+      const giniValues = Object.values(c.gini);
+      if (giniValues.length === 0) return 0;
+      return Math.min((giniValues[0] / 60) * 100, 100);
+    };
+    const normalizeLanguages = (c: Country | null) =>
+      c ? Math.min((Object.keys(c.languages || {}).length / 15) * 100, 100) : 0;
+    const getBordersCount = (c: Country | null) => c?.borders?.length || 0;
+    const getGiniValue = (c: Country | null): string => {
+      if (!c?.gini) return '-';
+      const giniValues = Object.values(c.gini);
+      return giniValues.length > 0 ? `${giniValues[0]}` : '-';
+    };
+    const getLanguagesCount = (c: Country | null) =>
+      c ? Object.keys(c.languages || {}).length : 0;
+
+    const formatPop = (v: number) => v.toLocaleString();
+    const formatArea = (v: number) => `${v.toLocaleString()} km²`;
+    const formatCount = (v: number) => v.toString();
+
+    if (country1 && !country2) {
+      return [
+        {
+          metric: 'Population',
+          country1: 100,
+          country2: 0,
+          real1: formatPop(country1.population),
+          real2: '-',
+        },
+        {
+          metric: 'Area',
+          country1: 100,
+          country2: 0,
+          real1: formatArea(country1.area || 0),
+          real2: '-',
+        },
+        {
+          metric: 'Borders',
+          country1: normalizeBorders(country1),
+          country2: 0,
+          real1: formatCount(getBordersCount(country1)),
+          real2: '-',
+        },
+        {
+          metric: 'Gini',
+          country1: normalizeGini(country1),
+          country2: 0,
+          real1: getGiniValue(country1),
+          real2: '-',
+        },
+        {
+          metric: 'Languages',
+          country1: normalizeLanguages(country1),
+          country2: 0,
+          real1: formatCount(getLanguagesCount(country1)),
+          real2: '-',
+        },
+      ];
+    }
+    if (country2 && !country1) {
+      return [
+        {
+          metric: 'Population',
+          country1: 0,
+          country2: 100,
+          real1: '-',
+          real2: formatPop(country2.population),
+        },
+        {
+          metric: 'Area',
+          country1: 0,
+          country2: 100,
+          real1: '-',
+          real2: formatArea(country2.area || 0),
+        },
+        {
+          metric: 'Borders',
+          country1: 0,
+          country2: normalizeBorders(country2),
+          real1: '-',
+          real2: formatCount(getBordersCount(country2)),
+        },
+        {
+          metric: 'Gini',
+          country1: 0,
+          country2: normalizeGini(country2),
+          real1: '-',
+          real2: getGiniValue(country2),
+        },
+        {
+          metric: 'Languages',
+          country1: 0,
+          country2: normalizeLanguages(country2),
+          real1: '-',
+          real2: formatCount(getLanguagesCount(country2)),
+        },
+      ];
+    }
+    if (!country1 || !country2) return [];
+
+    const maxPop = Math.max(country1.population, country2.population);
+    const maxArea = Math.max(country1.area || 0, country2.area || 0);
+
+    return [
+      {
+        metric: 'Population',
+        country1: Math.round((country1.population / maxPop) * 100),
+        country2: Math.round((country2.population / maxPop) * 100),
+        real1: formatPop(country1.population),
+        real2: formatPop(country2.population),
+      },
+      {
+        metric: 'Area',
+        country1: Math.round(((country1.area || 0) / maxArea) * 100),
+        country2: Math.round(((country2.area || 0) / maxArea) * 100),
+        real1: formatArea(country1.area || 0),
+        real2: formatArea(country2.area || 0),
+      },
+      {
+        metric: 'Borders',
+        country1: normalizeBorders(country1),
+        country2: normalizeBorders(country2),
+        real1: formatCount(getBordersCount(country1)),
+        real2: formatCount(getBordersCount(country2)),
+      },
+      {
+        metric: 'Gini',
+        country1: normalizeGini(country1),
+        country2: normalizeGini(country2),
+        real1: getGiniValue(country1),
+        real2: getGiniValue(country2),
+      },
+      {
+        metric: 'Languages',
+        country1: normalizeLanguages(country1),
+        country2: normalizeLanguages(country2),
+        real1: formatCount(getLanguagesCount(country1)),
+        real2: formatCount(getLanguagesCount(country2)),
+      },
+    ];
+  }, [country1, country2]);
+
+  if (data.length === 0) {
+    return (
+      <div className={styles.container}>
+        <h3 className={styles.title}>RADAR ANALYSIS</h3>
+        <div className={styles.noData}>NO DATA AVAILABLE</div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>RADAR ANALYSIS</h3>
@@ -46,21 +201,33 @@ export default function RadarChart({
           <Tooltip
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
-              const val1 = typeof payload[0]?.value === 'number' ? payload[0].value : 0;
-              const val2 = typeof payload[1]?.value === 'number' ? payload[1].value : 0;
+              const payloadData = payload[0]?.payload;
+              const real1 = payloadData?.real1 as string;
+              const real2 = payloadData?.real2 as string;
+
               return (
                 <div className={styles.tooltip}>
-                  <p className={styles.tooltipLabel}>{payload[0]?.payload?.metric}</p>
-                  <p style={{ color: '#00FFD1' }}>{country1Name}: {val1}</p>
-                  <p style={{ color: '#2ff801' }}>{country2Name}: {val2}</p>
+                  <p className={styles.tooltipLabel}>{payloadData?.metric}</p>
+                  <p style={{ color: '#00FFD1' }}>
+                    {country1Name}: {real1}
+                  </p>
+                  <p style={{ color: '#2ff801' }}>
+                    {country2Name}: {real2}
+                  </p>
                 </div>
               );
             }}
           />
           <Legend
             wrapperStyle={{ paddingTop: 16 }}
-            formatter={(value) => (
-              <span style={{ color: '#f7f5fd', fontFamily: 'Fira Code', fontSize: 11 }}>
+            formatter={value => (
+              <span
+                style={{
+                  color: '#f7f5fd',
+                  fontFamily: 'Fira Code',
+                  fontSize: 11,
+                }}
+              >
                 {value}
               </span>
             )}

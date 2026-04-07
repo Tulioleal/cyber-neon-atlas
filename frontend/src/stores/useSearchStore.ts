@@ -10,11 +10,11 @@ interface SearchStore {
   clearSearch: () => void;
 }
 
-export const useSearchStore = create<SearchStore>((set) => ({
+export const useSearchStore = create<SearchStore>(set => ({
   query: '',
   results: [],
   isSearching: false,
-  setQuery: (query) => set({ query }),
-  setResults: (results) => set({ results, isSearching: false }),
+  setQuery: query => set({ query }),
+  setResults: results => set({ results, isSearching: false }),
   clearSearch: () => set({ query: '', results: [], isSearching: false }),
 }));

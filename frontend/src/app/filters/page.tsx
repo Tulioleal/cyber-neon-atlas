@@ -4,13 +4,25 @@ import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useFilterStore } from '@/stores/useFilterStore';
 import { useFilteredCountries } from '@/hooks/useFilteredCountries';
-import { LanguageFilter, CurrencyFilter, RegionFilter, FilterSummary } from '@/components/filters';
+import {
+  LanguageFilter,
+  CurrencyFilter,
+  RegionFilter,
+  FilterSummary,
+} from '@/components/filters';
 import CountryCard from '@/components/country/CountryCard';
 import styles from './page.module.scss';
 
 function FiltersContent() {
   const searchParams = useSearchParams();
-  const { regions, languages, currencies, setRegions, toggleLanguage, toggleCurrency } = useFilterStore();
+  const {
+    regions,
+    languages,
+    currencies,
+    setRegions,
+    toggleLanguage,
+    toggleCurrency,
+  } = useFilterStore();
   const { countries, isLoading, error } = useFilteredCountries();
 
   return (
@@ -27,7 +39,9 @@ function FiltersContent() {
 
       <section className={styles.results}>
         <div className={styles.resultsHeader}>
-          <span className={styles.count}>{countries.length} países encontrados</span>
+          <span className={styles.count}>
+            {countries.length} países encontrados
+          </span>
         </div>
 
         {isLoading && (
@@ -51,7 +65,7 @@ function FiltersContent() {
         )}
 
         <div className={styles.grid}>
-          {countries.map((country) => (
+          {countries.map(country => (
             <CountryCard key={country.cca3} country={country} />
           ))}
         </div>

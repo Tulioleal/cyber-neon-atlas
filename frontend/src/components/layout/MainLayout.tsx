@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, ReactNode } from 'react';
+import { FiMenu } from 'react-icons/fi';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
@@ -12,58 +13,76 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
     const stored = localStorage.getItem('sidebar-collapsed');
     if (stored !== null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSidebarCollapsed(JSON.parse(stored));
     }
-    
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleSidebarToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleSidebarCollapse = (collapsed: boolean) => {
+    setSidebarCollapsed(collapsed);
+    localStorage.setItem('sidebar-collapsed', JSON.stringify(collapsed));
+  };
+
   const sidebarWidth = sidebarCollapsed ? 72 : 280;
-  
+
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} suppressHydrationWarning>
       <ScanlineOverlay />
-      <Sidebar 
-        isOpen={mobileMenuOpen} 
+      <Sidebar
+        isOpen={mobileMenuOpen}
         isMobile={isMobile}
-        onToggle={handleSidebarToggle}
+        collapsed={sidebarCollapsed}
+        onCollapse={handleSidebarCollapse}
       />
-      <div 
+      <div
         className={styles.content}
-        style={{ 
+        style={{
           marginLeft: isMobile ? 0 : `${sidebarWidth}px`,
-          width: isMobile ? '100%' : `calc(100% - ${sidebarWidth}px)`
+          width: isMobile ? '100%' : `calc(100% - ${sidebarWidth}px)`,
         }}
       >
-        <Header 
-          onMenuToggle={handleSidebarToggle} 
-          showMenuButton={isMobile}
-        />
+        <Header onMenuToggle={handleSidebarToggle} showMenuButton={isMobile} />
         <main id="main-content" className={styles.main}>
           {children}
         </main>
         <Footer />
       </div>
+      {!isMobile && sidebarCollapsed && (
+        <button
+          className={styles.reopenBtn}
+          onClick={() => handleSidebarCollapse(false)}
+          aria-label="Reopen sidebar"
+        >
+          <FiMenu />
+        </button>
+      )}
       {isMobile && mobileMenuOpen && (
-        <div className={styles.overlay} onClick={() => setMobileMenuOpen(false)} />
+        <div
+          className={styles.overlay}
+          onClick={() => setMobileMenuOpen(false)}
+        />
       )}
     </div>
   );

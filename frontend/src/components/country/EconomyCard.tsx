@@ -29,32 +29,30 @@ export default function EconomyCard({
 
   const areaInSqMi = area ? Math.round(area * 0.386102) : null;
   const gdpEstimate = population * 15000;
-  
+
   const giniValue = gini ? Object.values(gini)[0] : null;
   const currencyInfo = currencies ? Object.values(currencies)[0] : null;
 
   return (
     <div className={styles.economyCard}>
-      <StatCard
-        label="Population"
-        value={population}
-        format="compact"
-      />
-      
+      <StatCard label="Population" value={population} format="compact" />
+
       <div className={styles.stat}>
         <span className={styles.statLabel}>Area</span>
         <span className={styles.statValue}>
           {area ? `${formatCompact(area * 1000000)} km²` : 'N/A'}
-          {areaInSqMi && <span className={styles.trend}>({formatCompact(areaInSqMi)} mi²)</span>}
+          {areaInSqMi && (
+            <span className={styles.trend}>
+              ({formatCompact(areaInSqMi)} mi²)
+            </span>
+          )}
         </span>
       </div>
 
       {giniValue && (
         <div className={styles.stat}>
           <span className={styles.statLabel}>GINI Index</span>
-          <span className={styles.statValue}>
-            {giniValue.toFixed(1)}%
-          </span>
+          <span className={styles.statValue}>{giniValue.toFixed(1)}%</span>
         </div>
       )}
 
@@ -69,9 +67,7 @@ export default function EconomyCard({
 
       <div className={styles.gdpEstimate}>
         <div className={styles.gdpLabel}>ESTIMATED GDP</div>
-        <div className={styles.gdpValue}>
-          ${formatCompact(gdpEstimate)}
-        </div>
+        <div className={styles.gdpValue}>${formatCompact(gdpEstimate)}</div>
       </div>
     </div>
   );

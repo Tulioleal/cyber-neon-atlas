@@ -1,73 +1,99 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo, Suspense } from 'react';
+import { useMemo, Suspense, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Country } from '@/types/country';
-import { useAllCountries } from '@/hooks/useCountries';
+import { useCountry, useCountrySearchList } from '@/hooks/useCountries';
 import CountrySelector from '@/components/comparison/CountrySelector';
 import BarChart from '@/components/charts/BarChart';
 import RadarChart from '@/components/charts/RadarChart';
 import IntersectionCard from '@/components/comparison/IntersectionCard';
 import ExportButton from '@/components/comparison/ExportButton';
 import styles from './page.module.scss';
+import Image from 'next/image';
 
 function VersusContent() {
-  const { data: countries = [], isLoading } = useAllCountries();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const comparisonRef = useRef<HTMLDivElement>(null);
 
-  const [country1, setCountry1] = useState<Country | null>(null);
-  const [country2, setCountry2] = useState<Country | null>(null);
+  const c1Param = searchParams.get('c1');
+  const c2Param = searchParams.get('c2');
 
-  useEffect(() => {
-    const c1 = searchParams.get('c1');
-    const c2 = searchParams.get('c2');
-    if (countries.length > 0) {
-      if (c1) {
-        const found = countries.find((c) => c.cca3 === c1);
-        if (found) setCountry1(found);
-      }
-      if (c2) {
-        const found = countries.find((c) => c.cca3 === c2);
-        if (found) setCountry2(found);
-      }
+  const { data: searchList = [], isLoading: isSearchLoading } =
+    useCountrySearchList();
+  const { data: country1Data, isLoading: isCountry1Loading } =
+    useCountry(c1Param);
+  const { data: country2Data, isLoading: isCountry2Loading } =
+    useCountry(c2Param);
+
+  const isLoading = isSearchLoading || isCountry1Loading || isCountry2Loading;
+
+  const country1 = c1Param && country1Data ? country1Data : null;
+  const country2 = c2Param && country2Data ? country2Data : null;
+
+  const handleCountry1Select = (cca3: string) => {
+    const params = new URLSearchParams();
+    if (cca3) params.set('c1', cca3);
+    if (c2Param) params.set('c2', c2Param);
+    router.push(params.toString() ? `/versus?${params.toString()}` : '/versus');
+  };
+
+  const handleCountry2Select = (cca3: string) => {
+    const params = new URLSearchParams();
+    if (cca3) params.set('c2', cca3);
+    if (c1Param) params.set('c1', c1Param);
+    router.push(params.toString() ? `/versus?${params.toString()}` : '/versus');
+  };
+
+  const getSelectedCountry = (cca3: string | null): Country | null => {
+    if (!cca3) return null;
+    const found = searchList.find(c => c.cca3 === cca3);
+    if (found) {
+      return {
+        name: found.name,
+        cca3: found.cca3,
+        population: 0,
+      } as Country;
     }
-  }, [countries, searchParams]);
+    return null;
+  };
 
   const barData = useMemo(() => {
+    if (country1 && !country2) {
+      return [
+        { name: 'Population', country1: country1.population, country2: 0 },
+        { name: 'Area', country1: country1.area || 0, country2: 0 },
+      ];
+    }
+    if (country2 && !country1) {
+      return [
+        { name: 'Population', country1: 0, country2: country2.population },
+        { name: 'Area', country1: 0, country2: country2.area || 0 },
+      ];
+    }
     if (!country1 || !country2) return [];
     return [
-      { name: 'Population', country1: country1.population, country2: country2.population },
-      { name: 'Area', country1: country1.area || 0, country2: country2.area || 0 },
+      {
+        name: 'Population',
+        country1: country1.population,
+        country2: country2.population,
+      },
+      {
+        name: 'Area',
+        country1: country1.area || 0,
+        country2: country2.area || 0,
+      },
     ];
   }, [country1, country2]);
-
-  const radarData = useMemo(() => {
-    if (!country1 || !country2) return [];
-    const maxPop = Math.max(country1.population, country2.population);
-    const maxArea = Math.max(country1.area || 0, country2.area || 0);
-
-    return [
-      { metric: 'Population', country1: Math.round((country1.population / maxPop) * 100), country2: Math.round((country2.population / maxPop) * 100) },
-      { metric: 'Area', country1: Math.round(((country1.area || 0) / maxArea) * 100), country2: Math.round(((country2.area || 0) / maxArea) * 100) },
-      { metric: 'Borders', country1: Math.min(((country1.borders?.length || 0) / 15) * 100, 100), country2: Math.min(((country2.borders?.length || 0) / 15) * 100, 100) },
-      { metric: 'Timezones', country1: Math.min(((country1.timezones?.length || 0) / 15) * 100, 100), country2: Math.min(((country2.timezones?.length || 0) / 15) * 100, 100) },
-      { metric: 'Languages', country1: Math.min(((Object.keys(country1.languages || {}).length) / 15) * 100, 100), country2: Math.min(((Object.keys(country2.languages || {}).length) / 15) * 100, 100) },
-    ];
-  }, [country1, country2]);
-
-  const handleCountry1Select = (country: Country) => {
-    setCountry1(country);
-  };
-
-  const handleCountry2Select = (country: Country) => {
-    setCountry2(country);
-  };
 
   if (isLoading) {
     return (
       <div className={styles.loading}>
-        <span className={styles.loader}>INITIALIZING COMPARISON PROTOCOL...</span>
+        <span className={styles.loader}>
+          INITIALIZING COMPARISON PROTOCOL...
+        </span>
       </div>
     );
   }
@@ -77,9 +103,9 @@ function VersusContent() {
       <header className={styles.header}>
         <div className={styles.selectors}>
           <CountrySelector
-            selectedCountry={country1}
+            selectedCountry={getSelectedCountry(c1Param)}
             onSelect={handleCountry1Select}
-            countries={countries}
+            searchList={searchList}
             label="PRIMARY TARGET"
             color="primary"
           />
@@ -88,116 +114,206 @@ function VersusContent() {
             <div className={styles.vsLine} />
           </div>
           <CountrySelector
-            selectedCountry={country2}
+            selectedCountry={getSelectedCountry(c2Param)}
             onSelect={handleCountry2Select}
-            countries={countries}
+            searchList={searchList}
             label="SECONDARY TARGET"
             color="secondary"
           />
         </div>
       </header>
 
-      {country1 && country2 ? (
-        <div className={styles.content} ref={comparisonRef}>
-          <div className={styles.countries}>
-            <div className={styles.countryPanel} style={{ borderColor: 'rgba(0, 255, 209, 0.3)' }}>
-              <div className={styles.countryId}>
-                ID: {country1.cca3}_OPERATIONAL_DATA_SEC_01
-              </div>
-              <div className={styles.countryHeader}>
-                <img src={country1.flags.svg} alt="" className={styles.flag} />
-                <div>
-                  <h2 className={styles.countryName}>{country1.name.official}</h2>
-                  <p className={styles.coords}>
-                    {country1.capitalInfo?.latlng
-                      ? `${country1.capitalInfo.latlng[0]}° N, ${country1.capitalInfo.latlng[1]}° E`
-                      : 'N/A'}
-                  </p>
-                </div>
-              </div>
-              <div className={styles.stats}>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>CAPITAL</span>
-                  <span className={styles.statValue}>{country1.capital?.[0] || 'N/A'}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>REGION</span>
-                  <span className={styles.statValue}>{country1.region || 'N/A'}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>POPULATION</span>
-                  <span className={styles.statValue}>{country1.population.toLocaleString()}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>AREA</span>
-                  <span className={styles.statValue}>{(country1.area || 0).toLocaleString()} km²</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.center}>
-              <div className={styles.charts}>
-                <BarChart
-                  data={barData}
-                  country1Name={country1.name.common}
-                  country2Name={country2.name.common}
-                />
-                <RadarChart
-                  data={radarData}
-                  country1Name={country1.name.common}
-                  country2Name={country2.name.common}
-                />
-              </div>
-              <IntersectionCard country1={country1} country2={country2} />
-              <ExportButton
-                comparisonRef={comparisonRef}
-                country1Code={country1.cca3}
-                country2Code={country2.cca3}
-              />
-            </div>
-
-            <div className={styles.countryPanel} style={{ borderColor: 'rgba(47, 248, 1, 0.3)', textAlign: 'right' }}>
-              <div className={styles.countryId}>
-                ID: {country2.cca3}_OPERATIONAL_DATA_SEC_07
-              </div>
-              <div className={styles.countryHeader} style={{ flexDirection: 'row-reverse' }}>
-                <img src={country2.flags.svg} alt="" className={styles.flag} />
-                <div>
-                  <h2 className={styles.countryNameSecondary}>{country2.name.official}</h2>
-                  <p className={styles.coordsSecondary}>
-                    {country2.capitalInfo?.latlng
-                      ? `${country2.capitalInfo.latlng[0]}° N, ${country2.capitalInfo.latlng[1]}° E`
-                      : 'N/A'}
-                  </p>
-                </div>
-              </div>
-              <div className={styles.stats} style={{ textAlign: 'right' }}>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>CAPITAL</span>
-                  <span className={styles.statValueSecondary}>{country2.capital?.[0] || 'N/A'}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>REGION</span>
-                  <span className={styles.statValueSecondary}>{country2.region || 'N/A'}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>POPULATION</span>
-                  <span className={styles.statValueSecondary}>{country2.population.toLocaleString()}</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statLabel}>AREA</span>
-                  <span className={styles.statValueSecondary}>{(country2.area || 0).toLocaleString()} km²</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
+      {!country1 && !country2 ? (
         <div className={styles.placeholder}>
           <div className={styles.placeholderContent}>
             <span className={styles.placeholderIcon}>⌕</span>
-            <p className={styles.placeholderText}>SELECT TWO COUNTRIES TO INITIATE COMPARISON</p>
+            <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
           </div>
+        </div>
+      ) : (
+        <div className={styles.content} ref={comparisonRef}>
+          {(country1 || country2) && (
+            <div className={styles.countries}>
+              {country1 ? (
+                <div
+                  className={styles.countryPanel}
+                  style={{ borderColor: 'rgba(0, 255, 209, 0.3)' }}
+                >
+                  <div className={styles.countryId}>
+                    ID: {country1.cca3}_OPERATIONAL_DATA_SEC_01
+                  </div>
+                  <div className={styles.countryHeader}>
+                    <div>
+                      <Image
+                        src={country1.flags.png}
+                        alt={`${country1.name.common} flag`}
+                        width={64}
+                        height={48}
+                        className={styles.flag}
+                      />
+                      <h2 className={styles.countryName}>
+                        {country1.name.official}
+                      </h2>
+                      <p className={styles.coords}>
+                        {country1.capitalInfo?.latlng
+                          ? `${country1.capitalInfo.latlng[0]}° N, ${country1.capitalInfo.latlng[1]}° E`
+                          : 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.stats}>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>CAPITAL</span>
+                      <span className={styles.statValue}>
+                        {country1.capital?.[0] || 'N/A'}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>REGION</span>
+                      <span className={styles.statValue}>
+                        {country1.region || 'N/A'}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>POPULATION</span>
+                      <span className={styles.statValue}>
+                        {country1.population.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>AREA</span>
+                      <span className={styles.statValue}>
+                        {(country1.area || 0).toLocaleString()} km²
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={styles.countryPanel}
+                  style={{ borderColor: 'rgba(0, 255, 209, 0.3)' }}
+                >
+                  <div className={styles.countryId}>ID: ---_PENDING</div>
+                  <div className={styles.stats}>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>STATUS</span>
+                      <span className={styles.statValue}>AWAITING DATA</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {country1 || country2 ? (
+                <div className={styles.center}>
+                  <div className={styles.charts}>
+                    <BarChart
+                      data={barData}
+                      country1Name={country1?.name.common || ''}
+                      country2Name={country2?.name.common || ''}
+                    />
+                    <RadarChart
+                      country1={country1}
+                      country2={country2}
+                      country1Name={country1?.name.common || ''}
+                      country2Name={country2?.name.common || ''}
+                    />
+                  </div>
+                  <IntersectionCard country1={country1} country2={country2} />
+                  <ExportButton
+                    comparisonRef={comparisonRef}
+                    country1Code={country1?.cca3 || ''}
+                    country2Code={country2?.cca3 || ''}
+                  />
+                </div>
+              ) : (
+                <div className={styles.center}>
+                  <p className={styles.selectSecond}>
+                    SELECT A SECOND COUNTRY TO COMPARE
+                  </p>
+                </div>
+              )}
+
+              {country2 ? (
+                <div
+                  className={styles.countryPanel}
+                  style={{
+                    borderColor: 'rgba(47, 248, 1, 0.3)',
+                    textAlign: 'right',
+                  }}
+                >
+                  <div className={styles.countryId}>
+                    ID: {country2.cca3}_OPERATIONAL_DATA_SEC_07
+                  </div>
+                  <div
+                    className={styles.countryHeader}
+                    style={{ flexDirection: 'row-reverse' }}
+                  >
+                    <div>
+                      <Image
+                        src={country2.flags.png}
+                        alt={`${country2.name.common} flag`}
+                        width={64}
+                        height={48}
+                        className={styles.flag}
+                      />
+                      <h2 className={styles.countryNameSecondary}>
+                        {country2.name.official}
+                      </h2>
+                      <p className={styles.coordsSecondary}>
+                        {country2.capitalInfo?.latlng
+                          ? `${country2.capitalInfo.latlng[0]}° N, ${country2.capitalInfo.latlng[1]}° E`
+                          : 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.stats} style={{ textAlign: 'right' }}>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>CAPITAL</span>
+                      <span className={styles.statValueSecondary}>
+                        {country2.capital?.[0] || 'N/A'}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>REGION</span>
+                      <span className={styles.statValueSecondary}>
+                        {country2.region || 'N/A'}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>POPULATION</span>
+                      <span className={styles.statValueSecondary}>
+                        {country2.population.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>AREA</span>
+                      <span className={styles.statValueSecondary}>
+                        {(country2.area || 0).toLocaleString()} km²
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={styles.countryPanel}
+                  style={{
+                    borderColor: 'rgba(47, 248, 1, 0.3)',
+                    textAlign: 'right',
+                  }}
+                >
+                  <div className={styles.countryId}>ID: ---_PENDING</div>
+                  <div className={styles.stats} style={{ textAlign: 'right' }}>
+                    <div className={styles.stat}>
+                      <span className={styles.statLabel}>STATUS</span>
+                      <span className={styles.statValueSecondary}>
+                        AWAITING DATA
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -206,11 +322,15 @@ function VersusContent() {
 
 export default function VersusPage() {
   return (
-    <Suspense fallback={
-      <div className={styles.loading}>
-        <span className={styles.loader}>INITIALIZING COMPARISON PROTOCOL...</span>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className={styles.loading}>
+          <span className={styles.loader}>
+            INITIALIZING COMPARISON PROTOCOL...
+          </span>
+        </div>
+      }
+    >
       <VersusContent />
     </Suspense>
   );

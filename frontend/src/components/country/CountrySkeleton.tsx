@@ -12,7 +12,7 @@ export default function CountrySkeleton() {
         </div>
       </div>
       <div className={styles.grid}>
-        {[1, 2, 3, 4].map((i) => (
+        {[1, 2, 3, 4].map(i => (
           <div key={i} className={styles.card}>
             <div className={styles.cardTitle} />
             <div className={styles.cardLine} />

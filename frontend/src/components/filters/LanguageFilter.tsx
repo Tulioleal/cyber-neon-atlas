@@ -24,7 +24,7 @@ export default function LanguageFilter() {
 
     const languageMap = new Map<string, LanguageOption>();
 
-    countries.forEach((country) => {
+    countries.forEach(country => {
       if (country.languages) {
         Object.entries(country.languages).forEach(([code, name]) => {
           const existing = languageMap.get(code);
@@ -43,14 +43,18 @@ export default function LanguageFilter() {
       }
     });
 
-    return Array.from(languageMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(languageMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }, [countries]);
 
   const filteredOptions = useMemo(() => {
     if (!search) return languageOptions;
     const lower = search.toLowerCase();
     return languageOptions.filter(
-      (opt) => opt.name.toLowerCase().includes(lower) || opt.code.toLowerCase().includes(lower)
+      opt =>
+        opt.name.toLowerCase().includes(lower) ||
+        opt.code.toLowerCase().includes(lower)
     );
   }, [languageOptions, search]);
 
@@ -71,9 +75,13 @@ export default function LanguageFilter() {
       >
         <span className={styles.label}>
           IDIOMA
-          {selectedCount > 0 && <span className={styles.badge}>{selectedCount}</span>}
+          {selectedCount > 0 && (
+            <span className={styles.badge}>{selectedCount}</span>
+          )}
         </span>
-        <FiChevronDown className={`${styles.icon} ${isOpen ? styles.open : ''}`} />
+        <FiChevronDown
+          className={`${styles.icon} ${isOpen ? styles.open : ''}`}
+        />
       </button>
 
       {isOpen && (
@@ -83,14 +91,14 @@ export default function LanguageFilter() {
               type="text"
               placeholder="Buscar idioma..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
               className={styles.searchInput}
               aria-label="Search languages"
             />
           </div>
 
           <div className={styles.options}>
-            {filteredOptions.map((option) => (
+            {filteredOptions.map(option => (
               <label
                 key={option.code}
                 className={`${styles.option} ${
@@ -109,7 +117,9 @@ export default function LanguageFilter() {
                 <span className={styles.optionText}>
                   <span className={styles.optionName}>{option.name}</span>
                   {option.nativeName && (
-                    <span className={styles.optionNative}>{option.nativeName}</span>
+                    <span className={styles.optionNative}>
+                      {option.nativeName}
+                    </span>
                   )}
                 </span>
                 <span className={styles.optionCount}>{option.count}</span>

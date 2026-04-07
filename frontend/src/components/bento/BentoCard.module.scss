@@ -18,7 +18,11 @@
     right: 0;
     width: 60px;
     height: 24px;
-    background: linear-gradient(135deg, transparent 50%, rgba(0, 255, 209, 0.05) 50%);
+    background: linear-gradient(
+      135deg,
+      transparent 50%,
+      rgba(0, 255, 209, 0.05) 50%
+    );
   }
 }
 

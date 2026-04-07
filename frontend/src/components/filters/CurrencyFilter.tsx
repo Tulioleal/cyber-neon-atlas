@@ -24,27 +24,31 @@ export default function CurrencyFilter() {
 
     const currencyMap = new Map<string, CurrencyOption>();
 
-    countries.forEach((country) => {
+    countries.forEach(country => {
       if (country.currencies) {
-        Object.entries(country.currencies).forEach(([code, { name, symbol }]) => {
-          const existing = currencyMap.get(code);
-          if (existing) {
-            existing.count += 1;
-          } else {
-            currencyMap.set(code, { code, name, symbol, count: 1 });
+        Object.entries(country.currencies).forEach(
+          ([code, { name, symbol }]) => {
+            const existing = currencyMap.get(code);
+            if (existing) {
+              existing.count += 1;
+            } else {
+              currencyMap.set(code, { code, name, symbol, count: 1 });
+            }
           }
-        });
+        );
       }
     });
 
-    return Array.from(currencyMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(currencyMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }, [countries]);
 
   const filteredOptions = useMemo(() => {
     if (!search) return currencyOptions;
     const lower = search.toLowerCase();
     return currencyOptions.filter(
-      (opt) =>
+      opt =>
         opt.name.toLowerCase().includes(lower) ||
         opt.code.toLowerCase().includes(lower) ||
         opt.symbol.toLowerCase().includes(lower)
@@ -64,9 +68,13 @@ export default function CurrencyFilter() {
       >
         <span className={styles.label}>
           MONEDA
-          {selectedCount > 0 && <span className={styles.badge}>{selectedCount}</span>}
+          {selectedCount > 0 && (
+            <span className={styles.badge}>{selectedCount}</span>
+          )}
         </span>
-        <FiChevronDown className={`${styles.icon} ${isOpen ? styles.open : ''}`} />
+        <FiChevronDown
+          className={`${styles.icon} ${isOpen ? styles.open : ''}`}
+        />
       </button>
 
       {isOpen && (
@@ -76,14 +84,14 @@ export default function CurrencyFilter() {
               type="text"
               placeholder="Buscar moneda..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
               className={styles.searchInput}
               aria-label="Search currencies"
             />
           </div>
 
           <div className={styles.options}>
-            {filteredOptions.map((option) => (
+            {filteredOptions.map(option => (
               <label
                 key={option.code}
                 className={`${styles.option} ${

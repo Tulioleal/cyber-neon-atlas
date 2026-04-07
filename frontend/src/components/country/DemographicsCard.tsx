@@ -24,11 +24,14 @@ export default function DemographicsCard({
     }).format(num);
   };
 
-  const populationDensity = area && population ? Math.round(population / area) : null;
+  const populationDensity =
+    area && population ? Math.round(population / area) : null;
 
-  const languageEntries = languages ? Object.entries(languages).slice(0, 5) : [];
+  const languageEntries = languages
+    ? Object.entries(languages).slice(0, 5)
+    : [];
   const totalLanguages = languageEntries.length;
-  
+
   const languagePercentages = languageEntries.map((_, index) => {
     if (totalLanguages === 0) return 0;
     return 100 / totalLanguages;
@@ -63,8 +66,8 @@ export default function DemographicsCard({
               <div key={name} className={styles.languageItem}>
                 <span className={styles.languageName}>{name}</span>
                 <div className={styles.languageProgress}>
-                  <div 
-                    className={styles.languageFill} 
+                  <div
+                    className={styles.languageFill}
                     style={{ width: `${languagePercentages[index]}%` }}
                   />
                 </div>

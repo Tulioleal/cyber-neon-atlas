@@ -14,7 +14,7 @@
   opacity: 0.6;
 
   &.primary {
-    color: #00FFD1;
+    color: #00ffd1;
   }
 
   &.secondary {
@@ -28,11 +28,13 @@
   align-items: center;
   background: #1e1f26;
   border: 1px solid transparent;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   &.primary {
     &:focus-within {
-      border-color: #00FFD1;
+      border-color: #00ffd1;
       box-shadow: 0 0 8px rgba(0, 255, 209, 0.3);
     }
   }
@@ -72,7 +74,7 @@
   letter-spacing: 0.05em;
 
   &.primary {
-    color: #00FFD1;
+    color: #00ffd1;
     &::placeholder {
       color: #00e9bf;
       opacity: 0.5;
@@ -100,7 +102,7 @@
   letter-spacing: 0.05em;
 
   &.primary {
-    color: #00FFD1;
+    color: #00ffd1;
   }
 
   &.secondary {

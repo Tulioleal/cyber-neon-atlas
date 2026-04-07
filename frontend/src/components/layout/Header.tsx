@@ -6,15 +6,22 @@ interface HeaderProps {
   showMenuButton?: boolean;
 }
 
-export default function Header({ onMenuToggle, showMenuButton = false }: HeaderProps) {
+export default function Header({
+  onMenuToggle,
+  showMenuButton = false,
+}: HeaderProps) {
   return (
     <header className={styles.header}>
       {showMenuButton && (
-        <button className={styles.menuBtn} onClick={onMenuToggle} aria-label="Toggle menu">
+        <button
+          className={styles.menuBtn}
+          onClick={onMenuToggle}
+          aria-label="Toggle menu"
+        >
           <FiSearch />
         </button>
       )}
-      
+
       <div className={styles.title}>
         <span className={styles.titlePrefix}>&gt;</span>
         <span className={styles.titleText}>ATLAS CIBER-NEÓN</span>
@@ -24,9 +31,9 @@ export default function Header({ onMenuToggle, showMenuButton = false }: HeaderP
       <div className={styles.searchArea}>
         <div className={styles.searchWrapper}>
           <FiSearch className={styles.searchIcon} />
-          <input 
-            type="text" 
-            placeholder="BUSCAR PROTOCOLO..." 
+          <input
+            type="text"
+            placeholder="BUSCAR PROTOCOLO..."
             className={styles.searchInput}
           />
         </div>

@@ -7,7 +7,11 @@ interface ProgressBarProps {
   animated?: boolean;
 }
 
-export default function ProgressBar({ value, max = 100, animated = true }: ProgressBarProps) {
+export default function ProgressBar({
+  value,
+  max = 100,
+  animated = true,
+}: ProgressBarProps) {
   const [width, setWidth] = useState(animated ? 0 : (value / max) * 100);
 
   useEffect(() => {

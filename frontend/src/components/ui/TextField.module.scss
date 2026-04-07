@@ -24,7 +24,9 @@
   color: $on-surface;
   resize: vertical;
   min-height: 100px;
-  transition: border-color $transition-fast, box-shadow $transition-fast;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
 
   &::placeholder {
     color: $on-surface-variant;

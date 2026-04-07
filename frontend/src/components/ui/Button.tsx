@@ -8,14 +8,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export default function Button({ 
-  variant = 'primary', 
-  size = 'md', 
+export default function Button({
+  variant = 'primary',
+  size = 'md',
   loading = false,
   disabled,
   children,
   className,
-  ...props 
+  ...props
 }: ButtonProps) {
   const classes = [
     styles.button,
@@ -23,14 +23,12 @@ export default function Button({
     styles[size],
     loading ? styles.loading : '',
     className,
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <button 
-      className={classes} 
-      disabled={disabled || loading}
-      {...props}
-    >
+    <button className={classes} disabled={disabled || loading} {...props}>
       {loading && <span className={styles.spinner} />}
       <span className={loading ? styles.hiddenText : ''}>{children}</span>
     </button>

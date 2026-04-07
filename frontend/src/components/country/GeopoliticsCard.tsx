@@ -41,7 +41,9 @@ export default function GeopoliticsCard({
     queryFn: async () => {
       if (!borders || borders.length === 0) return [];
       const codes = borders.join(',');
-      const response = await fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`);
+      const response = await fetch(
+        `https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`
+      );
       return response.json();
     },
     enabled: !!borders && borders.length > 0,
@@ -88,27 +90,27 @@ export default function GeopoliticsCard({
             Neighboring Countries ({borders.length})
           </div>
           <div className={styles.neighborsList}>
-            {Array.isArray(neighborCountries) ? (
-              neighborCountries.map((country: { name: { common: string }; cca3: string }) => (
-                <Link
-                  key={country.cca3}
-                  href={`/country/${country.cca3}`}
-                  className={styles.neighborLink}
-                >
-                  {country.name.common}
-                </Link>
-              ))
-            ) : (
-              borders.map((code) => (
-                <Link
-                  key={code}
-                  href={`/country/${code}`}
-                  className={styles.neighborLink}
-                >
-                  {code}
-                </Link>
-              ))
-            )}
+            {Array.isArray(neighborCountries)
+              ? neighborCountries.map(
+                  (country: { name: { common: string }; cca3: string }) => (
+                    <Link
+                      key={country.cca3}
+                      href={`/country/${country.cca3}`}
+                      className={styles.neighborLink}
+                    >
+                      {country.name.common}
+                    </Link>
+                  )
+                )
+              : borders.map(code => (
+                  <Link
+                    key={code}
+                    href={`/country/${code}`}
+                    className={styles.neighborLink}
+                  >
+                    {code}
+                  </Link>
+                ))}
           </div>
         </div>
       )}

@@ -7,9 +7,5 @@ interface BentoGridProps {
 }
 
 export default function BentoGrid({ children, className }: BentoGridProps) {
-  return (
-    <div className={`${styles.grid} ${className || ''}`}>
-      {children}
-    </div>
-  );
+  return <div className={`${styles.grid} ${className || ''}`}>{children}</div>;
 }

@@ -6,19 +6,23 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export default function Input({ 
-  label, 
-  error, 
-  className, 
+export default function Input({
+  label,
+  error,
+  className,
   id,
-  ...props 
+  ...props
 }: InputProps) {
   const inputId = id || `input-${Math.random().toString(36).slice(2, 9)}`;
-  
+
   return (
     <div className={`${styles.inputWrapper} ${className || ''}`}>
-      {label && <label htmlFor={inputId} className={styles.label}>{label}</label>}
-      <input 
+      {label && (
+        <label htmlFor={inputId} className={styles.label}>
+          {label}
+        </label>
+      )}
+      <input
         id={inputId}
         className={`${styles.input} ${error ? styles.error : ''}`}
         {...props}

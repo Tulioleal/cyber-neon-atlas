@@ -26,25 +26,27 @@ const initialState = {
 
 export const useFilterStore = create<FilterState>((set, get) => ({
   ...initialState,
-  setRegions: (regions) => set({ regions }),
-  setSubregion: (subregion) => set({ subregion }),
-  toggleLanguage: (language) => set((state) => {
-    const exists = state.languages.includes(language);
-    return {
-      languages: exists
-        ? state.languages.filter((l) => l !== language)
-        : [...state.languages, language],
-    };
-  }),
-  toggleCurrency: (currency) => set((state) => {
-    const exists = state.currencies.includes(currency);
-    return {
-      currencies: exists
-        ? state.currencies.filter((c) => c !== currency)
-        : [...state.currencies, currency],
-    };
-  }),
-  setFilteredCountries: (countries) => set({ filteredCountries: countries }),
+  setRegions: regions => set({ regions }),
+  setSubregion: subregion => set({ subregion }),
+  toggleLanguage: language =>
+    set(state => {
+      const exists = state.languages.includes(language);
+      return {
+        languages: exists
+          ? state.languages.filter(l => l !== language)
+          : [...state.languages, language],
+      };
+    }),
+  toggleCurrency: currency =>
+    set(state => {
+      const exists = state.currencies.includes(currency);
+      return {
+        currencies: exists
+          ? state.currencies.filter(c => c !== currency)
+          : [...state.currencies, currency],
+      };
+    }),
+  setFilteredCountries: countries => set({ filteredCountries: countries }),
   resetFilters: () => set(initialState),
   hasActiveFilters: () => {
     const state = get();

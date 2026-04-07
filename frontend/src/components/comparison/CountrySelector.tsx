@@ -2,12 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Country } from '@/types/country';
+import { CountrySearchItem } from '@/services/api';
 import styles from './CountrySelector.module.scss';
 
 interface CountrySelectorProps {
   selectedCountry: Country | null;
-  onSelect: (country: Country) => void;
-  countries: Country[];
+  onSelect: (cca3: string) => void;
+  searchList: CountrySearchItem[];
   label: string;
   color: 'primary' | 'secondary';
 }
@@ -15,7 +16,7 @@ interface CountrySelectorProps {
 export default function CountrySelector({
   selectedCountry,
   onSelect,
-  countries,
+  searchList,
   label,
   color,
 }: CountrySelectorProps) {
@@ -23,13 +24,16 @@ export default function CountrySelector({
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const filtered = countries.filter((c) =>
-    c.name.common.toLowerCase().includes(query.toLowerCase())
-  ).slice(0, 8);
+  const filtered = searchList
+    .filter(c => c.name.common.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 8);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -37,14 +41,14 @@ export default function CountrySelector({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelect = (country: Country) => {
-    onSelect(country);
+  const handleSelect = (country: CountrySearchItem) => {
+    onSelect(country.cca3);
     setQuery('');
     setIsOpen(false);
   };
 
   const handleClear = () => {
-    onSelect(null as unknown as Country);
+    onSelect('');
     setQuery('');
   };
 
@@ -54,7 +58,7 @@ export default function CountrySelector({
       <div className={`${styles.inputWrapper} ${styles[color]}`}>
         {selectedCountry ? (
           <div className={styles.selected}>
-            <img src={selectedCountry.flags.svg} alt="" className={styles.flag} />
+            {/* <Image src={selectedCountry.flags.svg} alt="" className={styles.flag} /> */}
             <span className={styles.name}>{selectedCountry.name.common}</span>
             <button onClick={handleClear} className={styles.clear}>
               ×
@@ -66,7 +70,7 @@ export default function CountrySelector({
             <input
               type="text"
               value={query}
-              onChange={(e) => {
+              onChange={e => {
                 setQuery(e.target.value);
                 setIsOpen(true);
               }}
@@ -82,13 +86,13 @@ export default function CountrySelector({
           {filtered.length === 0 ? (
             <div className={styles.noResult}>NO DATA FOUND</div>
           ) : (
-            filtered.map((country) => (
+            filtered.map(country => (
               <button
                 key={country.cca3}
                 onClick={() => handleSelect(country)}
                 className={styles.option}
               >
-                <img src={country.flags.svg} alt="" className={styles.flag} />
+                {/* <Image src={country.flags.svg} alt="" className={styles.flag} /> */}
                 <span>{country.name.common}</span>
               </button>
             ))
