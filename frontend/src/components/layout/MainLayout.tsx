@@ -69,15 +69,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </main>
         <Footer />
       </div>
-      {!isMobile && sidebarCollapsed && (
-        <button
-          className={styles.reopenBtn}
-          onClick={() => handleSidebarCollapse(false)}
-          aria-label="Reopen sidebar"
-        >
-          <FiMenu />
-        </button>
-      )}
       {isMobile && mobileMenuOpen && (
         <div
           className={styles.overlay}
