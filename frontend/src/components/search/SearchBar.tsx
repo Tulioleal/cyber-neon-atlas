@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { fetchAllCountries } from '@/services/api';
 import { useSearchStore } from '@/stores/useSearchStore';
 import styles from './SearchBar.module.scss';
+import Image from 'next/image';
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
@@ -21,24 +22,27 @@ function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue;
 }
 
-interface SearchBarProps {
-  onCountrySelect?: (countryCode: string) => void;
-}
-
-export default function SearchBar({ onCountrySelect }: SearchBarProps) {
+export default function SearchBar() {
   const router = useRouter();
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   const debouncedValue = useDebounce(inputValue, 300);
-  const { results, setResults, clearSearch } = useSearchStore();
+  const { results, setResults } = useSearchStore();
 
   const { data: countries } = useQuery({
     queryKey: ['countries', 'all'],
     queryFn: fetchAllCountries,
     staleTime: 60 * 60 * 1000,
   });
+
+  const handleSelect = useCallback((country: (typeof results)[0]) => {
+    setInputValue(country.name.common);
+    setIsOpen(false);
+    setHighlightedIndex(-1);
+    router.push(`/country/${country.cca3}`);
+  }, [router]);
 
   useEffect(() => {
     if (debouncedValue.length >= 2 && countries) {
@@ -50,6 +54,7 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
         )
         .slice(0, 8);
       setResults(filtered);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsOpen(true);
     } else {
       setResults([]);
@@ -86,15 +91,8 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
           break;
       }
     },
-    [isOpen, results, highlightedIndex]
+    [isOpen, results, highlightedIndex, handleSelect]
   );
-
-  const handleSelect = (country: (typeof results)[0]) => {
-    setInputValue(country.name.common);
-    setIsOpen(false);
-    setHighlightedIndex(-1);
-    router.push(`/country/${country.cca3}`);
-  };
 
   const highlightMatch = (text: string, query: string) => {
     if (!query) return text;
@@ -141,11 +139,9 @@ export default function SearchBar({ onCountrySelect }: SearchBarProps) {
               onMouseEnter={() => setHighlightedIndex(index)}
             >
               <span className={styles.flag}>
-                {country.flags?.svg ? (
-                  <img src={country.flags.svg} alt={country.name.common} />
-                ) : (
-                  '🏳️'
-                )}
+                { country.flags?.svg ? (
+                  <Image src={country.flags.svg} alt={country.name.common} width={50} height={30} />
+                ) : '🏳️' }
               </span>
               <span className={styles.name}>
                 {highlightMatch(country.name.common, debouncedValue)}

@@ -41,27 +41,6 @@ export default function MapClient() {
     [countries, setSelectedCountry, router]
   );
 
-  const handleSearchSelect = useCallback(
-    async (countryCode: string) => {
-      if (!countries?.length || !geoJsonData) return;
-
-      const country = (countries || []).find(c => c.cca3 === countryCode);
-      if (!country) return;
-
-      const feature = geoJsonData.features.find(
-        f =>
-          f.properties?.name?.toLowerCase() ===
-          country.name.common.toLowerCase()
-      );
-
-      if (feature) {
-        setSelectedCountry(country);
-        setSelectedCountryName(country.name.common);
-      }
-    },
-    [countries, setSelectedCountry]
-  );
-
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
@@ -73,7 +52,7 @@ export default function MapClient() {
   return (
     <div className={styles.mapPage}>
       <div className={styles.searchOverlay}>
-        <SearchBar onCountrySelect={handleSearchSelect} />
+        <SearchBar />
       </div>
       <div className={styles.mapContainer}>
         <MapWrapper>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, ReactNode } from 'react';
-import { FiMenu } from 'react-icons/fi';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
@@ -67,7 +66,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <main id="main-content" className={styles.main}>
           {children}
         </main>
-        <Footer sidebarWidth={sidebarWidth} />
+        <Footer />
       </div>
       {isMobile && mobileMenuOpen && (
         <div
