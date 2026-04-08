@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import html2canvas from 'html2canvas';
 import styles from './ExportButton.module.scss';
+import { colors } from '@/utils/colors';
 
 interface ExportButtonProps {
   comparisonRef: React.RefObject<HTMLDivElement | null>;
@@ -22,7 +23,7 @@ export default function ExportButton({
     setLoading(true);
     try {
       const canvas = await html2canvas(comparisonRef.current, {
-        backgroundColor: '#0d0e13',
+        backgroundColor: colors.background,
         scale: 2,
       });
       const link = document.createElement('a');

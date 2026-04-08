@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { FiGlobe, FiGitMerge, FiFilter, FiMenu, FiX } from 'react-icons/fi';
+import { FiGlobe, FiGitMerge, FiFilter, FiX } from 'react-icons/fi';
 import styles from './Sidebar.module.scss';
 import NavItem from '../navigation/NavItem';
 
@@ -63,80 +63,80 @@ export default function Sidebar({
   return (
     <aside className={sidebarClasses} suppressHydrationWarning>
       <div className={styles.header}>
-      {isCollapsed ? (
-        <button
-          className={styles.expandBtn}
-          onClick={handleCollapseToggle}
-          aria-label="Expand sidebar"
-        >
-                    <div className={styles.logoIcon}>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <ellipse
-                cx="12"
-                cy="12"
-                rx="4"
-                ry="10"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-              <line
-                x1="12"
-                y1="2"
-                x2="12"
-                y2="22"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-            </svg>
+        {isCollapsed ? (
+          <button
+            className={styles.expandBtn}
+            onClick={handleCollapseToggle}
+            aria-label="Expand sidebar"
+          >
+            <div className={styles.logoIcon}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <ellipse
+                  cx="12"
+                  cy="12"
+                  rx="4"
+                  ry="10"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="12"
+                  y1="2"
+                  x2="12"
+                  y2="22"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </svg>
+            </div>
+          </button>
+        ) : (
+          <div className={styles.logo}>
+            <div className={styles.logoIcon}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <ellipse
+                  cx="12"
+                  cy="12"
+                  rx="4"
+                  ry="10"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="12"
+                  y1="2"
+                  x2="12"
+                  y2="22"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </svg>
+            </div>
+            <span className={styles.logoText}>ATLAS</span>
           </div>
-        </button>
-      ) : (
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <ellipse
-                cx="12"
-                cy="12"
-                rx="4"
-                ry="10"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-              <line
-                x1="12"
-                y1="2"
-                x2="12"
-                y2="22"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-            </svg>
-          </div>
-          <span className={styles.logoText}>ATLAS</span>
-        </div>
-      )}
+        )}
         <button
           className={styles.collapseBtn}
           onClick={handleCollapseToggle}

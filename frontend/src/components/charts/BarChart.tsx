@@ -11,6 +11,7 @@ import {
   BarShapeProps,
 } from 'recharts';
 import styles from './BarChart.module.scss';
+import { colors } from '@/utils/colors';
 
 interface BarChartProps {
   data: Array<{
@@ -51,15 +52,19 @@ export default function BarChart({
             <XAxis
               type="number"
               domain={[0, maxValue]}
-              tick={{ fill: '#abaab1', fontSize: 10, fontFamily: 'Fira Code' }}
-              axisLine={{ stroke: '#47474e' }}
-              tickLine={{ stroke: '#47474e' }}
+              tick={{
+                fill: colors.onSurfaceVariant,
+                fontSize: 10,
+                fontFamily: 'Fira Code',
+              }}
+              axisLine={{ stroke: colors.outlineVariant }}
+              tickLine={{ stroke: colors.outlineVariant }}
             />
             <YAxis
               type="category"
               dataKey="name"
               tick={false}
-              axisLine={{ stroke: '#47474e' }}
+              axisLine={{ stroke: colors.outlineVariant }}
               tickLine={false}
               width={0}
             />
@@ -72,10 +77,10 @@ export default function BarChart({
                   typeof payload[1]?.value === 'number' ? payload[1].value : 0;
                 return (
                   <div className={styles.tooltip}>
-                    <p style={{ color: '#00FFD1' }}>
+                    <p style={{ color: colors.primary }}>
                       {country1Name}: {formatValue(val1, metricName)}
                     </p>
-                    <p style={{ color: '#2ff801' }}>
+                    <p style={{ color: colors.secondary }}>
                       {country2Name}: {formatValue(val2, metricName)}
                     </p>
                   </div>
@@ -85,7 +90,7 @@ export default function BarChart({
             <Bar
               dataKey="country1"
               radius={[0, 4, 4, 0]}
-              shape={props => <Rect {...props} color="#00FFD1" />}
+              shape={props => <Rect {...props} color={colors.primary} />}
             >
               <LabelList
                 dataKey="country1"
@@ -96,7 +101,7 @@ export default function BarChart({
                     : ''
                 }
                 style={{
-                  fill: '#00FFD1',
+                  fill: colors.primary,
                   fontSize: 10,
                   fontFamily: 'Fira Code',
                 }}
@@ -105,7 +110,7 @@ export default function BarChart({
             <Bar
               dataKey="country2"
               radius={[0, 4, 4, 0]}
-              shape={props => <Rect {...props} color="#2ff801" />}
+              shape={props => <Rect {...props} color={colors.secondary} />}
             >
               <LabelList
                 dataKey="country2"
@@ -116,7 +121,7 @@ export default function BarChart({
                     : ''
                 }
                 style={{
-                  fill: '#2ff801',
+                  fill: colors.secondary,
                   fontSize: 10,
                   fontFamily: 'Fira Code',
                 }}
@@ -145,13 +150,16 @@ export default function BarChart({
       <h3 className={styles.title}>COMPARATIVE METRICS</h3>
       <div className={styles.legend}>
         <div className={styles.legendItem}>
-          <span className={styles.dot} style={{ background: '#00FFD1' }} />
+          <span className={styles.dot} style={{ background: colors.primary }} />
           <span className={styles.legendLabel}>
             {country1Name || 'Country 1'}
           </span>
         </div>
         <div className={styles.legendItem}>
-          <span className={styles.dot} style={{ background: '#2ff801' }} />
+          <span
+            className={styles.dot}
+            style={{ background: colors.secondary }}
+          />
           <span className={styles.legendLabel}>
             {country2Name || 'Country 2'}
           </span>

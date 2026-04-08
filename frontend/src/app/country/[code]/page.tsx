@@ -14,6 +14,7 @@ import GeopoliticsCard from '@/components/country/GeopoliticsCard';
 import CountrySkeleton from '@/components/country/CountrySkeleton';
 import styles from './page.module.scss';
 import Image from 'next/image';
+import { colors } from '@/utils/colors';
 
 export default function CountryPage() {
   const params = useParams();
@@ -147,11 +148,15 @@ export default function CountryPage() {
           >
             {country.cca2 && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>CCA2</span>
+                <span
+                  style={{ color: colors.onSurfaceVariant, fontSize: '12px' }}
+                >
+                  CCA2
+                </span>
                 <span
                   style={{
                     fontFamily: 'Fira Code, monospace',
-                    color: '#f7f5fd',
+                    color: colors.onSurface,
                   }}
                 >
                   {country.cca2}
@@ -160,11 +165,15 @@ export default function CountryPage() {
             )}
             {country.tld && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>TLD</span>
+                <span
+                  style={{ color: colors.onSurfaceVariant, fontSize: '12px' }}
+                >
+                  TLD
+                </span>
                 <span
                   style={{
                     fontFamily: 'Fira Code, monospace',
-                    color: '#f7f5fd',
+                    color: colors.onSurface,
                   }}
                 >
                   {country.tld[0]}
@@ -173,11 +182,15 @@ export default function CountryPage() {
             )}
             {country.idd && country.idd.root && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>IDD</span>
+                <span
+                  style={{ color: colors.onSurfaceVariant, fontSize: '12px' }}
+                >
+                  IDD
+                </span>
                 <span
                   style={{
                     fontFamily: 'Fira Code, monospace',
-                    color: '#f7f5fd',
+                    color: colors.onSurface,
                   }}
                 >
                   {country.idd.root}
@@ -187,13 +200,15 @@ export default function CountryPage() {
             )}
             {country.car?.side && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                <span
+                  style={{ color: colors.onSurfaceVariant, fontSize: '12px' }}
+                >
                   Driving Side
                 </span>
                 <span
                   style={{
                     fontFamily: 'Fira Code, monospace',
-                    color: '#f7f5fd',
+                    color: colors.onSurface,
                     textTransform: 'capitalize',
                   }}
                 >
@@ -203,13 +218,15 @@ export default function CountryPage() {
             )}
             {country.startOfWeek && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                <span
+                  style={{ color: colors.onSurfaceVariant, fontSize: '12px' }}
+                >
                   Start of Week
                 </span>
                 <span
                   style={{
                     fontFamily: 'Fira Code, monospace',
-                    color: '#f7f5fd',
+                    color: colors.onSurface,
                     textTransform: 'capitalize',
                   }}
                 >
@@ -230,7 +247,7 @@ export default function CountryPage() {
                     padding: '4px 8px',
                     fontFamily: 'Fira Code, monospace',
                     fontSize: '10px',
-                    color: '#00FFD1',
+                    color: colors.primary,
                     border: '1px solid rgba(0, 255, 209, 0.3)',
                     background: 'rgba(0, 255, 209, 0.05)',
                   }}
@@ -252,13 +269,18 @@ export default function CountryPage() {
                   <div
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
-                    <span style={{ color: '#abaab1', fontSize: '12px' }}>
+                    <span
+                      style={{
+                        color: colors.onSurfaceVariant,
+                        fontSize: '12px',
+                      }}
+                    >
                       English (M/F)
                     </span>
                     <span
                       style={{
                         fontFamily: 'Fira Code, monospace',
-                        color: '#f7f5fd',
+                        color: colors.onSurface,
                       }}
                     >
                       {country.demonyms.eng.m} / {country.demonyms.eng.f}

@@ -22,7 +22,7 @@ function MapController({ children }: { children?: React.ReactNode }) {
 
   useEffect(() => {
     const container = map.getContainer();
-    container.style.background = '#0d0e13';
+    container.style.background = 'colors.background';
   }, [map]);
 
   return <>{children}</>;
@@ -51,29 +51,29 @@ export default function MapInner({ children }: { children?: React.ReactNode }) {
       </MapContainer>
       <style jsx global>{`
         .leaflet-container {
-          background: #0d0e13 !important;
+          background: colors.background !important;
           font-family: 'Space Grotesk', sans-serif !important;
         }
         .leaflet-control-zoom {
           border: none !important;
-          box-shadow: 0 0 15px rgba(0, 255, 209, 0.2) !important;
+          box-shadow: 0 0 15px colorsWithAlpha.primary(0.2) !important;
         }
         .leaflet-control-zoom a {
-          background: #121319 !important;
-          color: #00ffd1 !important;
-          border: 1px solid rgba(0, 255, 209, 0.3) !important;
+          background: colors.surfaceContainerLow !important;
+          color: colors.primary !important;
+          border: 1px solid colorsWithAlpha.primary(0.3) !important;
         }
         // .leaflet-control-zoom a:hover {
-        //   background: #1e1f26 !important;
-        //   box-shadow: 0 0 8px rgba(0, 255, 209, 0.4);
+        //   background: colors.surfaceContainerHigh !important;
+        //   box-shadow: 0 0 8px colorsWithAlpha.primary(0.4);
         // }
         .leaflet-control-attribution {
-          background: rgba(13, 14, 19, 0.8) !important;
-          color: #abaab1 !important;
+          background: colorsWithAlpha.background(0.8) !important;
+          color: colors.onSurfaceVariant !important;
           font-size: 10px !important;
         }
         .leaflet-control-attribution a {
-          color: #00ffd1 !important;
+          color: colors.primary !important;
         }
       `}</style>
     </div>

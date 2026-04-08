@@ -1,5 +1,6 @@
 'use client';
 
+import { colors } from '@/utils/colors';
 import dynamic from 'next/dynamic';
 
 const MapClient = dynamic(() => import('@/components/map/MapClient'), {
@@ -12,8 +13,8 @@ const MapClient = dynamic(() => import('@/components/map/MapClient'), {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#0d0e13',
-        color: '#00ffd1',
+        background: colors.background,
+        color: colors.primary,
         fontFamily: 'Fira Code, monospace',
         fontSize: '14px',
       }}

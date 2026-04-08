@@ -2,6 +2,7 @@
 
 import { Country } from '@/types/country';
 import styles from './IntersectionCard.module.scss';
+import { colors } from '@/utils/colors';
 
 interface IntersectionCardProps {
   country1: Country | null;
@@ -69,7 +70,10 @@ export default function IntersectionCard({
         )}
         <div className={styles.uniqueRow}>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#00FFD1' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.primary }}
+            >
               {country1.name.common}
             </span>
             {uniqueLang1.map(lang => (
@@ -79,7 +83,10 @@ export default function IntersectionCard({
             ))}
           </div>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#2ff801' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.secondary }}
+            >
               {country2.name.common}
             </span>
             {uniqueLang2.map(lang => (
@@ -106,7 +113,10 @@ export default function IntersectionCard({
         )}
         <div className={styles.uniqueRow}>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#00FFD1' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.primary }}
+            >
               {country1.name.common}
             </span>
             {uniqueCurr1.map(curr => (
@@ -116,7 +126,10 @@ export default function IntersectionCard({
             ))}
           </div>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#2ff801' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.secondary }}
+            >
               {country2.name.common}
             </span>
             {uniqueCurr2.map(curr => (
@@ -143,7 +156,10 @@ export default function IntersectionCard({
         )}
         <div className={styles.uniqueRow}>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#00FFD1' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.primary }}
+            >
               {country1.name.common}
             </span>
             {uniqueTz1.slice(0, 3).map(tz => (
@@ -153,7 +169,10 @@ export default function IntersectionCard({
             ))}
           </div>
           <div className={styles.uniqueColumn}>
-            <span className={styles.uniqueLabel} style={{ color: '#2ff801' }}>
+            <span
+              className={styles.uniqueLabel}
+              style={{ color: colors.secondary }}
+            >
               {country2.name.common}
             </span>
             {uniqueTz2.slice(0, 3).map(tz => (
