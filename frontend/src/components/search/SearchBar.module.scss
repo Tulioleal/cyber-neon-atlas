@@ -1,42 +1,31 @@
+@use '../../styles/variables' as *;
+
 .searchWrapper {
   position: relative;
   width: 100%;
   max-width: 400px;
 }
 
-.searchInput {
-  display: flex;
-  align-items: center;
-  background: #121319;
-  border: 1px solid rgba(0, 255, 209, 0.2);
-  padding: 8px 12px;
-  //  transition: all 0.2s ease;
-
-  &:focus-within {
-    border-color: #00ffd1;
-    box-shadow: 0 0 8px rgba(0, 255, 209, 0.3);
-  }
-}
-
 .prefix {
-  color: #00ffd1;
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
-  margin-right: 8px;
+  color: $primary;
+  font-family: $font-data;
+  font-size: $type-scale-body;
+  margin-right: $spacing-sm;
 }
 
 .input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #f7f5fd;
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  font-family: $font-data;
+  color: $on-surface;
+  display: flex;
+  align-items: center;
+  background: $surface-container-low;
   width: 100%;
+  font-size: $type-scale-body;
+  padding: $spacing-sm $spacing-md;
+  outline: none;
 
   &::placeholder {
-    color: #abaab1;
+    color: $on-surface-variant;
   }
 }
 
@@ -45,8 +34,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #121319;
-  border: 1px solid rgba(0, 255, 209, 0.3);
+  background: $surface-container-low;
+  border: 1px solid rgba($primary, 0.3);
   border-top: none;
   max-height: 320px;
   overflow-y: auto;
@@ -58,23 +47,17 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 10px 12px;
+  padding: $spacing-sm $spacing-md;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
-  //  transition: background 0.15s ease;
-
-  // &:hover,
-  // &.highlighted {
-  //   background: rgba(0, 255, 209, 0.1);
-  // }
 }
 
 .flag {
   width: 24px;
   height: 16px;
-  margin-right: 10px;
+  margin-right: $spacing-sm;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,12 +70,12 @@
 }
 
 .name {
-  color: #f7f5fd;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px;
+  color: $on-surface;
+  font-family: $font-body;
+  font-size: $type-scale-body;
 }
 
 .highlight {
-  color: #00ffd1;
+  color: $primary;
   font-weight: 600;
 }

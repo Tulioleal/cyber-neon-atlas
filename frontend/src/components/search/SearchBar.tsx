@@ -7,6 +7,8 @@ import { fetchAllCountries } from '@/services/api';
 import { useSearchStore } from '@/stores/useSearchStore';
 import styles from './SearchBar.module.scss';
 import Image from 'next/image';
+import { motion } from 'motion/react';
+import { colors, colorsWithAlpha } from '@/utils/colors';
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
@@ -37,12 +39,15 @@ export default function SearchBar() {
     staleTime: 60 * 60 * 1000,
   });
 
-  const handleSelect = useCallback((country: (typeof results)[0]) => {
-    setInputValue(country.name.common);
-    setIsOpen(false);
-    setHighlightedIndex(-1);
-    router.push(`/country/${country.cca3}`);
-  }, [router]);
+  const handleSelect = useCallback(
+    (country: (typeof results)[0]) => {
+      setInputValue(country.name.common);
+      setIsOpen(false);
+      setHighlightedIndex(-1);
+      router.push(`/country/${country.cca3}`);
+    },
+    [router]
+  );
 
   useEffect(() => {
     if (debouncedValue.length >= 2 && countries) {
@@ -110,22 +115,35 @@ export default function SearchBar() {
 
   return (
     <div className={styles.searchWrapper}>
-      <div className={styles.searchInput}>
-        <span className={styles.prefix}>&gt;</span>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={e => {
-            setInputValue(e.target.value);
-            setHighlightedIndex(-1);
-          }}
-          onKeyDown={handleKeyDown}
-          onFocus={() => results.length > 0 && setIsOpen(true)}
-          onBlur={() => setTimeout(() => setIsOpen(false), 200)}
-          placeholder="BUSCAR_PAIS..."
-          className={styles.input}
-        />
-      </div>
+      <motion.input
+        layoutId="item"
+        type="text"
+        value={inputValue}
+        onChange={e => {
+          setInputValue(e.target.value);
+          setHighlightedIndex(-1);
+        }}
+        onKeyDown={handleKeyDown}
+        onFocus={() => results.length > 0 && setIsOpen(true)}
+        onBlur={() => setTimeout(() => setIsOpen(false), 200)}
+        placeholder="BUSCAR_PAIS..."
+        className={styles.input}
+        initial={{
+          border: `1px solid ${colorsWithAlpha.onPrimary(0.2)}`,
+          boxShadow: 'none',
+        }}
+        animate={{
+          borderColor: colorsWithAlpha.onPrimary(0.3),
+          boxShadow: 'none',
+        }}
+        whileHover={{
+          boxShadow: `0 0 8px ${colorsWithAlpha.primary(0.2)}`,
+        }}
+        whileFocus={{
+          borderColor: colors.primary,
+          boxShadow: `0 0 8px ${colorsWithAlpha.primary(0.3)}`,
+        }}
+      />
 
       {isOpen && results.length > 0 && (
         <div className={styles.dropdown}>
@@ -139,9 +157,16 @@ export default function SearchBar() {
               onMouseEnter={() => setHighlightedIndex(index)}
             >
               <span className={styles.flag}>
-                { country.flags?.svg ? (
-                  <Image src={country.flags.svg} alt={country.name.common} width={50} height={30} />
-                ) : '🏳️' }
+                {country.flags?.svg ? (
+                  <Image
+                    src={country.flags.svg}
+                    alt={country.name.common}
+                    width={50}
+                    height={30}
+                  />
+                ) : (
+                  '🏳️'
+                )}
               </span>
               <span className={styles.name}>
                 {highlightMatch(country.name.common, debouncedValue)}
