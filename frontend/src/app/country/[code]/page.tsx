@@ -15,6 +15,7 @@ import CountrySkeleton from '@/components/country/CountrySkeleton';
 import styles from './page.module.scss';
 import Image from 'next/image';
 import { colors } from '@/utils/colors';
+import { motion } from 'motion/react';
 
 export default function CountryPage() {
   const params = useParams();
@@ -73,8 +74,12 @@ export default function CountryPage() {
 
   return (
     <div className={styles.page}>
-      <Link href="/" className={styles.backLink}>
-        ← Return to Map
+      <Link href="/">
+       <motion.span className={styles.backLink}
+          whileHover={{ color: colors.secondary, opacity: 0.8 }}
+          transition={{ duration: 0.2 }}
+        > ← Return to Map
+        </motion.span>
       </Link>
 
       <div className={styles.header}>

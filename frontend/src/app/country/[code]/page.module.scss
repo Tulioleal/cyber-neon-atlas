@@ -23,7 +23,7 @@
     right: 0;
     width: 200px;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 209, 0.05));
+    background: linear-gradient(90deg, transparent, rgba($primary, .051));
   }
 }
 
@@ -31,7 +31,7 @@
   width: 160px;
   height: 100px;
   object-fit: cover;
-  border: 1px solid rgba(0, 255, 209, 0.3);
+  border: 1px solid rgba($primary, 0.3);
   box-shadow: $neon-bloom;
 }
 
@@ -90,9 +90,4 @@
   color: $primary;
   margin-bottom: $spacing-lg;
   cursor: pointer;
-  //  transition: opacity $transition-fast;
-
-  // &:hover {
-  //   opacity: 0.8;
-  // }
 }
