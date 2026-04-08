@@ -148,7 +148,9 @@ export default function SearchBar() {
       {isOpen && results.length > 0 && (
         <div className={styles.dropdown}>
           {results.map((country, index) => (
-            <button
+            <motion.button
+              whileHover={{ backgroundColor: colorsWithAlpha.primary(0.1) }}
+              transition={{ duration: 0.2 }}
               key={country.cca3}
               className={`${styles.resultItem} ${
                 index === highlightedIndex ? styles.highlighted : ''
@@ -171,7 +173,7 @@ export default function SearchBar() {
               <span className={styles.name}>
                 {highlightMatch(country.name.common, debouncedValue)}
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
       )}
