@@ -9,8 +9,8 @@
   background: $surface-container-low;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 $spacing-lg 0 10%;
+  justify-content: space-around;
+  padding: 0 $spacing-lg;
   font-family: $font-data;
   font-size: $type-scale-caption;
   color: $on-surface-variant;
