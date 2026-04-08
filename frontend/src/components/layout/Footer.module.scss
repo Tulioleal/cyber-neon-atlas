@@ -3,14 +3,14 @@
 .footer {
   position: fixed;
   bottom: 0;
-  left: 280px;
+  left: 0px;
   right: 0;
   height: 48px;
   background: $surface-container-low;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 $spacing-lg;
+  padding: 0 $spacing-lg 0 10%;
   font-family: $font-data;
   font-size: $type-scale-caption;
   color: $on-surface-variant;
@@ -18,7 +18,7 @@
   transition: left 0.3s ease;
   border-top: 1px solid $outline-variant;
 
-  @media (max-width: $breakpoint-mobile - 1) {
+  @media (max-width: $breakpoint-mobile) {
     left: 0;
   }
 }
@@ -60,7 +60,7 @@
   box-shadow: 0 0 8px $secondary;
 }
 
-@media (max-width: $breakpoint-mobile - 1) {
+@media (max-width: $breakpoint-mobile) {
   .footer {
     left: 0;
     padding: 0 $spacing-md;

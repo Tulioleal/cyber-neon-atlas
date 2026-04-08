@@ -67,7 +67,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <main id="main-content" className={styles.main}>
           {children}
         </main>
-        <Footer />
+        <Footer sidebarWidth={sidebarWidth} />
       </div>
       {isMobile && mobileMenuOpen && (
         <div
