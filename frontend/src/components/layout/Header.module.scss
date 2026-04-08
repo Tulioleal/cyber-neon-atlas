@@ -12,9 +12,9 @@
   padding: 0 $spacing-lg;
   gap: $spacing-lg;
   z-index: 90;
-  transition: left 0.3s ease;
+  //  transition: left 0.3s ease;
 
-  @media (max-width: $breakpoint-mobile - 1) {
+  @media (max-width: $breakpoint-mobile) {
     left: 0;
   }
 }
@@ -28,7 +28,7 @@
   padding: $spacing-xs;
   font-size: 20px;
 
-  @media (max-width: $breakpoint-mobile - 1) {
+  @media (max-width: $breakpoint-mobile) {
     display: flex;
   }
 }
@@ -54,7 +54,7 @@
 
 .titleCursor {
   color: $primary;
-  animation: blink 1s step-end infinite;
+  // animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
@@ -94,7 +94,7 @@
   font-family: $font-data;
   font-size: $type-scale-label;
   color: $on-surface;
-  transition: border-color $transition-fast;
+  //  transition: border-color $transition-fast;
 
   &::placeholder {
     color: $on-surface-variant;
@@ -124,14 +124,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color $transition-fast;
+  //  transition: color $transition-fast;
 
-  &:hover {
-    color: $primary;
-  }
+  // &:hover {
+  //   color: $primary;
+  // }
 }
 
-@media (max-width: $breakpoint-mobile - 1) {
+@media (max-width: $breakpoint-mobile) {
   .header {
     left: 0;
     padding: 0 $spacing-md;

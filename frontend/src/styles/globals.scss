@@ -77,7 +77,7 @@ $transition-normal: 0.2s ease;
   color: $on-primary;
   padding: $spacing-sm $spacing-md;
   z-index: 9999;
-  transition: top 0.2s;
+  //  transition: top 0.2s;
   font-family: $font-headline;
   font-size: $type-scale-label;
   text-transform: uppercase;
@@ -162,7 +162,7 @@ h3 {
   background: $surface-bright;
   border-radius: 0;
 
-  &:hover {
-    background: $primary-dim;
-  }
+  // &:hover {
+  //   background: $primary-dim;
+  // }
 }

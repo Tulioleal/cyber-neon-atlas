@@ -14,11 +14,11 @@
   background: $surface-container-high;
   border: none;
   cursor: pointer;
-  transition: all $transition-normal;
+  //  transition: all $transition-normal;
 
-  &:hover {
-    background: $surface-bright;
-  }
+  // &:hover {
+  //   background: $surface-bright;
+  // }
 
   &.active {
     background: $surface-container-highest;
@@ -51,7 +51,7 @@
 
 .icon {
   color: $on-surface-variant;
-  transition: transform $transition-normal;
+  //  transition: transform $transition-normal;
 
   &.open {
     transform: rotate(180deg);
@@ -106,11 +106,11 @@
   gap: $spacing-sm;
   padding: $spacing-sm $spacing-md;
   cursor: pointer;
-  transition: background $transition-fast;
+  //  transition: background $transition-fast;
 
-  &:hover {
-    background: $surface-bright;
-  }
+  // &:hover {
+  //   background: $surface-bright;
+  // }
 
   &.selected {
     background: rgba($primary, 0.1);

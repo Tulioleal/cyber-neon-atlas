@@ -63,10 +63,10 @@ export default function MapInner({ children }: { children?: React.ReactNode }) {
           color: #00ffd1 !important;
           border: 1px solid rgba(0, 255, 209, 0.3) !important;
         }
-        .leaflet-control-zoom a:hover {
-          background: #1e1f26 !important;
-          box-shadow: 0 0 8px rgba(0, 255, 209, 0.4);
-        }
+        // .leaflet-control-zoom a:hover {
+        //   background: #1e1f26 !important;
+        //   box-shadow: 0 0 8px rgba(0, 255, 209, 0.4);
+        // }
         .leaflet-control-attribution {
           background: rgba(13, 14, 19, 0.8) !important;
           color: #abaab1 !important;

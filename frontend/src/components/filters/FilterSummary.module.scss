@@ -37,9 +37,9 @@
   font-family: $font-body;
   font-size: $type-scale-caption;
   cursor: pointer;
-  transition: all $transition-fast;
+  //  transition: all $transition-fast;
 
-  &:hover {
-    background: rgba($tertiary, 0.1);
-  }
+  // &:hover {
+  //   background: rgba($tertiary, 0.1);
+  // }
 }

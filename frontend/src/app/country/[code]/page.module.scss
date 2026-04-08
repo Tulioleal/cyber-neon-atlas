@@ -90,9 +90,9 @@
   color: $primary;
   margin-bottom: $spacing-lg;
   cursor: pointer;
-  transition: opacity $transition-fast;
+  //  transition: opacity $transition-fast;
 
-  &:hover {
-    opacity: 0.8;
-  }
+  // &:hover {
+  //   opacity: 0.8;
+  // }
 }

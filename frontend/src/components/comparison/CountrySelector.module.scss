@@ -127,11 +127,11 @@
   cursor: pointer;
   padding: 0 4px;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  //  transition: opacity 0.2s;
 
-  &:hover {
-    opacity: 1;
-  }
+  // &:hover {
+  //   opacity: 1;
+  // }
 }
 
 .dropdown {
@@ -169,11 +169,11 @@
   color: #f7f5fd;
   cursor: pointer;
   text-align: left;
-  transition: background 0.15s;
+  //  transition: background 0.15s;
 
-  &:hover {
-    background: rgba(0, 255, 209, 0.1);
-  }
+  // &:hover {
+  //   background: rgba(0, 255, 209, 0.1);
+  // }
 
   .flag {
     width: 28px;

@@ -10,7 +10,7 @@
   background: #121319;
   border: 1px solid rgba(0, 255, 209, 0.2);
   padding: 8px 12px;
-  transition: all 0.2s ease;
+  //  transition: all 0.2s ease;
 
   &:focus-within {
     border-color: #00ffd1;
@@ -63,12 +63,12 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  transition: background 0.15s ease;
+  //  transition: background 0.15s ease;
 
-  &:hover,
-  &.highlighted {
-    background: rgba(0, 255, 209, 0.1);
-  }
+  // &:hover,
+  // &.highlighted {
+  //   background: rgba(0, 255, 209, 0.1);
+  // }
 }
 
 .flag {

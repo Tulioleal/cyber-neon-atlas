@@ -46,11 +46,11 @@
   color: #00ffd1;
   cursor: pointer;
   z-index: 50;
-  transition: background 0.2s ease;
+  //  transition: background 0.2s ease;
 
-  &:hover {
-    background: rgba(0, 255, 209, 0.2);
-  }
+  // &:hover {
+  //   background: rgba(0, 255, 209, 0.2);
+  // }
 }
 
 @media (max-width: $breakpoint-mobile - 1) {

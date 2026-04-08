@@ -6,14 +6,14 @@
   gap: $spacing-md;
   padding: $spacing-sm $spacing-md;
   color: $on-surface-variant;
-  transition: all $transition-fast;
+  //  transition: all $transition-fast;
   position: relative;
   text-decoration: none;
 
-  &:hover {
-    background: $surface-container-high;
-    color: $on-surface;
-  }
+  // &:hover {
+  //   background: $surface-container-high;
+  //   color: $on-surface;
+  // }
 
   &:focus-visible {
     outline: $ghost-border;
@@ -55,7 +55,7 @@
     color: $primary;
   }
 
-  &:hover {
-    color: $primary-fixed;
-  }
+  // &:hover {
+  //   color: $primary-fixed;
+  // }
 }

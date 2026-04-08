@@ -17,12 +17,12 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.15s;
+  //  transition: all 0.15s;
 
-  &:hover:not(:disabled) {
-    background: #39ff14;
-    box-shadow: 0 0 12px rgba(47, 248, 1, 0.4);
-  }
+  // &:hover:not(:disabled) {
+  //   background: #39ff14;
+  //   box-shadow: 0 0 12px rgba(47, 248, 1, 0.4);
+  // }
 
   &:disabled {
     opacity: 0.5;
@@ -41,10 +41,10 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.15s;
+  //  transition: all 0.15s;
 
-  &:hover {
-    background: rgba(0, 255, 209, 0.1);
-    box-shadow: 0 0 12px rgba(0, 255, 209, 0.3);
-  }
+  // &:hover {
+  //   background: rgba(0, 255, 209, 0.1);
+  //   box-shadow: 0 0 12px rgba(0, 255, 209, 0.3);
+  // }
 }
