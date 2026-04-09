@@ -64,6 +64,7 @@ export default function StatCard({
 
       return () => clearInterval(timer);
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplayValue(value);
     }
   }, [value, animated]);

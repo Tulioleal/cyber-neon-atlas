@@ -24,35 +24,38 @@ export default function NavItem({
         className={styles.navItem}
         initial={{
           background: 'transparent',
-          color: active ? colors.primaryFixed : colors.onSurface
+          color: active ? colors.primaryFixed : colors.onSurface,
         }}
         whileHover={{
           background: colors.surfaceContainerHigh,
-          color: colors.primaryFixed
+          color: colors.primaryFixed,
         }}
         exit={{
           background: 'transparent',
-          color: active ? colors.primaryFixed : colors.onSurface
+          color: active ? colors.primaryFixed : colors.onSurface,
         }}
         transition={{ duration: 0.05 }}
       >
         <span className={styles.icon}>{icon}</span>
         <AnimatePresence>
-          { !collapsed && 
-            <motion.span className={styles.label}
+          {!collapsed && (
+            <motion.span
+              className={styles.label}
               layout
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.1, delay: collapsed ? 0.2 : 0 }}
-            > {label}
+            >
+              {' '}
+              {label}
             </motion.span>
-          }
+          )}
         </AnimatePresence>
         <motion.span
           className={styles.indicator}
           animate={{ background: active ? colors.primaryFixed : 'transparent' }}
-          transition={{ duration: 0.5, ease: "backIn" }}
+          transition={{ duration: 0.5, ease: 'backIn' }}
         />
       </motion.span>
     </Link>

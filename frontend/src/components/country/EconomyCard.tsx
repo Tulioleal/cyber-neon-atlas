@@ -1,5 +1,4 @@
 import React from 'react';
-import { IoTrendingUp, IoTrendingDown } from 'react-icons/io5';
 import StatCard from '../ui/StatCard';
 import styles from './EconomyCard.module.scss';
 
@@ -21,10 +20,6 @@ export default function EconomyCard({
       notation: 'compact',
       maximumFractionDigits: 1,
     }).format(num);
-  };
-
-  const formatNumber = (num: number): string => {
-    return new Intl.NumberFormat('en-US').format(num);
   };
 
   const areaInSqMi = area ? Math.round(area * 0.386102) : null;
