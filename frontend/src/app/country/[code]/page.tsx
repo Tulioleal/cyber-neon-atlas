@@ -75,10 +75,13 @@ export default function CountryPage() {
   return (
     <div className={styles.page}>
       <Link href="/">
-       <motion.span className={styles.backLink}
+        <motion.span
+          className={styles.backLink}
           whileHover={{ color: colors.secondary, opacity: 0.8 }}
           transition={{ duration: 0.2 }}
-        > ← Return to Map
+        >
+          {' '}
+          ← Return to Map
         </motion.span>
       </Link>
 

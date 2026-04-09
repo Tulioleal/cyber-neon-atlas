@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import styles from './Footer.module.scss';
+import { colors, colorsWithAlpha } from '@/utils/colors';
 
 export default function Footer() {
   return (
@@ -10,7 +12,22 @@ export default function Footer() {
         <span className={styles.coords}>LAT: 0.0000 | LON: 0.0000</span>
         <span className={styles.separator}>|</span>
         <span className={styles.status}>
-          <span className={styles.statusDot} />
+          <motion.span
+            className={styles.statusDot}
+            initial={{
+              background: colors.secondary,
+              boxShadow: `0 0 8px ${colors.secondary}`,
+            }}
+            animate={{
+              background: colorsWithAlpha.secondary(0.5),
+              boxShadow: `0 0 12px ${colorsWithAlpha.secondary(0.5)}`,
+            }}
+            transition={{
+              repeat: Infinity,
+              ease: 'anticipate',
+              duration: 1,
+            }}
+          />
           SISTEMA ACTIVO
         </span>
       </div>

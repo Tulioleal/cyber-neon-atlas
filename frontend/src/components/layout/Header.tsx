@@ -1,5 +1,6 @@
-import { FiSearch, FiSettings } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import styles from './Header.module.scss';
+import { motion } from 'motion/react';
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -25,24 +26,18 @@ export default function Header({
       <div className={styles.title}>
         <span className={styles.titlePrefix}>&gt;</span>
         <span className={styles.titleText}>ATLAS CIBER-NEÓN</span>
-        <span className={styles.titleCursor}>_</span>
-      </div>
-
-      <div className={styles.searchArea}>
-        <div className={styles.searchWrapper}>
-          <FiSearch className={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="BUSCAR PROTOCOLO..."
-            className={styles.searchInput}
-          />
-        </div>
-      </div>
-
-      <div className={styles.actions}>
-        <button className={styles.actionBtn} aria-label="Settings">
-          <FiSettings />
-        </button>
+        <motion.span
+          className={styles.titleCursor}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            repeat: Infinity,
+            ease: 'anticipate',
+            duration: 1,
+          }}
+        >
+          _
+        </motion.span>
       </div>
     </header>
   );
