@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: $spacing-lg;
-  padding: $spacing-lg;
+  padding: $spacing-lg 0;
 
   @media (max-width: $breakpoint-mobile) {
     grid-template-columns: 1fr;
