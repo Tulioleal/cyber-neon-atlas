@@ -90,15 +90,7 @@
   font-family: $font-body;
   font-size: $type-scale-caption;
   color: $secondary;
-  background: rgba(47, 248, 1, 0.1);
-  border: 1px solid rgba(47, 248, 1, 0.3);
   cursor: pointer;
-  //  transition: all $transition-fast;
-
-  // &:hover {
-  //   background: rgba(47, 248, 1, 0.2);
-  //   box-shadow: 0 0 8px rgba(47, 248, 1, 0.3);
-  // }
 }
 
 .noNeighbors {

@@ -57,3 +57,21 @@ export const fetchCountriesByRegion = async (
 
   return response.json();
 };
+
+export const fetchCountriesByCodes = async (
+  codes: string[]
+): Promise<CountrySearchItem[]> => {
+  if (!codes || codes.length === 0) return [];
+
+  const response = await fetch(
+    `${BASE_URL}/alpha?codes=${codes.join(',')}&fields=name,cca3`
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch countries by codes: ${response.statusText}`
+    );
+  }
+
+  return response.json();
+};
