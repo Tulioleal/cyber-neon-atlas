@@ -6,19 +6,8 @@
   gap: $spacing-md;
   padding: $spacing-sm $spacing-md;
   color: $on-surface-variant;
-  //  transition: all $transition-fast;
   position: relative;
   text-decoration: none;
-
-  // &:hover {
-  //   background: $surface-container-high;
-  //   color: $on-surface;
-  // }
-
-  &:focus-visible {
-    outline: $ghost-border;
-    outline-offset: 2px;
-  }
 }
 
 .icon {
@@ -43,19 +32,5 @@
   top: 0;
   bottom: 0;
   width: 3px;
-  background: $primary;
   box-shadow: $neon-bloom;
-}
-
-.active {
-  color: $primary;
-  background: $surface-container-high;
-
-  .icon {
-    color: $primary;
-  }
-
-  // &:hover {
-  //   color: $primary-fixed;
-  // }
 }
