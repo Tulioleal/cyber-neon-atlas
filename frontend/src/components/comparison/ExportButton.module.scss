@@ -19,6 +19,12 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
+  //  transition: all 0.15s;
+
+  // &:hover:not(:disabled) {
+  //   background: #39ff14;
+  //   box-shadow: 0 0 12px rgba(47, 248, 1, 0.4);
+  // }
 
   &:disabled {
     opacity: 0.5;
@@ -34,44 +40,6 @@
   font-size: $type-scale-label;
   font-weight: 700;
   color: $primary;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-}
-
-.button {
-  flex: 1;
-  padding: 14px 20px;
-  background: #2ff801;
-  border: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  color: #090a0f;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  //  transition: all 0.15s;
-
-  // &:hover:not(:disabled) {
-  //   background: #39ff14;
-  //   box-shadow: 0 0 12px rgba(47, 248, 1, 0.4);
-  // }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-.secondary {
-  padding: 14px 20px;
-  background: transparent;
-  border: 1px solid #00ffd1;
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  color: #00ffd1;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;

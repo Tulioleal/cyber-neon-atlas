@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import styles from './RadarChart.module.scss';
 import { Country } from '@/types/country';
+import { colors } from '@/utils/colors';
 
 interface RadarChartProps {
   country1: Country | null;
@@ -187,7 +188,7 @@ export default function RadarChart({
       <h3 className={styles.title}>RADAR ANALYSIS</h3>
       <ResponsiveContainer width="100%" height={320}>
         <RechartsRadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-          <PolarGrid stroke="#333C4D" />
+          <PolarGrid stroke={colors.gridLine} />
           <PolarAngleAxis
             dataKey="metric"
             tick={{

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Country } from '@/types/country';
+import { colorsWithAlpha } from '@/utils/colors';
 import styles from './CountryPanel.module.scss';
 
 interface CountryPanelProps {
@@ -17,8 +18,8 @@ export default function CountryPanel({
 }: CountryPanelProps) {
   const isPrimary = variant === 'primary';
   const borderColor = isPrimary
-    ? 'rgba(0, 255, 209, 0.3)'
-    : 'rgba(47, 248, 1, 0.3)';
+    ? colorsWithAlpha.primary(0.3)
+    : colorsWithAlpha.secondary(0.3);
   const valueClass = isPrimary ? styles.statValue : styles.statValueSecondary;
 
   if (!country) {

@@ -14,7 +14,7 @@ import GeopoliticsCard from '@/components/country/GeopoliticsCard';
 import CountrySkeleton from '@/components/country/CountrySkeleton';
 import styles from './page.module.scss';
 import Image from 'next/image';
-import { colors } from '@/utils/colors';
+import { colors, colorsWithAlpha } from '@/utils/colors';
 import { motion } from 'motion/react';
 
 export default function CountryPage() {
@@ -256,8 +256,8 @@ export default function CountryPage() {
                     fontFamily: 'Fira Code, monospace',
                     fontSize: '10px',
                     color: colors.primary,
-                    border: '1px solid rgba(0, 255, 209, 0.3)',
-                    background: 'rgba(0, 255, 209, 0.05)',
+                    border: `1px solid ${colorsWithAlpha.primary(0.3)}`,
+                    background: colorsWithAlpha.primary(0.05),
                   }}
                 >
                   {tz}

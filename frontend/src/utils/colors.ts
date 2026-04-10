@@ -17,6 +17,7 @@ export const colors = {
   onSurface: '#f7f5fd',
   onSurfaceVariant: '#abaab1',
   outlineVariant: '#47474e',
+  gridLine: '#333c4d',
 } as const;
 
 export type ColorKey = keyof typeof colors;
