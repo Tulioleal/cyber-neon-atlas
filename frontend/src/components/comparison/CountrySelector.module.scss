@@ -54,6 +54,8 @@
   left: $spacing-sm;
   font-size: 16px;
   pointer-events: none;
+  display: flex;
+  align-content: center;
 
   &.primary {
     color: $primary-dim;
@@ -129,6 +131,24 @@
   cursor: pointer;
   padding: 0 $spacing-xs;
   opacity: 0.6;
+  display: flex;
+  align-content: center;
+
+  &.primary {
+    color: $primary;
+    &::placeholder {
+      color: $primary-dim;
+      opacity: 0.5;
+    }
+  }
+
+  &.secondary {
+    color: $secondary;
+    &::placeholder {
+      color: $secondary-dim;
+      opacity: 0.5;
+    }
+  }
 }
 
 .dropdown {

@@ -122,25 +122,15 @@ function VersusContent() {
           />
         </div>
       </header>
-
-      {!country1 && !country2 ? (
-        <div className={styles.placeholder}>
-          <div className={styles.placeholderContent}>
-            <span className={styles.placeholderIcon}>⌕</span>
-            <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.content} ref={comparisonRef}>
-          {(country1 || country2) && (
-            <div className={styles.countries}>
-              <CountryPanel
-                country={country1}
-                variant="primary"
-                idSuffix="OPERATIONAL_DATA_SEC_01"
-              />
-
-              {country1 || country2 ? (
+        <div className={styles.content} ref={comparisonRef} >
+          <div className={styles.countries}>
+            <CountryPanel
+              country={country1}
+              variant="primary"
+              idSuffix="OPERATIONAL_DATA_SEC_01"
+            />
+            {
+              (country1 || country2) ? (
                 <div className={styles.center}>
                   <div className={styles.charts}>
                     <BarChart
@@ -163,21 +153,21 @@ function VersusContent() {
                   />
                 </div>
               ) : (
-                <div className={styles.center}>
-                  <p className={styles.selectSecond}>
-                    SELECT A SECOND COUNTRY TO COMPARE
-                  </p>
+                <div className={styles.placeholder}>
+                  <div className={styles.placeholderContent}>
+                    <span className={styles.placeholderIcon}>⌕</span>
+                    <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
+                  </div>
                 </div>
-              )}
-              <CountryPanel
-                country={country2}
-                variant="secondary"
-                idSuffix="OPERATIONAL_DATA_SEC_02"
-              />
-            </div>
-          )}
+              )
+            }
+            <CountryPanel
+              country={country2}
+              variant="secondary"
+              idSuffix="OPERATIONAL_DATA_SEC_02"
+            />
+          </div>
         </div>
-      )}
     </div>
   );
 }

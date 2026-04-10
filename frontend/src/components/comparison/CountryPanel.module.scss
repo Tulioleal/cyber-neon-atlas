@@ -10,6 +10,11 @@
   overflow-y: auto;
 }
 
+.container {
+  height: 100%;
+  padding: $spacing-lg;
+}
+
 .countryId {
   font-family: $font-data;
   font-size: $type-scale-caption;

@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { Country } from '@/types/country';
 import { CountrySearchItem } from '@/services/api';
 import styles from './CountrySelector.module.scss';
+import { FiX, FiSearch } from "react-icons/fi"
+import { colors } from '@/utils/colors';
 
 interface CountrySelectorProps {
   selectedCountry: Country | null;
@@ -60,13 +62,15 @@ export default function CountrySelector({
           <div className={styles.selected}>
             {/* <Image src={selectedCountry.flags.svg} alt="" className={styles.flag} /> */}
             <span className={styles.name}>{selectedCountry.name.common}</span>
-            <button onClick={handleClear} className={styles.clear}>
-              ×
+            <button onClick={handleClear} className={`${styles.clear} ${styles[color]}`}>
+              <FiX />
             </button>
           </div>
         ) : (
           <>
-            <span className={`${styles.searchIcon} ${styles[color]}`}>⌕</span>
+            <span className={`${styles.searchIcon} ${styles[color]}`} >
+              <FiSearch />
+            </span>
             <input
               type="text"
               value={query}
