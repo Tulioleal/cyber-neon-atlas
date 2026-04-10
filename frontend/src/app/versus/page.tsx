@@ -162,7 +162,20 @@ function VersusContent() {
                 ) : (
                   <motion.div className={styles.placeholder} key="placeholder-content">
                     <div className={styles.placeholderContent}>
-                      <span className={styles.placeholderIcon}>⌕</span>
+                      <motion.span 
+                        className={styles.spinner}
+                        animate={{ 
+                          scale: [1, 1.1, 1],
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{ 
+                          duration: 1.5, 
+                          repeat: Infinity, 
+                          ease: "linear",
+                          scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                          opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                        }}
+                      />
                       <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
                     </div>
                   </motion.div>

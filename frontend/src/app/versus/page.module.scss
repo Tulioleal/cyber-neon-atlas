@@ -180,6 +180,14 @@
   color: rgba($primary, 0.2);
 }
 
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba($secondary, 0.5);
+  background-color: $primary;
+}
+
 .placeholderText {
   font-family: $font-headline;
   font-size: $type-scale-body;
