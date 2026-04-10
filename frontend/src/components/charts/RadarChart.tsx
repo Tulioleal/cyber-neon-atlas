@@ -192,7 +192,7 @@ export default function RadarChart({
           <PolarAngleAxis
             dataKey="metric"
             tick={{
-              fill: 'colors.primary',
+              fill: colors.primary,
               fontSize: 10,
               fontFamily: 'Space Mono',
             }}
@@ -201,7 +201,7 @@ export default function RadarChart({
             angle={30}
             domain={[0, 100]}
             tick={{
-              fill: 'colors.onSurfaceVariant',
+              fill: colors.onSurfaceVariant,
               fontSize: 9,
               fontFamily: 'Fira Code',
             }}
@@ -217,10 +217,10 @@ export default function RadarChart({
               return (
                 <div className={styles.tooltip}>
                   <p className={styles.tooltipLabel}>{payloadData?.metric}</p>
-                  <p style={{ color: 'colors.primary' }}>
+                  <p style={{ color: colors.primary }}>
                     {country1Name}: {real1}
                   </p>
-                  <p style={{ color: 'colors.secondary' }}>
+                  <p style={{ color: colors.secondary }}>
                     {country2Name}: {real2}
                   </p>
                 </div>
@@ -232,7 +232,7 @@ export default function RadarChart({
             formatter={value => (
               <span
                 style={{
-                  color: 'colors.onSurface',
+                  color: colors.onSurface,
                   fontFamily: 'Fira Code',
                   fontSize: 11,
                 }}
@@ -244,15 +244,15 @@ export default function RadarChart({
           <Radar
             name={country1Name}
             dataKey="country1"
-            stroke="colors.primary"
-            fill="colors.primary"
+            stroke={colors.primary}
+            fill={colors.primary}
             fillOpacity={0.15}
           />
           <Radar
             name={country2Name}
             dataKey="country2"
-            stroke="colors.secondary"
-            fill="colors.secondary"
+            stroke={colors.secondary}
+            fill={colors.secondary}
             fillOpacity={0.15}
           />
         </RechartsRadarChart>

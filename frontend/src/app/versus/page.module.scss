@@ -147,6 +147,7 @@
 .placeholder {
   width: 420px;
   display: flex;
+  padding-bottom: $spacing-md;
   flex-direction: column;
   background: $background;
   border-left: 1px solid rgba($primary, 0.1);

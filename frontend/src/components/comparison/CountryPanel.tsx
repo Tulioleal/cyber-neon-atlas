@@ -65,7 +65,7 @@ export default function CountryPanel({
               className={styles.container}
             >
               <motion.div {...contentAnimationProps} >
-                <div className={styles.countryId}>ID: ---_{idSuffix}</div>
+                <div className={styles.countryId}>ID: {idSuffix}</div>
                 <div
                   className={styles.stats}
                   style={{ textAlign: isPrimary ? 'left' : 'right' }}
@@ -84,7 +84,7 @@ export default function CountryPanel({
             >
               <motion.div {...contentAnimationProps} >
                 <div className={styles.countryId}>
-                  ID: ---_{country.cca3}_{idSuffix}
+                  ID: {country.cca3}_{idSuffix}
                 </div>
                 <div
                   className={styles.countryHeader}

@@ -12,6 +12,7 @@ import RadarChart from '@/components/charts/RadarChart';
 import IntersectionCard from '@/components/comparison/IntersectionCard';
 import ExportButton from '@/components/comparison/ExportButton';
 import styles from './page.module.scss';
+import { AnimatePresence, motion } from 'motion/react';
 
 function VersusContent() {
   const searchParams = useSearchParams();
@@ -129,38 +130,46 @@ function VersusContent() {
               variant="primary"
               idSuffix="OPERATIONAL_DATA_SEC_01"
             />
-            {
-              (country1 || country2) ? (
-                <div className={styles.center}>
-                  <div className={styles.charts}>
-                    <BarChart
-                      data={barData}
-                      country1Name={country1?.name.common || ''}
-                      country2Name={country2?.name.common || ''}
+            <AnimatePresence mode="popLayout">
+              {
+                (country1 || country2) ? (
+                  <motion.div className={styles.center} key="comparison-content"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "anticipate" }}
+                  >
+                    <div className={styles.charts}>
+                      <BarChart
+                        data={barData}
+                        country1Name={country1?.name.common || ''}
+                        country2Name={country2?.name.common || ''}
+                      />
+                      <RadarChart
+                        country1={country1}
+                        country2={country2}
+                        country1Name={country1?.name.common || ''}
+                        country2Name={country2?.name.common || ''}
+                      />
+                    </div>
+                    <IntersectionCard country1={country1} country2={country2} />
+                    <ExportButton
+                      comparisonRef={comparisonRef}
+                      country1Code={country1?.cca3 || ''}
+                      country2Code={country2?.cca3 || ''}
                     />
-                    <RadarChart
-                      country1={country1}
-                      country2={country2}
-                      country1Name={country1?.name.common || ''}
-                      country2Name={country2?.name.common || ''}
-                    />
-                  </div>
-                  <IntersectionCard country1={country1} country2={country2} />
-                  <ExportButton
-                    comparisonRef={comparisonRef}
-                    country1Code={country1?.cca3 || ''}
-                    country2Code={country2?.cca3 || ''}
-                  />
-                </div>
-              ) : (
-                <div className={styles.placeholder}>
-                  <div className={styles.placeholderContent}>
-                    <span className={styles.placeholderIcon}>⌕</span>
-                    <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
-                  </div>
-                </div>
-              )
-            }
+                  </motion.div>
+                ) : (
+                  <motion.div className={styles.placeholder} key="placeholder-content">
+                    <div className={styles.placeholderContent}>
+                      <span className={styles.placeholderIcon}>⌕</span>
+                      <p className={styles.placeholderText}>SELECT A COUNTRY TO BEGIN</p>
+                    </div>
+                  </motion.div>
+                )
+              }
+                            
+            </AnimatePresence>
             <CountryPanel
               country={country2}
               variant="secondary"
