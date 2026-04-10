@@ -1,8 +1,42 @@
+@use '../../styles/variables' as *;
+
 .container {
   display: flex;
-  gap: 12px;
-  padding: 20px;
-  background: #121319;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $surface-container-low;
+}
+
+.button {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  background: $secondary;
+  border: none;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  font-weight: 700;
+  color: $surface;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.secondary {
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: 1px solid $primary;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
+  font-weight: 700;
+  color: $primary;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
 }
 
 .button {

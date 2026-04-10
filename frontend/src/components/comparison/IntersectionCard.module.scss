@@ -1,29 +1,31 @@
+@use '../../styles/variables' as *;
+
 .container {
   width: 100%;
-  padding: 20px;
-  background: #121319;
-  border-top: 1px solid rgba(0, 255, 209, 0.1);
+  padding: $spacing-md;
+  background: $surface-container-low;
+  border-top: 1px solid rgba($primary, 0.1);
 }
 
 .title {
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
+  font-family: $font-headline;
+  font-size: $type-scale-label;
   font-weight: 700;
-  color: #00ffd1;
+  color: $primary;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(0, 255, 209, 0.15);
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 1px solid rgba($primary, 0.15);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-xs;
 }
 
 .section {
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 255, 209, 0.05);
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid rgba($primary, 0.05);
 
   &:last-child {
     border-bottom: none;
@@ -32,46 +34,46 @@
 }
 
 .sectionTitle {
-  font-family: 'Fira Code', monospace;
-  font-size: 10px;
-  color: #00ffd1;
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $primary;
   opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 12px;
+  margin-bottom: $spacing-sm;
 }
 
 .shared {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-sm;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  background: rgba(47, 248, 1, 0.1);
-  border: 1px solid rgba(47, 248, 1, 0.2);
-  font-family: 'Fira Code', monospace;
-  font-size: 10px;
-  color: #2ff801;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($secondary, 0.1);
+  border: 1px solid rgba($secondary, 0.2);
+  font-family: $font-data;
+  font-size: $type-scale-caption;
+  color: $secondary;
   text-transform: uppercase;
 }
 
 .noData {
-  font-family: 'Fira Code', monospace;
-  font-size: 11px;
-  color: #ff7073;
+  font-family: $font-data;
+  font-size: $type-scale-label;
+  color: $tertiary;
   opacity: 0.8;
-  margin-bottom: 12px;
+  margin-bottom: $spacing-sm;
 }
 
 .uniqueRow {
   display: flex;
-  gap: 24px;
+  gap: $spacing-lg;
 }
 
 .uniqueColumn {
@@ -79,21 +81,21 @@
 }
 
 .uniqueLabel {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
+  font-family: $font-headline;
+  font-size: $type-scale-caption;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: $spacing-xs;
   display: block;
 }
 
 .uniqueTag {
   display: inline-block;
-  padding: 4px 8px;
-  background: rgba(171, 170, 177, 0.1);
-  font-family: 'Fira Code', monospace;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($on-surface-variant, 0.1);
+  font-family: $font-data;
   font-size: 9px;
-  color: #abaab1;
-  margin-right: 4px;
-  margin-bottom: 4px;
+  color: $on-surface-variant;
+  margin-right: $spacing-xs;
+  margin-bottom: $spacing-xs;
 }
