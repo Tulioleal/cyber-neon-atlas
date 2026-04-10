@@ -4,15 +4,14 @@ import Image from 'next/image';
 import { Country } from '@/types/country';
 import { colorsWithAlpha } from '@/utils/colors';
 import styles from './CountryPanel.module.scss';
-import { motion, AnimatePresence, HTMLMotionProps } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { GlitchAnimation } from '../effects/glitchAnimation';
 
 interface CountryPanelProps {
   country: Country | null;
   variant: 'primary' | 'secondary';
   idSuffix?: string;
 }
-
-type AnimationProps = HTMLMotionProps<"div">
 
 export default function CountryPanel({
   country,
@@ -24,30 +23,6 @@ export default function CountryPanel({
     ? colorsWithAlpha.primary(0.3)
     : colorsWithAlpha.secondary(0.3);
   const valueClass = isPrimary ? styles.statValue : styles.statValueSecondary;
-
-  const containerAnimationProps:AnimationProps = {
-    exit:{
-      backgroundColor: [
-        colorsWithAlpha[ isPrimary ? 'primary' : 'secondary' ](0.1),
-        colorsWithAlpha[ isPrimary ? 'primary' : 'secondary' ](0.5),
-        colorsWithAlpha[ isPrimary ? 'primary' : 'secondary' ](0.1),
-        colorsWithAlpha[ isPrimary ? 'primary' : 'secondary' ](0.35),
-        colorsWithAlpha[ isPrimary ? 'primary' : 'secondary' ](0),
-      ]
-      
-    },
-    transition:{
-      duration: 0.5,
-      times: [0, 0.2, 0.4, 0.6, 1]
-    },
-  }
-
-  const contentAnimationProps:AnimationProps = {
-    initial:{ opacity: 0 },
-    animate:{ opacity: 1 },
-    exit:{ opacity: 0 },
-    transition:{ duration: 0.1, ease: "anticipate" },
-  }
 
   return (
     <div
@@ -61,10 +36,10 @@ export default function CountryPanel({
         {
           !country ? (
             <motion.div key={`placeholder_${idSuffix}`}
-              {...containerAnimationProps}
+              {...GlitchAnimation.container(isPrimary)}
               className={styles.container}
             >
-              <motion.div {...contentAnimationProps} >
+              <motion.div {...GlitchAnimation.content} >
                 <div className={styles.countryId}>ID: {idSuffix}</div>
                 <div
                   className={styles.stats}
@@ -79,10 +54,10 @@ export default function CountryPanel({
             </motion.div>
           ) : (
             <motion.div key={country.cca3}
-              {...containerAnimationProps}
+              {...GlitchAnimation.container(isPrimary)}
               className={styles.container}
             >
-              <motion.div {...contentAnimationProps} >
+              <motion.div {...GlitchAnimation.content} >
                 <div className={styles.countryId}>
                   ID: {country.cca3}_{idSuffix}
                 </div>

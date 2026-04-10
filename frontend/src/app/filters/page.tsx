@@ -12,6 +12,7 @@ import {
 } from '@/components/filters';
 import CountryCard from '@/components/country/CountryCard';
 import styles from './page.module.scss';
+import { AnimatePresence } from 'framer-motion';
 
 function FiltersContent() {
   const searchParams = useSearchParams();
@@ -65,9 +66,11 @@ function FiltersContent() {
         )}
 
         <div className={styles.grid}>
-          {countries.map(country => (
-            <CountryCard key={country.cca3} country={country} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {countries.map(country => (
+              <CountryCard key={country.cca3} country={country} />
+            ))}
+          </AnimatePresence>
         </div>
       </section>
     </div>
